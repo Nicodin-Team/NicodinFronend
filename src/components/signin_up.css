@@ -1,0 +1,156 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+  
+.illustration img {
+width: 100%;
+height: 30vh;
+object-fit: cover;
+
+}
+
+
+
+.wrapper {
+display: -webkit-box;
+display: -ms-flexbox;
+display:flex;
+justify-content: center;
+height: 100vh;
+-webkit-box-align: center;
+-ms-flex-align: center;
+align-items: center;
+box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.wrapper p {
+font-size: 1.1rem;
+margin-top: 1rem;
+
+}
+
+
+.wrapper p  :link{
+text-decoration: none;
+}
+.form {
+
+padding: 1.5rem;
+-ms-flex-preferred-size: 100vw;
+flex-basis: 100vw;
+}
+
+.form .heading {
+font-size: 1.4rem;
+font-weight: bold;
+text-align: center;
+}
+
+.or {
+margin: 1.7rem 0;
+text-align: center;
+}
+
+.form label {
+display:flex;
+justify-content: left;
+align-items: center;
+margin: 1.25rem 0 1rem 0;
+}
+
+.form input {
+height: 40px;
+width: 100px;
+padding: 15px;
+background-color: #f1f9ff;
+border: 1px solid #b1d0e9;
+border-radius: 8px;
+}
+
+.form button {
+height: 40px;
+width: 100%;
+background-color: #258de6;
+color: white;
+text-transform: uppercase;
+letter-spacing: 2px;
+border: none;
+display: block;
+margin: 0 auto;
+font-weight: bold;
+margin-top: 1.5rem;
+border-radius: 8px;
+}
+
+@media (min-width: 363px) {
+body {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    align-items: center;
+}
+.wrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100vh;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: distribute;
+    justify-content:space-around;
+    padding: 2rem;
+    max-width: 1100px;
+}
+
+.form {
+    -ms-flex-preferred-size: auto;
+    flex-basis: auto;
+}
+
+.form input {
+    width: 300px;
+}
+
+.illustration img {
+    max-width: 100%;
+    height: auto;
+}
+}
+
+@media (max-width: 680px) {
+.illustration {
+    display: none;
+}
+.form input {
+    width: 300px;
+}
+}
+
+.signUp .illustration {
+order: 2;
+justify-self: flex-end;
+margin-left: 2rem;
+}
+
+.signUp .form  {
+width: 300px;
+}
+
+.signUp button{
+width: 300px;
+}
+button:hover {
+filter: brightness(95%);
+}
+
+button:active {
+transform: scale(0.98);
+}
