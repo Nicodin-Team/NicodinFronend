@@ -4,6 +4,7 @@ import Login from './components/login';
 import Signup from './components/signup';
 import Error from './components/error';
 import EditProfile from './components/Edituser';
+import Landing from './pages/Landing';
 
 function App() {
   
@@ -12,13 +13,8 @@ function App() {
       <Router>
         <Routes>
           <Route path='/profile' element={<EditProfile/>}/>
-          <Route path='/' 
-              element={
-              
-                <Login/>
-              
-               }
-          />
+          <Route path='/login' element={<Login/>}/>
+          <Route path='/' element={<Landing/>}/>
           <Route path='/signup' element={<Signup/>}/>
           <Route path='*' element={<Error/>}/>
         </Routes>
