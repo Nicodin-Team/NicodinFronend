@@ -4,13 +4,6 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     font-family: sans-serif;
-  }
-  
-.illustration img {
-width: 100%;
-height: 30vh;
-object-fit: cover;
-
 }
 
 
@@ -25,34 +18,54 @@ height: 100vh;
 -ms-flex-align: center;
 align-items: center;
 box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+border-radius: 15px;
+background-color:#214674;
+max-height:600px;
 }
+
 
 .wrapper p {
 font-size: 1.1rem;
 margin-top: 1rem;
-
 }
 
+
+.link{
+    color:#f1bd4c;
+}
 
 .wrapper p  :link{
 text-decoration: none;
 }
-.form {
 
+.form {
+color: #fff;
 padding: 1.5rem;
 -ms-flex-preferred-size: 100vw;
 flex-basis: 100vw;
+margin-left: 40px;
+margin-right: 56px;
 }
+/* .wrapper .signUp{
+    padding-left: 200px;
+} */
 
 .form .heading {
 font-size: 1.4rem;
 font-weight: bold;
 text-align: center;
+color: #fff;
+padding: 2px;
+}
+
+.account{
+margin-left: 50px;
 }
 
 .or {
 margin: 1.7rem 0;
 text-align: center;
+margin-left: 40px;
 }
 
 .form label {
@@ -60,6 +73,7 @@ display:flex;
 justify-content: left;
 align-items: center;
 margin: 1.25rem 0 1rem 0;
+margin-bottom: 10px;
 }
 
 .form input {
@@ -71,10 +85,11 @@ border: 1px solid #b1d0e9;
 border-radius: 8px;
 }
 
+
 .form button {
 height: 40px;
 width: 100%;
-background-color: #258de6;
+background-color: rgb(241,190,75);
 color: white;
 text-transform: uppercase;
 letter-spacing: 2px;
@@ -84,7 +99,9 @@ margin: 0 auto;
 font-weight: bold;
 margin-top: 1.5rem;
 border-radius: 8px;
+margin-top: 30px;
 }
+
 
 @media (min-width: 363px) {
 body {
@@ -96,6 +113,7 @@ body {
     justify-content: center;
     align-items: center;
 }
+
 .wrapper {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -119,20 +137,17 @@ body {
     width: 300px;
 }
 
-.illustration img {
-    max-width: 100%;
-    height: auto;
-}
-}
 
 @media (max-width: 680px) {
 .illustration {
     display: none;
 }
+
 .form input {
     width: 300px;
 }
 }
+
 
 .signUp .illustration {
 order: 2;
@@ -140,12 +155,21 @@ justify-self: flex-end;
 margin-left: 2rem;
 }
 
+
 .signUp .form  {
 width: 300px;
+margin-right: 90px;
 }
 
+div .button{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    width: 300px;
+}
 .signUp button{
 width: 300px;
+
 }
 button:hover {
 filter: brightness(95%);
@@ -153,4 +177,9 @@ filter: brightness(95%);
 
 button:active {
 transform: scale(0.98);
+}
+
+}
+.log{
+    color:#f1bd4c;
 }
