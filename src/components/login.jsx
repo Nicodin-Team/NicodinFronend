@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import logo from '../assets/images/logo.png';
 
 export default function Login() {
 	const [email,setEmail]=useState("");
@@ -27,6 +27,9 @@ export default function Login() {
 	return (
 		<div className="wrapper signIn">
 			<div className="form">
+		
+					<img src={logo} alt="" style={{width:'200px', height:'auto', marginBottom:'35px' , marginLeft:'34px' }}/>
+				
 				<div className="heading">LOGIN</div>
 				<form className='wap'>
 					<div>
