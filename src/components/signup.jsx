@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
 import '../components/signin_up.css';
 import axios from "axios";
 
@@ -91,7 +90,7 @@ export default function Signup() {
           </h2>
         </form>
         <p className="account">
-          Have an account ? <Link to="/" className="log"> Log In </Link>
+          Have an account ? <Link to="/login" className="log"> Log In </Link>
         </p>
       </div>
     </div>

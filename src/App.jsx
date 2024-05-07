@@ -12,7 +12,7 @@ function App() {
       <Router>
         <Routes>
           <Route path='/profile' element={<EditProfile/>}/>
-          <Route path='/' 
+          <Route path='/login' 
               element={
               
                 <Login/>

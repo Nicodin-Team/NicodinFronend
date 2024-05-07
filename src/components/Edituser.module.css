@@ -1,12 +1,17 @@
 body {
     margin: 0;
+    padding: 0;
     padding-top: 50px;
+    padding-bottom: 40px;
     color: #2e323c;
     background: #f3f7fc;
     position: fixed;
     height: 100%;
     width: 100dvw;
 }
+/* .editProfile{
+   
+} */
 
 
 .snippets{
