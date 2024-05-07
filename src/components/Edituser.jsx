@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import "../components/Edituser.module.css";
+import styles from "../components/Edituser.module.css";
+// import avatar from '../assets/Images/c2.png';
 // import { axios } from 'axios';
 // import Box from '@mui/material/Box';
 // import TextField from '@mui/material/TextField';
@@ -70,12 +71,13 @@ export default function EditProfile() {
 
   return (
     <>
+      {/* <div className={styles.editProfile}> */}
       <div className="container bootstrap snippets bootdey">
         <h1
-          className="font-weight-bold h1 d-flex ps-2"
-          style={{ color: "#f1bd4c", fontFamily: "venose" }}
-        >
-          Edit User Profile
+            className="font-weight-bold h1 d-flex ps-2"
+            style={{ color: "#f1bd4c", fontFamily: "venose" }}
+          >
+            Edit User Profile
         </h1>
         <hr />
         <div className="d-flex flex-row align-items-center justify-content-between">
@@ -85,7 +87,7 @@ export default function EditProfile() {
                 <div className="card-body text-center">
                   <img
                     className="img-account-profile rounded-circle mb-2"
-                    src="http://bootdey.com/img/Content/avatar/avatar7.png"
+                    src="https://bootdey.com/img/Content/avatar/avatar7.png"
                     alt=""
                   />
                   <div className="small font-italic text-muted mb-4">
@@ -96,7 +98,7 @@ export default function EditProfile() {
             </div>
           </div>
             <div className="col-xl-8 col-lg-8 col-md-8 col-sm-8">
-              <div className="card h-100 rounded-3">
+              <div className="card h-100 rounded-4">
                 <div className="card-body">
                   <div className="row gutters ">
                     <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -276,7 +278,8 @@ export default function EditProfile() {
             </div>
           </div>
         </div>
-      <hr />
-    </>
+       
+   </>
+
   );
 }
