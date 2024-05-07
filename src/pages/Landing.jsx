@@ -1,4 +1,5 @@
 import React from "react";
+import {Link} from "react-router-dom"
 
 import "./landing.css";
 // import imagearrow from '../assets/Icons/Arrow_icon.png';
@@ -7,7 +8,7 @@ import "./landing.css";
 // import imagechat from '../assets/Icons/chat.png';
 import MyAnimation from "../components/landing/animation";
 
-const Landing = () => {
+export default function Landing() {
   return (
     <>
       <nav className="navbar navbar-expand-lg ">
@@ -17,13 +18,14 @@ const Landing = () => {
               <img src={imagegrowth} alt="" />
 
               <li className="nav-item">
-                <a
+                <Link
                   className=" ms-3 mt-2 icon-custom nav-link active"
                   aria-current="page"
-                  href="#"
+                //   href="#"
+                to="/login"
                 >
                   Team Up
-                </a>
+                </Link>
               </li>
 
               <li className="nav-item">
@@ -294,6 +296,6 @@ const Landing = () => {
       </footer>
     </>
   );
-};
+}
 
-export default Landing;
+
