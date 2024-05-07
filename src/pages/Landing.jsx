@@ -2,15 +2,16 @@ import React from "react";
 import {Link} from "react-router-dom"
 
 import "./landing.css";
-// import imagearrow from '../assets/Icons/Arrow_icon.png';
-// import imageagreement from '../assets/Icons/agreement.png'
-// import imagebriefcase from '../assets/Icons//briefcase.png';
-// import imagechat from '../assets/Icons/chat.png';
+import imageagreement from '../assets/Icons/agreement.png'
+import imagebriefcase from '../assets/Icons//briefcase.png';
+import imagechat from '../assets/Icons/chat.png';
 import MyAnimation from "../components/landing/animation";
 
 export default function Landing() {
   return (
     <>
+
+    <div className="landing">
       <nav className="navbar navbar-expand-lg ">
         <div className="container-fluid">
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
@@ -294,6 +295,8 @@ export default function Landing() {
           </div>
         </div>
       </footer>
+
+      </div>
     </>
   );
 }
