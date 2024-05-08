@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import styles from "../components/Edituser.module.css";
 // import avatar from '../assets/Images/c2.png';
 // import { axios } from 'axios';
-// import Box from '@mui/material/Box';
-// import TextField from '@mui/material/TextField';
-// import MenuItem from '@mui/material/MenuItem';
+import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
 
 // const currencies = [
 // 	{
@@ -32,6 +34,11 @@ export default function EditProfile() {
   const [age, setAge] = useState("");
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
+  const [value, setValue] = React.useState('1');
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   const setfirstname = (e) => {
     setFirstname(e.target.value);
@@ -102,10 +109,16 @@ export default function EditProfile() {
                 <div className="card-body">
                   <div className="row gutters ">
                     <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                      <h6 className="mb-2 text-primary d-flex Font-weight-bolder " style={{fontSize : '20px'}}>
-                        Personal Details
-                      </h6>
-                    </div>
+                    <Box sx={{ width: '100%', typography: 'body1' }}>
+                      <TabContext value={value}>
+                        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                          <TabList onChange={handleChange} aria-label="lab API tabs example">
+                            <Tab label="Item One" value="1" />
+                            <Tab label="Item Two" value="2" />
+                            <Tab label="Item Three" value="3" />
+                          </TabList>
+                        </Box>
+                    <TabPanel value="1">
                     <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                       <div className="form-group">
                         <label htmlFor="firstname" className="d-flex my-1 py-2">
@@ -272,12 +285,16 @@ export default function EditProfile() {
                         </div>
                       </div>
                     </div>
-                  </div>
+                    </TabPanel>
+                 </TabContext>
+                 </Box>
+                 </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+     </div>
        
    </>
 
