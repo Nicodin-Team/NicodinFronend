@@ -67,7 +67,7 @@ export default function Signup_em() {
           OR
         </h2>
         <p className="account">
-          Have an account ? <Link to="/login" className="log"> Log In </Link>
+          Have an account? <Link to="/login" className="text-warning"> Log In </Link>
         </p>
       </div>
     </div>

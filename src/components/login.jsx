@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/Images/logo.png";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 import { useAuth } from "../context/AuthContext";
+
 
 export default function Login() {
   const { login } = useAuth();
@@ -87,8 +88,8 @@ export default function Login() {
           )}
         </Formik>
         <p>
-          Don't have an account?{" "}
-          <Link to="/signup" className="link">
+          Don't have an account?
+          <Link to="/signup" className="text-warning">
             Sign Up
           </Link>
         </p>
