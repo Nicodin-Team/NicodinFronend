@@ -7,6 +7,7 @@ import EditProfile from './components/Edituser';
 import Landing from './pages/Landing';
 import { AuthProvider } from './context/AuthContext';
 
+
 function App() {
   
   return(
