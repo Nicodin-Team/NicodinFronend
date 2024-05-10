@@ -1,11 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    font-family: sans-serif;
-}
-
 
 
 .wrapper {
@@ -21,6 +13,7 @@ box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 border-radius: 15px;
 background-color:#214674;
 max-height:600px;
+margin: 20px;
 }
 
 
@@ -31,7 +24,7 @@ margin-top: 1rem;
 
 
 .link{
-    color:#f1bd4c;
+    color:#d19d2c;
 }
 
 .wrapper p  :link{
