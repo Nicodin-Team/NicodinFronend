@@ -25,7 +25,6 @@ export default function EditProfile() {
   const [age, setAge] = useState("");
   const [country, setCountry] = useState("");
   // const [city, setCity] = useState("");
-  // const [profilePicture, setProfilePicture] = useState(""); 
   const [profilePicture, setProfilePicture] = useState("https://bootdey.com/img/Content/avatar/avatar7.png");
   const [selectedFile, setSelectedFile] = useState(null);
   const [errorFirstname, setErrorFirstname] = useState("");
@@ -144,7 +143,6 @@ export default function EditProfile() {
 
  
   const setUpdate = async () => {
-    // Check if all required fields are filled and validations pass
     if (
       firstname &&
       lastname &&
@@ -162,7 +160,7 @@ export default function EditProfile() {
       formData.append("gender", gender); // Assuming you have a gender field
       formData.append("age", age); // Assuming you have an age field
       formData.append("country", country); // Assuming you have a country field
-      formData.append("city", city);
+      formData.append("city", selectedCity);
   
       try {
         const response = await fetch("https://teamup.liara.run/accounts/users/update/", { // Replace with your actual API endpoint
@@ -170,17 +168,16 @@ export default function EditProfile() {
           body: formData,
         });
         if (response.ok) {
-          const data = await response.json(); // Assuming successful response includes updated profile data
-          // Update profile state with new data (e.g., profile picture URL)
-          setProfilePicture(data.profilePictureUrl || profilePicture); // Use new URL if provided, otherwise fallback to existing
+          const data = await response.json(); 
+          setProfilePicture(data.profilePictureUrl || profilePicture); 
           setFirstname(data.firstName || firstname);
           setLastname(data.lastName || lastname);
           setUsername(data.username || Username);
           setEmail(data.email || email);
-          setGender(data.gender || gender); // Update other fields if necessary
+          setGender(data.gender || gender); 
           setAge(data.age || age);
           setCountry(data.country || country);
-          setCity(data.city || city);
+          setSelectedCity(data.city ||selectedCity);
 
           console.log("Profile updated successfully!");
         } else {
@@ -192,7 +189,7 @@ export default function EditProfile() {
       console.error("Error updating profile:", error);
     }
   } else {
-    // Handle validation errors
+   
     console.error("Validation errors:", {
       firstname: errorFirstname,
       lastname: errorLastname,
@@ -203,17 +200,6 @@ export default function EditProfile() {
   }
   };
   
-
-  // const setupdate = () => {
-  //   console.log(firstname);
-  //   console.log(lastname);
-  //   console.log(Username);
-  //   console.log(email);
-  //   console.log(gender);
-  //   console.log(age);
-  //   console.log(country);
-  //   console.log(city);
-  // };
 
   return (
     <>
@@ -334,7 +320,7 @@ export default function EditProfile() {
                         type="number"
                         className="form-control"
                         id=" Age"
-                        placeholder="Enter your number"
+                        placeholder="Enter your age"
                         onChange={setage}
                       />
                     </div>
@@ -362,7 +348,7 @@ export default function EditProfile() {
                       <select id="city" className="form-control" onChange={handleChange} value={selectedCity}>
                         <option value="">Select City</option>
                         {cities.map((city) => (
-                          <option key={city.id} value={city.id}>  {/* Use city ID as value */}
+                          <option key={city.id} value={city.id}> 
                             {city.name}
                           </option>
                         ))}
