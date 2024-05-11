@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import React, { useState , useEffect } from "react";
 import "../components/Edituser.module.css";
 import avatar from "../assets/Images/c2.png";
@@ -16,15 +16,8 @@ async function fetchCities() {
     return []; 
   }
 }
-=======
-import React, { useState } from "react";
-import styles from "../components/Edituser.module.css";
-// import avatar from '../assets/Images/c2.png';
-// import { axios } from 'axios';
-// import Box from '@mui/material/Box';
-// import TextField from '@mui/material/TextField';
-// import MenuItem from '@mui/material/MenuItem';
->>>>>>> parent of 5191bd7 (edit)
+
+
 
 export default function EditProfile() {
   const [firstname, setFirstname] = useState("");
@@ -34,40 +27,7 @@ export default function EditProfile() {
   const [gender, setGender] = useState("");
   const [age, setAge] = useState("");
   const [country, setCountry] = useState("");
-<<<<<<< HEAD
-  // const [city, setCity] = useState("");
-  // const [profilePicture, setProfilePicture] = useState(""); 
-  const [profilePicture, setProfilePicture] = useState("https://bootdey.com/img/Content/avatar/avatar7.png");
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [errorFirstname, setErrorFirstname] = useState("");
-  const [errorLastname, setErrorLastname] = useState("");
-  const [errorUsername, setErrorUsername] = useState("");
-  const [errorEmail, setErrorEmail] = useState("");
-  const [errorAge, setErrorAge] = useState("");
-  const [cities, setCities] = useState([]);
-  const [selectedCity, setSelectedCity] = useState('');
-
-  useEffect(() => {
-    const fetchCityData = async () => {
-      const fetchedCities = await fetchCities();
-      setCities(fetchedCities);
-    };
-
-    fetchCityData();
-  }, []);
-
-  const handleChange = (event) => {
-    setSelectedCity(event.target.value);
-  };
-
-
-  const validateEmail = (email) => {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(String(email).toLowerCase());
-  };
-=======
   const [city, setCity] = useState("");
->>>>>>> parent of 5191bd7 (edit)
 
   const setfirstname = (e) => {
     setFirstname(e.target.value);
@@ -420,15 +380,6 @@ export default function EditProfile() {
                   </div>
                   <div className="row gutters d-grid">
                     <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-<<<<<<< HEAD
-                      <div className="text-right my-3 button ">
-                        <button
-                          type="button"
-                          id="submit"
-                          name="submit"
-                          className="btn btn-warning text-white py-2 "
-                          onClick={setUpdate}
-=======
                       <h6 className="mb-2 text-primary d-flex Font-weight-bolder " style={{fontSize : '20px'}}>
                         Personal Details
                       </h6>
@@ -499,93 +450,15 @@ export default function EditProfile() {
                           name="gender"
                           className="form-control"
                           onChange={setgender}
->>>>>>> parent of 5191bd7 (edit)
-                        >
+                        />
                           Update
                         </button>
-                      </div>
-                    </div>
-<<<<<<< HEAD
-                  </div>
-=======
-                    <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                      <div className="form-group">
-                        <label htmlFor=" Age" className="d-flex my-1 py-2">
-                          Age
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id=" Age"
-                          placeholder="Enter your Age"
-                          onChange={setage}
-                        />
-                      </div>
-                    </div>
-                    <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                      <div className="form-group">
-                        <label htmlFor="Country" className="d-flex my-1 py-2">
-                          Country
-                        </label>
-                        <input
-                          type="text"
-                          className="form-control"
-                          id="Country"
-                          placeholder="Enter your Country"
-                          onChange={setcountry}
-                        />
-                      </div>
-                    </div>
-                    <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                      <div className="form-group">
-                        <label htmlFor="city" className="d-flex my-1 py-2">
-                          City
-                        </label>
-                        <div className="ui-select">
-                          <select
-                            id="city"
-                            className="form-control"
-                            onChange={setcity}
-                          >
-                            <option value="">Select City</option>
-                            <option value="1">Tehran</option>
-                            <option value="2">Gilan</option>
-                            <option value="3">East Azerbaijan</option>
-                            <option value="4">Khuzestan</option>
-                            <option value="5">Fars</option>
-                            <option value="6">Isfahan</option>
-                            <option value="7">Razavi Khorasan</option>
-                            <option value="8">Qazvin</option>
-                            <option value="9">Semnan</option>
-                            <option value="10">Qom</option>
-                            <option value="11">Markazi</option>
-                            <option value="12">Zanjan</option>
-                            <option value="13">Mazandaran</option>
-                            <option value="14">Golestan</option>
-                            <option value="15">Ardabil</option>
-                            <option value="16">West Azerbaijan</option>
-                            <option value="17">Hamadan</option>
-                            <option value="18">Kurdistan</option>
-                            <option value="19">Kermanshah</option>
-                            <option value="20">Lorestan</option>
-                            <option value="21">Bushehr</option>
-                            <option value="22">Kerman</option>
-                            <option value="23">Hormozgan</option>
-                            <option value="24">
-                              Chaharmahal and Bakhtiari
-                            </option>
-                            <option value="25">Yazd</option>
-                            <option value="26">Sistan and Baluchestan</option>
-                            <option value="27">Ilam</option>
-                            <option value="28">
-                              Kohgiluyeh and Boyer-Ahmad
-                            </option>
-                            <option value="29">North Khorasan</option>
-                            <option value="30">South Khorasan</option>
-                            <option value="31">Alborz</option>
-                          </select>
+                        </div>
+                        </div>
                         </div>
                       </div>
+                      </div>
+                    </div>
                     </div>
                     <div className="row gutters d-grid">
                       <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -603,20 +476,7 @@ export default function EditProfile() {
                       </div>
                     </div>
                   </div>
-                </div>
->>>>>>> parent of 5191bd7 (edit)
-              </div>
-            </div>
-          </div>
-        </div>
-<<<<<<< HEAD
-        </div>
-        </div>
+                
     </>
-=======
-       
-   </>
-
->>>>>>> parent of 5191bd7 (edit)
   );
 }
