@@ -1,17 +1,17 @@
 import React, { useState , useEffect } from "react";
 import "../components/Edituser.module.css";
 import avatar from "../assets/Images/c2.png";
+import axios from "axios";
 
-async function fetchCities() {
+const fetchCities = async ()=> {
   try {
-    const response = await fetch('https://teamup.liara.run/resources/cities/'); // Replace with your actual API URL
-    if (!response.ok) {
-      throw new Error(`API request failed with status ${response.status}`);
-    }
-    const data = await response.json();
+    const response = await axios.get('https://teamup.liara.run/resources/cities/');
+    const {data} = response;
+    console.log(data)
     return data; 
   } catch (error) {
-    console.error("Error fetching cities:", error);
+    // console.error("Error fetching cities:", error);
+    console.log(error)
     return []; 
   }
 }
@@ -38,6 +38,7 @@ export default function EditProfile() {
   useEffect(() => {
     const fetchCityData = async () => {
       const fetchedCities = await fetchCities();
+      console.log(fetchCities)
       setCities(fetchedCities);
     };
 
@@ -347,8 +348,8 @@ export default function EditProfile() {
                       <div className="ui-select">
                       <select id="city" className="form-control" onChange={handleChange} value={selectedCity}>
                         <option value="">Select City</option>
-                        {cities.map((city) => (
-                          <option key={city.id} value={city.id}> 
+                        {cities.slice(0,50).map((city) => (
+                          <option key={city.id} value={city.slug}> 
                             {city.name}
                           </option>
                         ))}
