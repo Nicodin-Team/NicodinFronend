@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./landing.css";
+// import "./landing.css";
 // import imagearrow from '../assets/Icons/Arrow_icon.png';
 // import imageagreement from '../assets/Icons/agreement.png'
 // import imagebriefcase from '../assets/Icons//briefcase.png';

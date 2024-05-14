@@ -1,5 +1,5 @@
 import React, { useState , useEffect } from "react";
-import "../components/Edituser.module.css";
+// import "../components/Edituser.module.css";
 import avatar from "../assets/Images/c2.png";
 
 async function fetchCities() {

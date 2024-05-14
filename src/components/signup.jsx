@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from 'formik'; // Import Formik components
 import * as yup from 'yup'; // Import yup for validation
-import '../components/signin_up.css';
+// import '../components/signin_up.css';
 
 
 export default function Signup_em() {
