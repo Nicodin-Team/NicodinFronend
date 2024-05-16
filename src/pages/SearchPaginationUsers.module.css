@@ -71,8 +71,6 @@
     color: var(--gray);
   }
 
-  /* search input */
-
   .search_wrapper {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -80,10 +78,7 @@
     margin-right: 5px;
     display: flex;
     justify-content: space-between;
-    /* padding-left: 100px; */
-    /* box-shadow: #0d0c0c 0px 0px 0px 1px; */
     border-radius: 25px;
-    /* border: #0d0c0c; */
   }
 
   .box {
@@ -99,7 +94,6 @@
     background: rgb(65, 107, 149);
     border-radius: 50px;
     box-sizing: border-box;
-    /* font-family: Comic Sans MS; */
     font-size: 18px;
     color: #030303;
     outline: none;
@@ -159,7 +153,6 @@
     color: var(--gray);
     box-shadow: 0px 4px 6px var(--border);
     transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
-    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(245, 186, 86) 0px 0px 0px 3.5px; */
     border-radius: 25px;
   }
   .search_input:hover {
@@ -167,122 +160,20 @@
     box-shadow: 0px 0px 0px var(--border);
     border-radius: 20px;
   }
-  /* select from moderncss.dev */
-  /* select {
-    appearance: none !important;
-    outline: none;
-    background-color: var(--bg-offset);
-    border-radius: 0.25em;
-    border-width: 1px;
-    border-style: solid;
-    border-color: rgb(13 12 12);
-    padding: 1.4em 2em 1.4em 1em;
-    margin: 0;
-    margin-right: 1em;
-    width: 100%;
-    font-family: inherit;
-    font-size: inherit;
-    cursor: inherit;
-    line-height: inherit;
-    width: 100%;
-    color: #030303;
-    border-radius: 20px;
-  } */
-  /* .select {
-    padding-left: 0px;
-    padding-top: 0px;
-    margin-left: 10px;
-    margin-top: 5px;
-    max-height: 10px;
-    cursor: pointer;
-    line-height: 1.1;
-    background-color: transparent;
-    display: grid;
-    grid-template-areas: "select";
-    align-items: center;
-    position: relative;
-    box-shadow: 0px 4px 6px var(--border);
-    transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
-    border-radius: 20px;
-    margin-left: 950px;
-    position: absolute;
-  } */
-  /* .select:hover {
-    box-shadow: 0px 0px 0px var(--border);
-    border-radius: 20px;
-  } */
-
-  /* .select::after {
-    content: "";
-    display: block;
-    width: 0.8em;
-    height: 0.5em;
-    background-color: var(--text);
-    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
-    justify-self: end;
-    margin-right: 1em;
-    border-radius: 20px;
-  }
-  select,
-  .select:after {
-    grid-area: select;
-    border-radius: 20px;
-  }
-  select:focus + .focus {
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    right: -1px;
-    bottom: -45px;
-    border: 2px solid var(--text);
-    border-radius: inherit;
-    border-radius: 20px;
-  } */
-
-  /* button {
-    display: block;
-    margin-top: 2rem;
-    margin-bottom: 3rem;
-    font-size: 1.4rem;
-    padding: 12px 32px;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 40px;
-    background-color: #30a1e8;
-    border: 1px solid #0481c9;
-    color: #fff;
-    cursor: pointer;
-  } */
 
   .search_and_filter {
     display: flex;
   }
 
-
-  /* .multifilter{
-    border :1px solid rebeccapurple
-} */
-
   .multiselect_for_cities {
-    /* border :1px solid rgb(37, 181, 26); */
-
-    /* background-color: #0481c9; */
     position: absolute;
     margin-left: 485px;
     margin-top: 5.6px;
   }
 
-  /* .search_wrapper {
-    border: 1px solid rgb(13 12 12);
-    border-radius: 20px;
-    margin: 0px;
-    background-color: #ffffff;
-  } */
-
   .multiselect_for_skills {
     position: absolute;
     margin-left: 715px;
-    /* border :1px solid rebeccapurple; */
     border-radius: 50%;
     margin-top: 5.6px;
   }
@@ -290,7 +181,6 @@
   .multiselect_for_gender {
     position: absolute;
     margin-left: 945px;
-    /* border :1px solid rebeccapurple; */
     border-radius: 50%;
     margin-top: 5.6px;
   }
