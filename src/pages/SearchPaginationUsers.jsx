@@ -71,12 +71,12 @@ function SearchPaginationUsers() {
                   value={query}
                   onChange={(e) => setQuery(e.target.value)}
                   type="text"
-                  class="input"
+                  className={styles.myinput}
                   name="txt"
                   onmouseout="this.value = ''; this.blur();"
                 />
               </form>
-              <i class="fas fa-search"></i>
+              <i className="fas fa-search"></i>
             </div>
             {/* #### */}
             <div className={styles.multiselect_for_skills}>
@@ -166,17 +166,17 @@ function SearchPaginationUsers() {
             .slice((page - 1) * 8, page * 8)
             .map((item) => (
               <li key={item.id}>
-                <article className={styles.card}>
+                <article className={styles.mycard}>
                   <div className={styles.card_image}>
-                    <img
+                    <img className={styles.myimage}
                       src={item.image}
                       alt={item.first_name + " " + item.last_name}
                     />
                   </div>
                   <div className={styles.card_content}>
-                    <h3 className={styles.card_name}>
+                    <h4 className={styles.card_name}>
                       {item.first_name + " " + item.last_name}
-                    </h3>
+                    </h4>
                     <ol className={styles.card_list}>
                       <li>
                         <span>{item.email}</span>

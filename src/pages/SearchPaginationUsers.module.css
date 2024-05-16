@@ -6,7 +6,8 @@
     --border: rgba(0, 0, 0, 0.13);
     background: var(--bg);
   }
-  .sr_only {
+  
+  /* .sr_only {
     border: 0;
     clip: rect(1px, 1px, 1px, 1px);
     -webkit-clip-path: inset(50%);
@@ -18,36 +19,31 @@
     position: absolute;
     width: 1px;
     white-space: nowrap;
-  }
-  img {
-    width: 100%;
-  }
+  } */
 
-  ul,
-  ol {
-    list-style: none;
-  }
 
-  .wrapper {
+
+  /* .wrapper {
     width: 96%;
     max-width: 1140px;
     margin: 0 auto;
-  }
-  .wrapper_inner {
+  } */
+  /* .wrapper_inner {
     max-width: 600px;
     text-align: center;
     margin-left: auto;
     margin-right: auto;
-  }
+  } */
   .card_grid {
-    padding-right: 200px; /* taghir fasele az safhe az rast va chap*/
+    list-style: none;
+    padding-right: 200px; 
     padding-left: 200px;
     margin: 2em 0;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     grid-gap: 48px;
   }
-  .card {
+  .mycard {
     background-color: var(--bg-offset);
     padding: 0px;
     box-shadow: 0px 2px 4px var(--border);
@@ -56,10 +52,10 @@
     /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(245, 186, 86) 0px 0px 0px 2px; */
     border: 2px solid #194673;
   }
-  .card:hover {
+  .mycard:hover {
     transform: scale(1.034);
   }
-  .card:hover .card_content h2 {
+  .mycard:hover .card_content h2 {
     display: block;
     -webkit-line-clamp: none;
     -webkit-box-orient: none;
@@ -70,15 +66,15 @@
     height: 243.8px;
     /* overflow: hidden; */
   }
-  .card_image img {
+  .myimage {
     /* margin-top: -13px; */
-    min-height: 100%;
+    height: 100%;
     width: 100%;
     /* margin: 5px; */
     object-fit: cover;
     object-position: center;
     /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(245, 186, 86) 0px 0px 0px 2px; */
-    border-radius: 5% 5% 0 0;
+    border-radius: 5.25% 5.25% 0 0;
   }
   .card_content {
     padding: 20px 15px;
@@ -87,7 +83,7 @@
     padding-bottom: 25px;
     padding-right: 16px;
   }
-  .card_content h2 {
+  .card_name {
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
@@ -96,6 +92,9 @@
 
   .card_list {
     margin-top: 16px;
+    list-style: none;
+    padding-left: 0px ;
+    
   }
   .card_list li {
     color: var(--text);
@@ -124,7 +123,7 @@
     position: relative;
   }
 
-  .input {
+  .myinput {
     margin-left: 22px;
     margin-top: 16px;
     padding: 10px;
