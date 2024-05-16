@@ -101,6 +101,19 @@ function SearchPaginationUsers() {
                   setSelectedOptions(selectedList.map((option) => option))
                 }
                 placeholder="Select For Skills"
+                style={{
+                  chips: {
+                    background: 'black'
+                  },
+                  multiselectContainer: {
+                    color: 'black'
+                  },
+                  searchBox: {
+                    border: '1px solid',
+                    'border-radius': '20px',
+                    padding:'13px'
+                  }
+                }}
               />
             </div>
 
@@ -132,6 +145,19 @@ function SearchPaginationUsers() {
                   )
                 }
                 placeholder="Select For Cities"
+                style={{
+                  chips: {
+                    background: 'black'
+                  },
+                  multiselectContainer: {
+                    color: 'black'
+                  },
+                  searchBox: {
+                    border: '1px solid',
+                    'border-radius': '20px',
+                    padding:'13px'
+                  }
+                }}
               />
             </div>
 
@@ -154,6 +180,20 @@ function SearchPaginationUsers() {
                   )
                 }
                 placeholder="Select For Gender"
+                style={{
+                  chips: {
+                    background: 'black'
+                  },
+                  multiselectContainer: {
+                    color: 'black'
+                  },
+                  searchBox: {
+                    border: '1px solid',
+                    'border-radius': '20px',
+                    padding:'13px'
+                  }
+                }}
+              
               />
             </div>
 
@@ -202,10 +242,12 @@ function SearchPaginationUsers() {
           sx={{
             display: "flex",
             justifyContent: "center",
-            my: 6,
+            
           }}
         >
           <Pagination
+            sx={{my:6}}
+            
             page={page}
             onChange={handleChange}
             variant="outlined"
