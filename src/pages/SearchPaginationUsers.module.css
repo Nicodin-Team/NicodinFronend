@@ -7,33 +7,6 @@
     background: var(--bg);
   }
   
-  /* .sr_only {
-    border: 0;
-    clip: rect(1px, 1px, 1px, 1px);
-    -webkit-clip-path: inset(50%);
-    clip-path: inset(50%);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-    white-space: nowrap;
-  } */
-
-
-
-  /* .wrapper {
-    width: 96%;
-    max-width: 1140px;
-    margin: 0 auto;
-  } */
-  /* .wrapper_inner {
-    max-width: 600px;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-  } */
   .card_grid {
     list-style: none;
     padding-right: 200px; 
@@ -49,7 +22,6 @@
     box-shadow: 0px 2px 4px var(--border);
     transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
     border-radius: 5%;
-    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(245, 186, 86) 0px 0px 0px 2px; */
     border: 2px solid #194673;
   }
   .mycard:hover {
@@ -62,18 +34,13 @@
     overflow: visible;
   }
   .card_image {
-    /* max-height: 1500px; */
     height: 243.8px;
-    /* overflow: hidden; */
   }
   .myimage {
-    /* margin-top: -13px; */
     height: 100%;
     width: 100%;
-    /* margin: 5px; */
     object-fit: cover;
     object-position: center;
-    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(245, 186, 86) 0px 0px 0px 2px; */
     border-radius: 5.25% 5.25% 0 0;
   }
   .card_content {
