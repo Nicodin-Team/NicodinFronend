@@ -80,7 +80,7 @@ function SearchPaginationUsers() {
             </div>
             {/* #### */}
             <div className={styles.multiselect_for_skills}>
-              <Multiselect
+              <Multiselect 
                 isObject={false}
                 options={[
                   "Frontend Developer",

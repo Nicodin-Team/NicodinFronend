@@ -201,7 +201,7 @@
     border-radius: 20px;
   }
   /* select from moderncss.dev */
-  select {
+  /* select {
     appearance: none !important;
     outline: none;
     background-color: var(--bg-offset);
@@ -220,8 +220,8 @@
     width: 100%;
     color: #030303;
     border-radius: 20px;
-  }
-  .select {
+  } */
+  /* .select {
     padding-left: 0px;
     padding-top: 0px;
     margin-left: 10px;
@@ -239,13 +239,13 @@
     border-radius: 20px;
     margin-left: 950px;
     position: absolute;
-  }
-  .select:hover {
+  } */
+  /* .select:hover {
     box-shadow: 0px 0px 0px var(--border);
     border-radius: 20px;
-  }
+  } */
 
-  .select::after {
+  /* .select::after {
     content: "";
     display: block;
     width: 0.8em;
@@ -270,9 +270,9 @@
     border: 2px solid var(--text);
     border-radius: inherit;
     border-radius: 20px;
-  }
+  } */
 
-  button {
+  /* button {
     display: block;
     margin-top: 2rem;
     margin-bottom: 3rem;
@@ -285,16 +285,13 @@
     border: 1px solid #0481c9;
     color: #fff;
     cursor: pointer;
-  }
+  } */
 
   .search_and_filter {
     display: flex;
   }
 
-  .custom_select {
-    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(150, 27, 87) 0px 0px 0px 3.5px; */
-    border-radius: 20px;
-  }
+
   /* .multifilter{
     border :1px solid rebeccapurple
 } */
@@ -308,12 +305,12 @@
     margin-top: 5.6px;
   }
 
-  .search_wrapper .searchWrapper {
+  /* .search_wrapper {
     border: 1px solid rgb(13 12 12);
     border-radius: 20px;
     margin: 0px;
     background-color: #ffffff;
-  }
+  } */
 
   .multiselect_for_skills {
     position: absolute;
@@ -331,13 +328,3 @@
     margin-top: 5.6px;
   }
 
-  .searchWrapper {
-    /* box-shadow: rgb(13 12 12) 0px 0px 0px 0.7px; */
-
-    /* margin: 0px; */
-
-    margin: 10px;
-    width: 200px;
-    height: 56.2px;
-    /* width:300px; */
-  }
