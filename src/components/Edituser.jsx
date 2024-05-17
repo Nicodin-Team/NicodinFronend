@@ -87,10 +87,11 @@ export default function EditProfile() {
   const [errorUsername, setErrorUsername] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
   const [errorAge, setErrorAge] = useState("");
-  const [cities, setCities] = useState([]);
+  const [cities, setCities] = useState([{}]);
   const [selectedCity, setSelectedCity] = useState("");
+  const [data, setData] = useState(null);
   const [value, setValue] = useState(0);
-  const [chipData, setChipData] = React.useState([
+  const [chipData, setChipData] = useState([
     { key: 0, label: "Angular" },
     { key: 1, label: "jQuery" },
     { key: 2, label: "Polymer" },
@@ -121,6 +122,13 @@ export default function EditProfile() {
   // const handleChange = (event) => {
   //   setSelectedCity(event.target.value);
   // };
+  useEffect(() => {
+    async function fetchData() {
+      const result = await axios.get('https://teamup.liara.run/accounts/users/update/');
+      setData(result.data);
+    }
+    fetchData();
+  }, []);
 
   const validateEmail = (email) => {
     const re =
@@ -307,7 +315,7 @@ export default function EditProfile() {
           </div>
           <div className="col-xl-8 col-lg-8 col-md-8 col-sm-8">
             <div className="card h-100 rounded-4">
-              <div className="card-body my-2 py-1">
+              <div className="card-body my-1 py-1">
                 {/* <h6
                     className="mb-2 text-primary d-flex Font-weight-bolder "
                     style={{ fontSize: "20px" }}
@@ -450,9 +458,9 @@ export default function EditProfile() {
                               onChange={handleChange}
                               value={selectedCity}
                             >
-                              <option value="">Select City</option>
+                              <option value=''>Select City</option>
                               {cities.slice(0, 50).map((city) => (
-                                <option key={city.id} value={city.slug}>
+                                <option key={city.id} value={city.name}>
                                   {city.name}
                                 </option>
                               ))}
@@ -512,16 +520,16 @@ export default function EditProfile() {
                     </div>
                   </CustomTabPanel>
                   <CustomTabPanel value={value} index={1}>
-                  <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style={{height:'400px'}}>
-                    <div className="card my-2 py-3"> 
+                  <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 " style={{height:'380px',width:'700px'}}>
+                    <div className="my-3 py-2 d-inline"> 
                     <Paper
                       sx={{
                         display: "flex",
                         justifyContent: "center",
                         flexWrap: "wrap",
                         listStyle: "none",
-                        p: 2,
-                        m: 4,
+                        p: 4,
+                        m: 5,
                       }}
                       component="ul"
                     >
@@ -554,12 +562,12 @@ export default function EditProfile() {
                         justifyContent: "center",
                         flexWrap: "wrap",
                         listStyle: "none",
-                        p: 1,
-                        m: 4,
+                        p: 2,
+                        m: 5,
                       }}
                       component="ul"
                     >
-                      <FormGroup style={{display:'inline-block'}}>
+                    <FormGroup style={{display:'inline-block'}}>
                         <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
                         <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
                         <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
