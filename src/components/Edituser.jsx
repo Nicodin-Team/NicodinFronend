@@ -1,19 +1,72 @@
-import React, { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 import "../components/Edituser.module.css";
+import Form from "react-bootstrap/Form";
+import * as React from "react";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import { styled } from "@mui/material/styles";
+import Chip from "@mui/material/Chip";
+import Paper from "@mui/material/Paper";
+import TagFacesIcon from "@mui/icons-material/TagFaces";
 import avatar from "../assets/Images/c2.png";
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
 import axios from "axios";
 
-const fetchCities = async ()=> {
+const fetchCities = async () => {
   try {
-    const response = await axios.get('https://teamup.liara.run/resources/cities/');
-    const {data} = response;
-    console.log(data)
-    return data; 
+    const response = await axios.get(
+      "https://teamup.liara.run/resources/cities/"
+    );
+    const { data } = response;
+    console.log(data);
+    return data;
   } catch (error) {
     // console.error("Error fetching cities:", error);
-    console.log(error)
-    return []; 
+    console.log(error);
+    return [];
   }
+};
+
+const ListItem = styled("li")(({ theme }) => ({
+  margin: theme.spacing(0.5),
+}));
+
+function CustomTabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+CustomTabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
 }
 
 export default function EditProfile() {
@@ -25,7 +78,9 @@ export default function EditProfile() {
   const [age, setAge] = useState("");
   const [country, setCountry] = useState("");
   // const [city, setCity] = useState("");
-  const [profilePicture, setProfilePicture] = useState("https://bootdey.com/img/Content/avatar/avatar7.png");
+  const [profilePicture, setProfilePicture] = useState(
+    "https://bootdey.com/img/Content/avatar/avatar7.png"
+  );
   const [selectedFile, setSelectedFile] = useState(null);
   const [errorFirstname, setErrorFirstname] = useState("");
   const [errorLastname, setErrorLastname] = useState("");
@@ -33,25 +88,43 @@ export default function EditProfile() {
   const [errorEmail, setErrorEmail] = useState("");
   const [errorAge, setErrorAge] = useState("");
   const [cities, setCities] = useState([]);
-  const [selectedCity, setSelectedCity] = useState('');
+  const [selectedCity, setSelectedCity] = useState("");
+  const [value, setValue] = useState(0);
+  const [chipData, setChipData] = React.useState([
+    { key: 0, label: "Angular" },
+    { key: 1, label: "jQuery" },
+    { key: 2, label: "Polymer" },
+    { key: 3, label: "React" },
+    { key: 4, label: "Vue.js" },
+  ]);
+
+  const handleDelete = (chipToDelete) => () => {
+    setChipData((chips) =>
+      chips.filter((chip) => chip.key !== chipToDelete.key)
+    );
+  };
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
   useEffect(() => {
     const fetchCityData = async () => {
       const fetchedCities = await fetchCities();
-      console.log(fetchCities)
+      console.log(fetchCities);
       setCities(fetchedCities);
     };
 
     fetchCityData();
   }, []);
 
-  const handleChange = (event) => {
-    setSelectedCity(event.target.value);
-  };
-
+  // const handleChange = (event) => {
+  //   setSelectedCity(event.target.value);
+  // };
 
   const validateEmail = (email) => {
-    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re =
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
   };
 
@@ -112,7 +185,7 @@ export default function EditProfile() {
   // const setcity = (e) => {
   //   setCity(e.target.value);
   // };
-  
+
   const handleProfilePictureChange = (e) => {
     const reader = new FileReader();
     reader.onload = (e) => {
@@ -123,7 +196,7 @@ export default function EditProfile() {
     };
     reader.readAsDataURL(e.target.files[0]);
   };
-  
+
   // const fetchProfilePicture = async () => {
   //   try {
   //     const response = await fetch("https://your-api-endpoint/profile-picture");
@@ -141,8 +214,6 @@ export default function EditProfile() {
   //   fetchProfilePicture(); // Call the API to fetch profile picture on component mount
   // }, []);
 
-
- 
   const setUpdate = async () => {
     if (
       firstname &&
@@ -153,7 +224,7 @@ export default function EditProfile() {
     ) {
       const formData = new FormData();
       formData.append("profilePicture", selectedFile); // Add image file
-  
+
       // Add other form data
       formData.append("firstName", firstname);
       formData.append("lastName", lastname);
@@ -162,45 +233,50 @@ export default function EditProfile() {
       formData.append("age", age); // Assuming you have an age field
       formData.append("country", country); // Assuming you have a country field
       formData.append("city", selectedCity);
-  
+
       try {
-        const response = await fetch("https://teamup.liara.run/accounts/users/update/", { // Replace with your actual API endpoint
-          method: "PATCH",
-          body: formData,
-        });
+        const response = await fetch(
+          "https://teamup.liara.run/accounts/users/update/",
+          {
+            // Replace with your actual API endpoint
+            method: "PATCH",
+            body: formData,
+          }
+        );
         if (response.ok) {
-          const data = await response.json(); 
-          setProfilePicture(data.profilePictureUrl || profilePicture); 
+          const data = await response.json();
+          setProfilePicture(data.profilePictureUrl || profilePicture);
           setFirstname(data.firstName || firstname);
           setLastname(data.lastName || lastname);
           setUsername(data.username || Username);
           setEmail(data.email || email);
-          setGender(data.gender || gender); 
+          setGender(data.gender || gender);
           setAge(data.age || age);
           setCountry(data.country || country);
-          setSelectedCity(data.city ||selectedCity);
+          setSelectedCity(data.city || selectedCity);
 
           console.log("Profile updated successfully!");
         } else {
-        // Handle API errors (e.g., display error messages to user)
-        const errorData = await response.json();
-        console.error("Failed to update profile:", errorData.message || response.statusText);
+          // Handle API errors (e.g., display error messages to user)
+          const errorData = await response.json();
+          console.error(
+            "Failed to update profile:",
+            errorData.message || response.statusText
+          );
+        }
+      } catch (error) {
+        console.error("Error updating profile:", error);
       }
-    } catch (error) {
-      console.error("Error updating profile:", error);
+    } else {
+      console.error("Validation errors:", {
+        firstname: errorFirstname,
+        lastname: errorLastname,
+        username: errorUsername,
+        email: errorEmail,
+        age: errorAge,
+      });
     }
-  } else {
-   
-    console.error("Validation errors:", {
-      firstname: errorFirstname,
-      lastname: errorLastname,
-      username: errorUsername,
-      email: errorEmail,
-      age: errorAge,
-    });
-  }
   };
-  
 
   return (
     <>
@@ -231,130 +307,157 @@ export default function EditProfile() {
           </div>
           <div className="col-xl-8 col-lg-8 col-md-8 col-sm-8">
             <div className="card h-100 rounded-4">
-              <div className="card-body my-4 py-3">
-                  <h6
+              <div className="card-body my-2 py-1">
+                {/* <h6
                     className="mb-2 text-primary d-flex Font-weight-bolder "
                     style={{ fontSize: "20px" }}
                   >
                     Personal Details
-                  </h6>
-                  
-                <div className="row gutters">
-                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div className="form-group">
-                      <label htmlFor="firstname" className="d-flex my-1 py-2">
-                        First Name
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="firstname"
-                        placeholder="Enter your firstname"
-                        onChange={setfirstname}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div className="form-group">
-                      <label htmlFor="Last Name" className="d-flex my-1 py-2">
-                        Last Name
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="Last Name"
-                        placeholder="Enter your Lastname"
-                        onChange={setlastname}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div className="form-group">
-                      <label htmlFor="User Name" className="d-flex my-1 py-2">
-                        User Name
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="User Name"
-                        placeholder="Enter your username"
-                        onChange={setusername}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div className="form-group">
-                      <label htmlFor="Email" className="d-flex my-1 py-2">
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        className="form-control"
-                        id="Email"
-                        placeholder="Enter your email"
-                        onChange={setemail}
-                        readOnly
-                      />
-                    </div>
-                  </div>
-                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div className="form-group">
-                      <label htmlFor="Gender" className="d-flex my-1 py-2">
-                        Gender
-                      </label>
-                      <select
-                        name="gender"
-                        className="form-control"
-                        onChange={setgender}
-                      >
-                        <option value="male">men</option>
-                        <option value="female">women</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div className="form-group">
-                      <label htmlFor=" Age" className="d-flex my-1 py-2">
-                        Age
-                      </label>
-                      <input
-                        type="number"
-                        className="form-control"
-                        id=" Age"
-                        placeholder="Enter your age"
-                        onChange={setage}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div className="form-group">
-                      <label htmlFor="Country" className="d-flex my-1 py-2">
-                        Country
-                      </label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        id="Country"
-                        placeholder="Enter your Country"
-                        onChange={setcountry}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
-                    <div className="form-group">
-                      <label htmlFor="city" className="d-flex my-1 py-2">
-                        City
-                      </label>
-                      <div className="ui-select">
-                      <select id="city" className="form-control" onChange={handleChange} value={selectedCity}>
-                        <option value="">Select City</option>
-                        {cities.slice(0,50).map((city) => (
-                          <option key={city.id} value={city.slug}> 
-                            {city.name}
-                          </option>
-                        ))}
-                      </select>
-                      {/* 
+                  </h6> */}
+                <Box sx={{ width: "100%" }}>
+                  <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+                    <Tabs
+                      value={value}
+                      onChange={handleChange}
+                      aria-label="basic tabs example"
+                    >
+                      <Tab label="Personal Details" {...a11yProps(0)} />
+                      <Tab label="Skills" {...a11yProps(1)} />
+                    </Tabs>
+                  </Box>
+                  <CustomTabPanel value={value} index={0}>
+                    <div className="row gutters">
+                      <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div className="form-group">
+                          <label
+                            htmlFor="firstname"
+                            className="d-flex my-1 py-2"
+                          >
+                            First Name
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="firstname"
+                            placeholder="Enter your firstname"
+                            onChange={setfirstname}
+                          />
+                        </div>
+                      </div>
+                      <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div className="form-group">
+                          <label
+                            htmlFor="Last Name"
+                            className="d-flex my-1 py-2"
+                          >
+                            Last Name
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="Last Name"
+                            placeholder="Enter your Lastname"
+                            onChange={setlastname}
+                          />
+                        </div>
+                      </div>
+                      <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div className="form-group">
+                          <label
+                            htmlFor="User Name"
+                            className="d-flex my-1 py-2"
+                          >
+                            User Name
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="User Name"
+                            placeholder="Enter your username"
+                            onChange={setusername}
+                          />
+                        </div>
+                      </div>
+                      <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div className="form-group">
+                          <label htmlFor="Email" className="d-flex my-1 py-2">
+                            Email
+                          </label>
+                          <input
+                            type="email"
+                            className="form-control"
+                            id="Email"
+                            placeholder="Enter your email"
+                            onChange={setemail}
+                            readOnly
+                          />
+                        </div>
+                      </div>
+                      <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div className="form-group">
+                          <label htmlFor="Gender" className="d-flex my-1 py-2">
+                            Gender
+                          </label>
+                          <Form.Select
+                            aria-label="Default select example"
+                            name="gender"
+                            className="form-control"
+                            onChange={setgender}
+                          >
+                            <option value="male">men</option>
+                            <option value="female">women</option>
+                          </Form.Select>
+                        </div>
+                      </div>
+                      <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div className="form-group">
+                          <label htmlFor=" Age" className="d-flex my-1 py-2">
+                            Age
+                          </label>
+                          <input
+                            type="number"
+                            className="form-control"
+                            id=" Age"
+                            placeholder="Enter your age"
+                            onChange={setage}
+                          />
+                        </div>
+                      </div>
+                      <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div className="form-group">
+                          <label htmlFor="Country" className="d-flex my-1 py-2">
+                            Country
+                          </label>
+                          <input
+                            type="text"
+                            className="form-control"
+                            id="Country"
+                            placeholder="Enter your Country"
+                            onChange={setcountry}
+                          />
+                        </div>
+                      </div>
+                      <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div className="form-group">
+                          <label htmlFor="city" className="d-flex my-1 py-2">
+                            City
+                          </label>
+                          <div className="ui-select">
+                            <Form.Select
+                              aria-label="Default select example"
+                              id="city"
+                              className="form-control"
+                              onChange={handleChange}
+                              value={selectedCity}
+                            >
+                              <option value="">Select City</option>
+                              {cities.slice(0, 50).map((city) => (
+                                <option key={city.id} value={city.slug}>
+                                  {city.name}
+                                </option>
+                              ))}
+                            </Form.Select>
+                            {/* 
                           <option value="">Select City</option>
                           <option value="1">Tehran</option>
                           <option value="2">Gilan</option>
@@ -388,25 +491,87 @@ export default function EditProfile() {
                           <option value="30">South Khorasan</option>
                           <option value="31">Alborz</option>
                         </select> */}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="row gutters d-grid">
+                        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                          <div className="text-right my-3 button ">
+                            <button
+                              type="button"
+                              id="submit"
+                              name="submit"
+                              className="btn btn-warning text-white py-2 "
+                              onClick={setUpdate}
+                            >
+                              Update
+                            </button>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="row gutters d-grid">
-                    <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                      <div className="text-right my-3 button ">
-                        <button
-                          type="button"
-                          id="submit"
-                          name="submit"
-                          className="btn btn-warning text-white py-2 "
-                          onClick={setUpdate}
-                        >
-                          Update
-                        </button>
-                      </div>
+                  </CustomTabPanel>
+                  <CustomTabPanel value={value} index={1}>
+                  <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" style={{height:'400px'}}>
+                    <div className="card my-2 py-3"> 
+                    <Paper
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        flexWrap: "wrap",
+                        listStyle: "none",
+                        p: 2,
+                        m: 4,
+                      }}
+                      component="ul"
+                    >
+                      {chipData.map((data) => {
+                        let icon;
+
+                        if (data.label === "React") {
+                          icon = <TagFacesIcon />;
+                        }
+
+                        return (
+                          <ListItem key={data.key}>
+                            <Chip
+                              icon={icon}
+                              label={data.label}
+                              onDelete={
+                                data.label === "React"
+                                  ? undefined
+                                  : handleDelete(data)
+                              }
+                            />
+                          </ListItem>
+                        );
+                      })}
+                    </Paper>
+                    <hr/>
+                    <Paper
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        flexWrap: "wrap",
+                        listStyle: "none",
+                        p: 1,
+                        m: 4,
+                      }}
+                      component="ul"
+                    >
+                      <FormGroup style={{display:'inline-block'}}>
+                        <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
+                        <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
+                        <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
+                        <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
+                        <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
+                        <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
+                    </FormGroup>
+                    </Paper>
                     </div>
-                  </div>
-              </div>
+                    </div>
+                  </CustomTabPanel>
+                </Box>
             </div>
           </div>
         </div>
