@@ -6,6 +6,7 @@ import Error from './components/error';
 import EditProfile from './components/Edituser';
 import Landing from './pages/Landing';
 import { AuthProvider } from './context/AuthContext';
+import AnnouncementPage from './components/Announcement/AnnouncementPage';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <AuthProvider>
       <Router>
         <Routes>
+          <Route path='/announcement' element={<AnnouncementPage/>}/>
           <Route path='/profile' element={<EditProfile/>}/>
           <Route path='/login' element={<Login/>}/>
           <Route path='/' element={<Landing/>}/>
