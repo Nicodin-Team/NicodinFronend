@@ -1,27 +1,7 @@
-:root {
 
-    --bg-color: #242e56;
-    --primary-color: #f1bd4c;
-    --text-color: #777c94;
-    --text-color2: #f3f2f5;
-
-
-}
-
-@font-face {
-    font-family: Mona sans;
-    src: url(../../assests/Fonts/Work_Sans/static/WorkSans-Medium.ttf);
-}
-
-body {
-
-    background-color: var(--bg-color);
-    font-family: Mona sans;
+.landing{
     
-
-}
-
-
+background-color: var(--bg-color);
 a {
 
     text-decoration: none;
@@ -356,4 +336,5 @@ a {
 
 .footer-section__footer-social a:hover {
     background-color: var(--bg-color);
+}
 }

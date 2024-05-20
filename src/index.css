@@ -1,15 +1,21 @@
+@font-face {
+  font-family: WorkSans;
+  src: url(../assests/Fonts/Work_Sans/static/WorkSans-Medium.ttf);
+}
+:root {
+    --bg-color: #242e56;
+    --primary-color: #f1bd4c;
+    --text-color: #777c94;
+    --text-color2: #f3f2f5;
+}
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
+      sans-serif; */
+    font-family: WorkSans;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background-color: #232347;
-  }
-  
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-  }
-  
+}
+
