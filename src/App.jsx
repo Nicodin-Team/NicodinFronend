@@ -5,11 +5,14 @@ import Signup from './components/signup';
 import Error from './components/error';
 import EditProfile from './components/Edituser';
 import Landing from './pages/Landing';
+import { AuthProvider } from './context/AuthContext';
+
 
 function App() {
   
   return(
     <div className="App">
+      <AuthProvider>
       <Router>
         <Routes>
           <Route path='/profile' element={<EditProfile/>}/>
@@ -18,7 +21,7 @@ function App() {
           <Route path='/signup' element={<Signup/>}/>
           <Route path='*' element={<Error/>}/>
         </Routes>
-      </Router>
+      </Router></AuthProvider>
     </div>
   )
 }
