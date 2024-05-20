@@ -87,7 +87,7 @@ export default function EditProfile() {
   const [errorUsername, setErrorUsername] = useState("");
   const [errorEmail, setErrorEmail] = useState("");
   const [errorAge, setErrorAge] = useState("");
-  const [cities, setCities] = useState([{}]);
+  const [cities, setCities] = useState([]);
   const [selectedCity, setSelectedCity] = useState("");
   const [data, setData] = useState(null);
   const [value, setValue] = useState(0);
@@ -105,7 +105,7 @@ export default function EditProfile() {
     );
   };
 
-  const handleChange = (event, newValue) => {
+  const setcity = (event, newValue) => {
     setValue(newValue);
   };
 
@@ -115,20 +115,27 @@ export default function EditProfile() {
       console.log(fetchCities);
       setCities(fetchedCities);
     };
+    const id = 1;
+    async function fetchData() {
+      const result = await axios.get(`https://teamup.liara.run/accounts/users/${id}`);
+      setData(result.data);
+      setFirstname(result.data.first_name)
+      setLastname(result.data.last_name)
+      setUsername(result.data.username)
+      setcity(result.data.city)
+      setGender(result.data.gender)
+      setAge(result.data.age)
+      setCountry(result.data.country)
+    }
 
+    fetchData();
     fetchCityData();
   }, []);
+   
+  const handleChange = (event) => {
+    setSelectedCity(event.target.value);
+  };
 
-  // const handleChange = (event) => {
-  //   setSelectedCity(event.target.value);
-  // };
-  useEffect(() => {
-    async function fetchData() {
-      const result = await axios.get('https://teamup.liara.run/accounts/users/update/');
-      setData(result.data);
-    }
-    fetchData();
-  }, []);
 
   const validateEmail = (email) => {
     const re =
@@ -303,7 +310,7 @@ export default function EditProfile() {
               <div className="card-body text-center my-4">
                 <img
                   className="img-account-profile rounded-circle mb-2"
-                  src={profilePicture}
+                  src={profilePicture || data.photo}
                   alt=""
                 />
                 <div className="small font-italic text-muted mb-4">
@@ -455,7 +462,7 @@ export default function EditProfile() {
                               aria-label="Default select example"
                               id="city"
                               className="form-control"
-                              onChange={handleChange}
+                              onChange={setcity}
                               value={selectedCity}
                             >
                               <option value=''>Select City</option>
