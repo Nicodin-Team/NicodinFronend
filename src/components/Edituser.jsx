@@ -91,6 +91,7 @@ export default function EditProfile() {
   const [selectedCity, setSelectedCity] = useState("");
   const [data, setData] = useState(null);
   const [value, setValue] = useState(0);
+  const [newfirstname , setNewfirstname] = useState("");
   const [chipData, setChipData] = useState([
     { key: 0, label: "Angular" },
     { key: 1, label: "jQuery" },
@@ -106,18 +107,18 @@ export default function EditProfile() {
   };
 
   const setcity = (event, newValue) => {
-    setValue(newValue);
+    setSelectedCity(newValue);
   };
 
   useEffect(() => {
     const fetchCityData = async () => {
       const fetchedCities = await fetchCities();
-      console.log(fetchCities);
       setCities(fetchedCities);
     };
     const id = 1;
     async function fetchData() {
       const result = await axios.get(`https://teamup.liara.run/accounts/users/${id}`);
+      console.log(typeof(result.data))
       setData(result.data);
       setFirstname(result.data.first_name)
       setLastname(result.data.last_name)
@@ -132,9 +133,16 @@ export default function EditProfile() {
     fetchCityData();
   }, []);
    
-  const handleChange = (event) => {
-    setSelectedCity(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   // setSelectedCity(event.target.value);
+  //   console.log('VALUE', event.target.value);
+  //   setValue(event.target.value);
+  // };
+
+  const handleTabChange = (event, newValue) => {
+    console.log(newValue);
+    setValue(newValue);
+  }
 
 
   const validateEmail = (email) => {
@@ -143,8 +151,10 @@ export default function EditProfile() {
     return re.test(String(email).toLowerCase());
   };
 
+
   const setfirstname = (e) => {
     setFirstname(e.target.value);
+    setNewfirstname(e.target.value);
     if (!firstname) {
       setErrorFirstname("First name is required");
     } else {
@@ -228,15 +238,16 @@ export default function EditProfile() {
   // useEffect(() => {
   //   fetchProfilePicture(); // Call the API to fetch profile picture on component mount
   // }, []);
-
+  const [token, settoken] = useState("");
+  localStorage.getItem("accessToken", token);
   const setUpdate = async () => {
-    if (
-      firstname &&
-      lastname &&
-      Username &&
-      validateEmail(email) &&
-      !errorAge
-    ) {
+    // if (
+    //   firstname &&
+    //   lastname &&
+    //   Username &&
+    //   validateEmail(email) &&
+    //   !errorAge
+    // ) {
       const formData = new FormData();
       formData.append("profilePicture", selectedFile); // Add image file
 
@@ -256,6 +267,10 @@ export default function EditProfile() {
             // Replace with your actual API endpoint
             method: "PATCH",
             body: formData,
+            header: {
+              'Content-Type': 'application/json',
+              Token: token,
+            },
           }
         );
         if (response.ok) {
@@ -282,15 +297,15 @@ export default function EditProfile() {
       } catch (error) {
         console.error("Error updating profile:", error);
       }
-    } else {
-      console.error("Validation errors:", {
-        firstname: errorFirstname,
-        lastname: errorLastname,
-        username: errorUsername,
-        email: errorEmail,
-        age: errorAge,
-      });
-    }
+    // } else {
+    //   console.error("Validation errors:", {
+    //     firstname: errorFirstname,
+    //     lastname: errorLastname,
+    //     username: errorUsername,
+    //     email: errorEmail,
+    //     age: errorAge,
+    //   });
+    // }
   };
 
   return (
@@ -333,7 +348,7 @@ export default function EditProfile() {
                   <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
                     <Tabs
                       value={value}
-                      onChange={handleChange}
+                      onChange={handleTabChange}
                       aria-label="basic tabs example"
                     >
                       <Tab label="Personal Details" {...a11yProps(0)} />
@@ -356,6 +371,7 @@ export default function EditProfile() {
                             id="firstname"
                             placeholder="Enter your firstname"
                             onChange={setfirstname}
+                            value={firstname}
                           />
                         </div>
                       </div>
@@ -373,6 +389,7 @@ export default function EditProfile() {
                             id="Last Name"
                             placeholder="Enter your Lastname"
                             onChange={setlastname}
+                            value={lastname}
                           />
                         </div>
                       </div>
@@ -390,6 +407,7 @@ export default function EditProfile() {
                             id="User Name"
                             placeholder="Enter your username"
                             onChange={setusername}
+                            value={Username}
                           />
                         </div>
                       </div>
@@ -404,6 +422,7 @@ export default function EditProfile() {
                             id="Email"
                             placeholder="Enter your email"
                             onChange={setemail}
+                            value={email}
                             readOnly
                           />
                         </div>
@@ -418,9 +437,10 @@ export default function EditProfile() {
                             name="gender"
                             className="form-control"
                             onChange={setgender}
+                            value={gender}
                           >
-                            <option value="male">men</option>
-                            <option value="female">women</option>
+                            <option value="male">male</option>
+                            <option value="female">female</option>
                           </Form.Select>
                         </div>
                       </div>
@@ -435,6 +455,7 @@ export default function EditProfile() {
                             id=" Age"
                             placeholder="Enter your age"
                             onChange={setage}
+                            value={age}
                           />
                         </div>
                       </div>
@@ -449,6 +470,7 @@ export default function EditProfile() {
                             id="Country"
                             placeholder="Enter your Country"
                             onChange={setcountry}
+                            value={country}
                           />
                         </div>
                       </div>
