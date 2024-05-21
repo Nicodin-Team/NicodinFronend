@@ -91,7 +91,7 @@ export default function EditProfile() {
   const [selectedCity, setSelectedCity] = useState("");
   const [data, setData] = useState(null);
   const [value, setValue] = useState(0);
-  const [newfirstname , setNewfirstname] = useState("");
+  // const [newfirstname , setNewfirstname] = useState("");
   const [chipData, setChipData] = useState([
     { key: 0, label: "Angular" },
     { key: 1, label: "jQuery" },
@@ -154,7 +154,7 @@ export default function EditProfile() {
 
   const setfirstname = (e) => {
     setFirstname(e.target.value);
-    setNewfirstname(e.target.value);
+    
     if (!firstname) {
       setErrorFirstname("First name is required");
     } else {
@@ -238,7 +238,7 @@ export default function EditProfile() {
   // useEffect(() => {
   //   fetchProfilePicture(); // Call the API to fetch profile picture on component mount
   // }, []);
-  const [token, settoken] = useState("");
+   const [token, settoken] = useState("");
   localStorage.getItem("accessToken", token);
   const setUpdate = async () => {
     // if (
@@ -261,16 +261,15 @@ export default function EditProfile() {
       formData.append("city", selectedCity);
 
       try {
-        const response = await fetch(
+        const response = await axios.patch(
           "https://teamup.liara.run/accounts/users/update/",
           {
             // Replace with your actual API endpoint
-            method: "PATCH",
+            // method: "PATCH",
             body: formData,
-            header: {
-              'Content-Type': 'application/json',
-              Token: token,
-            },
+            headers: { 
+              'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE2MzE2NDgyLCJpYXQiOjE3MTYzMTYxODIsImp0aSI6ImZjOGY3ODlmYzE3MjQ5NjFiY2MwMzg0NjY1ZTkwOWI4IiwidXNlcl9pZCI6MTR9.fvxVz1m4dq0JdJM8gP3fUPzZ_d_-2Q9fOAYzCxvf5xc'
+            }
           }
         );
         if (response.ok) {
