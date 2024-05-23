@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "./landing.css";
+import styles from "../pages/landing.module.css";
 import imageagreement from "../assets/Icons/agreement.png";
 import imagearrow from "../assets/Icons/Arrow_icon.png";
 import imagebriefcase from "../assets/Icons/briefcase.png";

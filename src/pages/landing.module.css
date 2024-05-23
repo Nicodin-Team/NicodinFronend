@@ -1,7 +1,9 @@
-
-.landing{
+body{
+    background-color: var(--bg-color);
     
-background-color: var(--bg-color);
+}
+    
+
 a {
 
     text-decoration: none;
@@ -337,4 +339,4 @@ a {
 .footer-section__footer-social a:hover {
     background-color: var(--bg-color);
 }
-}
+
