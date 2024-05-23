@@ -28,7 +28,6 @@ const fetchCities = async () => {
     console.log(data);
     return data;
   } catch (error) {
-    // console.error("Error fetching cities:", error);
     console.log(error);
     return [];
   }
@@ -142,11 +141,7 @@ export default function EditProfile() {
     fetchCityData();
   }, []);
    
-  // const handleChange = (event) => {
-  //   // setSelectedCity(event.target.value);
-  //   console.log('VALUE', event.target.value);
-  //   setValue(event.target.value);
-  // };
+  
 
   const handleTabChange = (event, newValue) => {
     console.log(newValue);
@@ -479,40 +474,6 @@ export default function EditProfile() {
                                 </option>
                               ))}
                             </Form.Select>
-                            {/* 
-                          <option value="">Select City</option>
-                          <option value="1">Tehran</option>
-                          <option value="2">Gilan</option>
-                          <option value="3">East Azerbaijan</option>
-                          <option value="4">Khuzestan</option>
-                          <option value="5">Fars</option>
-                          <option value="6">Isfahan</option>
-                          <option value="7">Razavi Khorasan</option>
-                          <option value="8">Qazvin</option>
-                          <option value="9">Semnan</option>
-                          <option value="10">Qom</option>
-                          <option value="11">Markazi</option>
-                          <option value="12">Zanjan</option>
-                          <option value="13">Mazandaran</option>
-                          <option value="14">Golestan</option>
-                          <option value="15">Ardabil</option>
-                          <option value="16">West Azerbaijan</option>
-                          <option value="17">Hamadan</option>
-                          <option value="18">Kurdistan</option>
-                          <option value="19">Kermanshah</option>
-                          <option value="20">Lorestan</option>
-                          <option value="21">Bushehr</option>
-                          <option value="22">Kerman</option>
-                          <option value="23">Hormozgan</option>
-                          <option value="24">Chaharmahal and Bakhtiari</option>
-                          <option value="25">Yazd</option>
-                          <option value="26">Sistan and Baluchestan</option>
-                          <option value="27">Ilam</option>
-                          <option value="28">Kohgiluyeh and Boyer-Ahmad</option>
-                          <option value="29">North Khorasan</option>
-                          <option value="30">South Khorasan</option>
-                          <option value="31">Alborz</option>
-                        </select> */}
                           </div>
                         </div>
                       </div>
