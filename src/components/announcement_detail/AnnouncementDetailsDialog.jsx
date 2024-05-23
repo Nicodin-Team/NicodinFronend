@@ -36,32 +36,6 @@ const AnnouncementDetailsDialog = ({ open, handleClose, data }) => {
         <DialogContent>
             <Grid container gap={4}>
             <Box>
-                <Typography variant="subtitle1">{"Company Name : "}</Typography>
-                <Box sx={{
-                    borderRadius: 2,
-                    padding: 1,
-                    backgroundColor: "#C0C0C0",
-                    width: 230,
-                }}>
-                    <Typography variant="h6">
-                        {data.companyName}
-                    </Typography>
-                </Box>
-            </Box>
-            <Box>
-                <Typography variant="subtitle1">{"Salary : "}</Typography>
-                <Box sx={{
-                    borderRadius: 2,
-                    padding: 1,
-                    backgroundColor: "#C0C0C0",
-                    width: 230,
-                }}>
-                    <Typography variant="h6">
-                        {data.salary}
-                    </Typography>
-                </Box>
-            </Box>
-            <Box>
                 <Typography variant="subtitle1">{"Job Name : "}</Typography>
                 <Box sx={{
                     borderRadius: 2,
@@ -75,7 +49,7 @@ const AnnouncementDetailsDialog = ({ open, handleClose, data }) => {
                 </Box>
             </Box>
             <Box>
-                <Typography variant="subtitle1">{"Location : "}</Typography>
+                <Typography variant="subtitle1">{"Company Name : "}</Typography>
                 <Box sx={{
                     borderRadius: 2,
                     padding: 1,
@@ -83,12 +57,26 @@ const AnnouncementDetailsDialog = ({ open, handleClose, data }) => {
                     width: 230,
                 }}>
                     <Typography variant="h6">
-                        {"Ghazvin"}
+                        {data.companyName}
+                    </Typography>
+                </Box>
+            </Box>
+            
+            <Box>
+                <Typography variant="subtitle1">{"Created at : "}</Typography>
+                <Box sx={{
+                    borderRadius: 2,
+                    padding: 1,
+                    backgroundColor: "#C0C0C0",
+                    width: 230,
+                }}>
+                    <Typography variant="h6">
+                        {"2/23/2024"}
                     </Typography>
                 </Box>
             </Box>
             <Box>
-                <Typography variant="subtitle1">{"Skills needed : "}</Typography>
+                <Typography variant="subtitle1">{"Status : "}</Typography>
                 <Box sx={{
                     borderRadius: 2,
                     padding: 1,
@@ -96,7 +84,20 @@ const AnnouncementDetailsDialog = ({ open, handleClose, data }) => {
                     width: 230,
                 }}>
                     <Typography variant="h6">
-                        {"Ghazvin"}
+                        {"Active"}
+                    </Typography>
+                </Box>
+            </Box>
+            <Box>
+                <Typography variant="subtitle">{"ِDescription : "}</Typography>
+                <Box sx={{
+                    borderRadius: 2,
+                    padding: 1,
+                    backgroundColor: "#C0C0C0",
+                    width: 500,
+                }}>
+                    <Typography variant="h6">
+                        {"We are looking for a person ready for hard positions in office with good english to talk. if you are good at this request for it or whatffffffffffffffffffffffffffffffffff"}
                     </Typography>
                 </Box>
             </Box>
