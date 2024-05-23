@@ -8,9 +8,51 @@ import {
   Grid,
   Typography,
 } from "@mui/material";
-import react from "react";
+import react, { useEffect, useState } from "react";
 
-const AnnouncementDetailsDialog = ({ open, handleClose, data }) => {
+import axios from "axios";
+const baseUrl = "https://teamup.liara.run";
+const getOne = ({ id }) => {
+  const url = `${baseUrl}/announcements/announcements/${id}/`;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  return axios.get(url, config);
+};
+
+const createrequest = ({ data, id }) => {
+  const url = `${baseUrl}/announcements/announcements/${id}/`;
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  return axios.patch(url, data, config);
+};
+
+
+const AnnouncementDetailsDialog = ({ open, handleClose, id }) => {
+  const [data, setData]=useState({})
+  useEffect(() => {
+    const fetchdata = async () => {
+      const response = await getOne({id:1})//pak bad moaref =>:1
+      setData(response.data)
+      console.log(response)
+    }
+  fetchdata()
+}, [id])
+
+  const send_request = async () => {
+    try {
+      const response = await createrequest({data , id})
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   if (data) {
     return (
       <Dialog
@@ -41,27 +83,13 @@ const AnnouncementDetailsDialog = ({ open, handleClose, data }) => {
                     borderRadius: 2,
                     padding: 1,
                     backgroundColor: "#C0C0C0",
-                    width: 230,
+                    width: 495,
                 }}>
                     <Typography variant="h6">
-                        {data.jobName}
+                        {data.title}
                     </Typography>
                 </Box>
             </Box>
-            <Box>
-                <Typography variant="subtitle1">{"Company Name : "}</Typography>
-                <Box sx={{
-                    borderRadius: 2,
-                    padding: 1,
-                    backgroundColor: "#C0C0C0",
-                    width: 230,
-                }}>
-                    <Typography variant="h6">
-                        {data.companyName}
-                    </Typography>
-                </Box>
-            </Box>
-            
             <Box>
                 <Typography variant="subtitle1">{"Created at : "}</Typography>
                 <Box sx={{
@@ -71,7 +99,7 @@ const AnnouncementDetailsDialog = ({ open, handleClose, data }) => {
                     width: 230,
                 }}>
                     <Typography variant="h6">
-                        {"2/23/2024"}
+                        {data.created_at}
                     </Typography>
                 </Box>
             </Box>
@@ -84,7 +112,7 @@ const AnnouncementDetailsDialog = ({ open, handleClose, data }) => {
                     width: 230,
                 }}>
                     <Typography variant="h6">
-                        {"Active"}
+                        {data.active? "Active":"Not active"  }
                     </Typography>
                 </Box>
             </Box>
@@ -94,10 +122,10 @@ const AnnouncementDetailsDialog = ({ open, handleClose, data }) => {
                     borderRadius: 2,
                     padding: 1,
                     backgroundColor: "#C0C0C0",
-                    width: 500,
+                    width: 495,
                 }}>
                     <Typography variant="h6">
-                        {"We are looking for a person ready for hard positions in office with good english to talk. if you are good at this request for it or whatffffffffffffffffffffffffffffffffff"}
+                      {data.description}
                     </Typography>
                 </Box>
             </Box>

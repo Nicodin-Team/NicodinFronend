@@ -201,7 +201,7 @@ class AnnouncementPage extends React.Component {
       </ul>
       </div>
       </div>
-      <AnnouncementDetailsDialog open={openDialog} handleClose={this.handleCloseDialog} data={selectedData}/>
+      <AnnouncementDetailsDialog open={openDialog} handleClose={this.handleCloseDialog} id={1}/>
       </>
     );
   }
