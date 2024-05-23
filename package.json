@@ -15,7 +15,7 @@
     "@mui/icons-material": "^5.15.16",
     "@mui/lab": "^5.0.0-alpha.170",
     "@mui/material": "^5.15.17",
-    "axios": "^1.6.8",
+    "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
     "formik": "^2.4.6",
     "multiselect-react-dropdown": "^2.0.25",
