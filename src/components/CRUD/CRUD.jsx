@@ -1,8 +1,8 @@
 import React ,{useState,useEffect} from "react";
-import "./AnnouncementPage.css";
+import "../CRUD/CRUD.css";
 import { getList } from "./services/accounts";
 import { useHistory } from 'react-router-use-history';
-import EmployeeService from '../Announcement/EmployeeService';
+import EmployeeService from '../CRUD/EmployeeService';
 
 
 // const CompanyName = ({ name }) => <h3 className="job-company">{name}</h3>;
@@ -125,7 +125,7 @@ const hiringAds = [
   
 ]
 
-function AnnouncementPage() {
+function CRUD() {
   const [employees, setEmployees] = useState([]); 
   const history = useHistory();
   
@@ -210,4 +210,4 @@ function AnnouncementPage() {
 
   }
 
-export default AnnouncementPage;
+export default CRUD;

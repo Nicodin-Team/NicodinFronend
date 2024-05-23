@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
-  Button,
+  
   Card,
   CardBody,
   Col,
@@ -9,16 +9,36 @@ import {
   FormGroup,
   Row,
 } from "reactstrap";
-import EmployeeService from '../Announcement/EmployeeService';
+import Button from 'react-bootstrap/Button';
+import './UpdateEmployee.module.css';
+import EmployeeService from './EmployeeService';
+import { useParams } from "react-router-dom";
 import { useHistory } from 'react-router-use-history';
 
-function CreateEmployeeComponent() {
+function UpdateEmployeeComponent() {
+  const [id, setId] = useState(useParams()); // Get ID from route params
   const [User, setUser] = useState("");
   const [Title, setTitle] = useState("");
   const [Description, setDescription] = useState("");
   const [Active, setActive] = useState("");
   const [Created_at, setCreated_at] = useState(new Date());
+  
   const history = useHistory();
+
+  useEffect(() => {
+    const fetchEmployee = async () => {
+      const response = await EmployeeService.getEmployeeById(id);
+      const employee = response.data;
+      setUser(employee.User);
+      setTitle(employee.Title);
+      setDescription(employee.Description);
+      setActive(employee.Active);
+      setCreated_at(employee.Created_at);
+      
+    };
+
+    fetchEmployee();
+  }, [id]);
 
   const changeHandler = (event) => {
     const { name, value } = event.target;
@@ -43,15 +63,15 @@ function CreateEmployeeComponent() {
     }
   };
 
-  const saveEmployee = async (e) => {
+  const update = async (e) => {
     e.preventDefault();
+   
     try {
       const employee = { User, Title, Description, Active, Created_at };
-      await EmployeeService.createEmployee(employee);
+      await EmployeeService.updateEmployee(employee, id);
       history.push("/employees");
     } catch (error) {
-      console.error("Error saving employee:", error);
-      // Handle errors appropriately (e.g., display error message to user)
+      console.log("Error updating employee:", error);
     }
   };
 
@@ -62,13 +82,13 @@ function CreateEmployeeComponent() {
   return (
     <div>
       <Container>
-        <Row>
+        
           <Card>
-            <Col>
-              <h3>Add Employee</h3>
+            
+              <h3>Update Employee</h3>
               <CardBody>
                 <Form>
-                <FormGroup style={{ padding: "1em" }}>
+                  <FormGroup style={{ padding: "1em"}}>
                     <label style={{display:'flex',color:'red'}}>User:</label>
                     <input
                       name="User"
@@ -113,20 +133,23 @@ function CreateEmployeeComponent() {
                       onChange={changeHandler}
                     />
                   </FormGroup>
-                  <Button type="button" className="btn btn-warning" onClick={saveEmployee} style={{ display: 'inline-block', marginRight:'10px' }}>
+                  
+                  
+                    <Button type="button" className="btn btn-warning" onClick={update} style={{ display: 'inline-block', marginRight:'10px' }}>
                       Save
                     </Button>
                     <Button type="button" className="btn btn-danger " onClick={cancel} style={{ display: 'inline-block', marginRight:'910px'}}>
                       Cancel
                     </Button>
+                    
+                    
                 </Form>
               </CardBody>
-            </Col>
           </Card>
-        </Row>
+        
       </Container>
     </div>
   );
 }
 
-export default CreateEmployeeComponent;
+export default UpdateEmployeeComponent;
