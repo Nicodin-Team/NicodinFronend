@@ -16,6 +16,8 @@ import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import axios from "axios";
+import {useAuth} from '../context/AuthContext'
+// import { useAuth } from 'path/to/auth/hook';
 
 const fetchCities = async () => {
   try {
@@ -98,6 +100,12 @@ export default function EditProfile() {
     { key: 2, label: "Polymer" },
     { key: 3, label: "React" },
     { key: 4, label: "Vue.js" },
+    { key: 5, label: "c++" },
+    { key: 6, label: "c#" },
+    { key: 7, label: "html" },
+    { key: 8, label: "css" },
+    { key: 9, label: "javascript" },
+    { key: 10, label: "java" },
   ]);
 
   const handleDelete = (chipToDelete) => () => {
@@ -118,7 +126,8 @@ export default function EditProfile() {
     const id = 1;
     async function fetchData() {
       const result = await axios.get(`https://teamup.liara.run/accounts/users/${id}`);
-      console.log(typeof(result.data))
+      // console.log(typeof(result.data))
+      
       setData(result.data);
       setFirstname(result.data.first_name)
       setLastname(result.data.last_name)
@@ -222,56 +231,40 @@ export default function EditProfile() {
     reader.readAsDataURL(e.target.files[0]);
   };
 
-  // const fetchProfilePicture = async () => {
-  //   try {
-  //     const response = await fetch("https://your-api-endpoint/profile-picture");
-  //     if (!response.ok) {
-  //       throw new Error(`Failed to fetch profile picture: ${response.status}`);
-  //     }
-  //     const data = await response.json();
-  //     setProfilePicture(data.profilePictureUrl); // Assuming the API response has a "profilePictureUrl" property
-  //   } catch (error) {
-  //     console.error("Error fetching profile picture:", error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchProfilePicture(); // Call the API to fetch profile picture on component mount
-  // }, []);
-   const [token, settoken] = useState("");
-  localStorage.getItem("accessToken", token);
+  
+  const { accessToken } = useAuth();
+  
   const setUpdate = async () => {
-    // if (
-    //   firstname &&
-    //   lastname &&
-    //   Username &&
-    //   validateEmail(email) &&
-    //   !errorAge
-    // ) {
+    console.log(setUpdate)
       const formData = new FormData();
-      formData.append("profilePicture", selectedFile); // Add image file
+      // formData.append("photo", selectedFile); 
+      formData.append("photo", ''); 
 
       // Add other form data
-      formData.append("firstName", firstname);
-      formData.append("lastName", lastname);
-      formData.append("email", email);
-      formData.append("gender", gender); // Assuming you have a gender field
-      formData.append("age", age); // Assuming you have an age field
-      formData.append("country", country); // Assuming you have a country field
+      formData.append("bio", '');
+      formData.append("first_name", firstname);
+      formData.append("last_name", lastname);
+      formData.append("username", Username);
+      formData.append("gender", gender); 
+      formData.append("age", age); 
+      formData.append("country", country); 
       formData.append("city", selectedCity);
-
+      
+     console.log(accessToken)
       try {
-        const response = await axios.patch(
+        const response = await fetch(
           "https://teamup.liara.run/accounts/users/update/",
           {
-            // Replace with your actual API endpoint
-            // method: "PATCH",
+            
+            method: "PATCH",
             body: formData,
             headers: { 
-              'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzE2MzE2NDgyLCJpYXQiOjE3MTYzMTYxODIsImp0aSI6ImZjOGY3ODlmYzE3MjQ5NjFiY2MwMzg0NjY1ZTkwOWI4IiwidXNlcl9pZCI6MTR9.fvxVz1m4dq0JdJM8gP3fUPzZ_d_-2Q9fOAYzCxvf5xc'
+              "Content-Type": "multipart/form-data",
+              'Authorization': `Bearer ${accessToken}`
             }
           }
         );
+        console.log(response)
         if (response.ok) {
           const data = await response.json();
           setProfilePicture(data.profilePictureUrl || profilePicture);
@@ -283,28 +276,21 @@ export default function EditProfile() {
           setAge(data.age || age);
           setCountry(data.country || country);
           setSelectedCity(data.city || selectedCity);
-
+          console.log(data)
           console.log("Profile updated successfully!");
         } else {
-          // Handle API errors (e.g., display error messages to user)
+          
           const errorData = await response.json();
-          console.error(
+          console.log(
             "Failed to update profile:",
             errorData.message || response.statusText
           );
         }
       } catch (error) {
-        console.error("Error updating profile:", error);
+        console.log("Error updating profile:", error);
       }
-    // } else {
-    //   console.error("Validation errors:", {
-    //     firstname: errorFirstname,
-    //     lastname: errorLastname,
-    //     username: errorUsername,
-    //     email: errorEmail,
-    //     age: errorAge,
-    //   });
-    // }
+    
+    
   };
 
   return (
@@ -530,14 +516,14 @@ export default function EditProfile() {
                           </div>
                         </div>
                       </div>
-                      <div className="row gutters d-grid">
+                      <div className="row gutters d-flex">
                         <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                          <div className="text-right my-3 button ">
+                          <div className="text-right my-3 button">
                             <button
                               type="button"
                               id="submit"
                               name="submit"
-                              className="btn btn-warning text-white py-2 "
+                              className="btn btn-warning text-white py-2 click"
                               onClick={setUpdate}
                             >
                               Update
@@ -596,12 +582,18 @@ export default function EditProfile() {
                       component="ul"
                     >
                     <FormGroup style={{display:'inline-block'}}>
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="Label" />
+                        <FormControlLabel control={<Checkbox defaultChecked />} label="روابط عمومی" />
+                        <FormControlLabel control={<Checkbox defaultChecked />} label="تیم سازی" />
+                        <FormControlLabel control={<Checkbox defaultChecked />} label="مهارت در ارائه" />
+                        <FormControlLabel control={<Checkbox defaultChecked />} label="مدیریت استرس" />
+                        <FormControlLabel control={<Checkbox defaultChecked />} label="خودشناسی" />
+                        <FormControlLabel control={<Checkbox defaultChecked />} label="مسئولیت پذیری" />
+                        <FormControlLabel control={<Checkbox defaultChecked />} label="رقابت جویی" />
+                        <FormControlLabel control={<Checkbox defaultChecked />} label="گزارش نویسی" />
+                        <FormControlLabel control={<Checkbox defaultChecked />} label="کاریزما" />
+                        <FormControlLabel control={<Checkbox defaultChecked />} label="مدیریت بحران" />
+                        <FormControlLabel control={<Checkbox defaultChecked />} label="خلاقیت وایده پردازی" />
+                        <FormControlLabel control={<Checkbox defaultChecked />} label="قدرت مذاکره" />
                     </FormGroup>
                     </Paper>
                     </div>
