@@ -1,0 +1,184 @@
+/* AnnouncementPage.css */
+.Announcement-page {
+  
+  .announcement-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  header {
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #232347;
+  }
+
+  .navigation {
+    display: flex;
+  }
+  
+  .nav-item {
+    padding: 10px;
+    margin-right: 10px;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .nav-item:hover {
+    color: #007bff;
+  }
+  
+  header h1 {
+    margin: 0 200px 0 0;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  nav ul li {
+    display: inline;
+    margin-right: 20px;
+  }
+  
+  nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  nav ul li a:hover {
+    color: #f1c40f; /* Change color on hover */
+  }
+
+
+  
+.announcement-container {
+  padding: 20px;
+}
+
+.announcement-title {
+  font-size: 30px; /* Larger font size for the title */
+  margin-bottom: 20px; /* Adds space below the title */
+  color: #041628;
+}
+
+.announcement-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr)); 
+  gap: 10px; 
+}
+
+.announcement-item {
+  color: rgb(248, 246, 246);
+  background-color: #214673; /* Background color for each item */
+  padding: 20px; /* Add padding around each item */
+  border-radius: 8px; /* Rounded corners for each item */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow */
+  position: relative; /* Allows positioning the button relative to the item */
+  border-radius: 1.5em;
+  box-shadow: 0px 0px 16px -2px #041628;
+}
+
+
+
+.title {
+  font-size: 24px;
+  margin: 0px;
+  display: flex;
+}
+
+.job-description {
+  display: flex;
+  font-weight: 700;
+  font-size: 24px;
+  color: #f5f4f2;
+}
+
+.view-details-button{
+  border-radius: 1em;
+  background-color: #F2BD4B;
+}
+
+.job-company{
+  display: flex;
+  
+}
+.job-created_at{
+  display: flex;
+}
+.job-active{
+  display: flex;
+  font-weight: 400;
+  font-size: big;
+}
+
+.job-user{
+  display: flex;
+  font-weight: 400;
+  font-size: big;
+}
+
+.pagination {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.pagination li {
+  margin: 0 2px;
+}
+
+.pagination button {
+  color: white;
+  background-color: transparent;
+  border: none;
+  font-size: 1.2em; /* 2 times bigger */
+  padding: 10px 20px;
+  cursor: pointer;
+  position: relative;
+}
+
+.pagination button::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 100%;
+  height: 2px;
+  background-color: transparent;
+  transition: background-color 0.3s ease;
+}
+
+.pagination button:hover::after {
+  background-color: #F2BD4B; /* Blue line color */
+}
+
+.active {
+  color: #F2BD4B; /* Active button text color */
+}
+
+}
+
+.msn{
+  margin-right: 10px;
+  justify-content: end;
+}
+
+.mary{
+  margin-right: 30px;
+}
+
+.mmad{
+  margin-left: 20px;
+}
