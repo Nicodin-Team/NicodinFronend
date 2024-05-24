@@ -6,9 +6,8 @@ import Error from './components/error';
 import EditProfile from './components/Edituser';
 import Landing from './pages/Landing';
 import { AuthProvider } from './context/AuthContext';
-import CRUD from './components/CRUD/CRUD';
-import CreateEmployeeComponent from './components/CRUD/AddEmployee';
-import UpdateEmployeeComponent from './components/CRUD/UpdateEmployee';
+
+import Crud from './components/CRUD/Crud';
 
 
 
@@ -23,9 +22,7 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/' element={<Landing/>}/>
           <Route path='/signup' element={<Signup/>}/>
-          <Route path='/crud' element={<CRUD/>}/>
-          <Route path="/add-employee" element={<CreateEmployeeComponent/>}/>
-          <Route path="/update-employee/:id" element={<UpdateEmployeeComponent/>}/>
+          <Route path='/crud' element={<Crud/>}/>
           <Route path='*' element={<Error/>}/>
         </Routes>
       </Router></AuthProvider>

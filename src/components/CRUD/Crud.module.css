@@ -1,7 +1,7 @@
-/* AnnouncementPage.css */
-.Announcement-page {
+
+.Announcementpage {
   
-  .announcement-container {
+  .announcementcontainer {
     max-width: 1400px;
     margin: 0 auto;
     padding: 20px;
@@ -68,13 +68,13 @@
   color: #041628;
 }
 
-.announcement-list {
+.announcementList {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(600px, 1fr)); 
   gap: 10px; 
 }
 
-.announcement-item {
+.announcementItem {
   color: rgb(248, 246, 246);
   background-color: #214673; /* Background color for each item */
   padding: 20px; /* Add padding around each item */
@@ -93,7 +93,7 @@
   display: flex;
 }
 
-.job-description {
+.jobDescription {
   display: flex;
   font-weight: 700;
   font-size: 24px;
@@ -105,20 +105,17 @@
   background-color: #F2BD4B;
 }
 
-.job-company{
-  display: flex;
-  
-}
-.job-created_at{
+
+.jobCreatedAt{
   display: flex;
 }
-.job-active{
+.jobActive{
   display: flex;
   font-weight: 400;
   font-size: big;
 }
 
-.job-user{
+.jobUser{
   display: flex;
   font-weight: 400;
   font-size: big;
