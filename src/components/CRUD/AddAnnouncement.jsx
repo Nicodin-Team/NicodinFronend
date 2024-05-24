@@ -15,18 +15,24 @@ import * as yup from "yup";
 const modalSchema = yup.object({
     title: yup.string().required("این فیلد اجباری میباشد"),
     description: yup.string().required("این فیلد اجباری میباشد"),
+    created_at: yup.string().required("این فیلد اجباری میباشد"),
+    active: yup.string().required("این فیلد اجباری میباشد"),
 });
 
 const AddAnnouncements = ({ open, handleClose, handleSave, data }) => {
     const [touched, setTouched] = useState({
         title: false,
         description: false,
+        created_at:  false,
+        active: false
     });
 
     const handleTouch = ({ name }) => {
         const newTouched = {
             title: touched.title,
             description: touched.description,
+            created_at: touched.created_at,
+            active: touched.active
         };
         switch (name) {
             case "title":
@@ -34,6 +40,12 @@ const AddAnnouncements = ({ open, handleClose, handleSave, data }) => {
                 break;
             case "description":
                 newTouched.description = true;
+                break;
+            case "created_at":
+                newTouched.created_at = true;
+                break;
+            case "active":
+                newTouched.active = true;
                 break;
             default:
                 return;
@@ -44,6 +56,8 @@ const AddAnnouncements = ({ open, handleClose, handleSave, data }) => {
         initialValues: {
             title: data.title,
             description: data.description,
+            created_at: data.created_at,
+            active: data.active
         },
         validationSchema: modalSchema,
         onSubmit: async (values, { resetForm }) => {
@@ -136,6 +150,62 @@ const AddAnnouncements = ({ open, handleClose, handleSave, data }) => {
                             ml={1}
                             color="error">
                             {formik.errors.description}
+                        </Typography>
+                    )}
+                    <FormControl
+                        fullWidth
+                        sx={{
+                            mt: 3,
+                        }}>
+                        <InputLabel shrink>
+                            <Typography
+                                variant="h6"
+                                fontWeight={700}>
+                                {`Created_at : `}
+                            </Typography>
+                        </InputLabel>
+                        <Input
+                            value={formik.values.created_at}
+                            onFocus={() => handleTouch({ name: "created_at" })}
+                            name="created_at"
+                            onChange={formik.handleChange}
+                        />
+                    </FormControl>
+                    {touched.created_at && formik.errors.created_at && (
+                        <Typography
+                            variant="subtitle2"
+                            mt={0.5}
+                            ml={1}
+                            color="error">
+                            {formik.errors.created_at}
+                        </Typography>
+                    )}
+                    <FormControl
+                        fullWidth
+                        sx={{
+                            mt: 3,
+                        }}>
+                        <InputLabel shrink>
+                            <Typography
+                                variant="h6"
+                                fontWeight={700}>
+                                {`Active : `}
+                            </Typography>
+                        </InputLabel>
+                        <Input
+                            value={formik.values.active}
+                            onFocus={() => handleTouch({ name: "active" })}
+                            name="active"
+                            onChange={formik.handleChange}
+                        />
+                    </FormControl>
+                    {touched.active && formik.errors.active && (
+                        <Typography
+                            variant="subtitle2"
+                            mt={0.5}
+                            ml={1}
+                            color="error">
+                            {formik.errors.active}
                         </Typography>
                     )}
                 </Box>

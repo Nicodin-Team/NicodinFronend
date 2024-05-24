@@ -4,7 +4,7 @@ import styles from "./Crud.module.css";
 import {create,deleteOne,getAll,update} from "../../services/announcement";
 import AddAnnouncements from "./AddAnnouncement";
 import { useAuth } from "../../context/AuthContext";
-import { Button ,Typography } from "@mui/material";
+// import { Button ,Typography } from "@mui/material";
 
 function Crud() {
   const {accessToken} = useAuth();
@@ -94,51 +94,44 @@ function Crud() {
                 <h4 className={styles.jobActive}>{item.active}</h4>
                 {/* <h4 className={styles.jobUser}>{item.User}</h4> */}
                 <h4 className={styles.jobCreatedAt}>{item.created_at}</h4>
-                <div className="row msn">
-                  <div className="col-1 mary">
-                    {/* <button type="button" className="btn btn-warning" onClick={() => {handleUpdateClick(index)}}>
-                      update
-                    </button>
 
-                  </div>
-                  <div className="col-1 mary">
-                    <button type="button" className="btn btn-danger" onClick={(e,index) => {handleDeleteClick(index)}}>
-                      delete
-                    </button> */}
-                     <Button
-                        onClick={() => {setSelectedData(item);setOpenEdit(true)}}
-                        disableElevation
-                        sx={{
-                            borderRadius: 2.5,
-                            px: 4,
-                        }}
-                        variant="contained">
-                        <Typography>{"update"}</Typography>
-                    </Button>
-                    <Button
-                        onClick={() => {setSelectedData(item);handleDelete()}}
-                        disableElevation
-                        sx={{
-                            borderRadius: 2.5,
-                            px: 4,
-                        }}
-                        variant="contained">
-                        <Typography>{"delete"}</Typography>
-                    </Button>
+                    <div className={`${styles.row} row justify-content-end`}> 
+                        <div className={`${styles.col} col-1 ms-5`}> 
+                          <button
+                            type="button"
+                            className={`${styles.updateButton} btn btn-warning`} 
+                            onClick={() => {
+                              setSelectedData(item);
+                              setOpenEdit(true);
+                            }}
+                          >
+                            update
+                          </button>
+                        </div>
+                        <div className={`${styles.col} col-1`}> 
+                          <button
+                            type="button"
+                            className={`${styles.deleteButton} btn btn-danger`} 
+                            onClick={() => {
+                              setSelectedData(item);
+                              handleDelete();
+                            }}
+                          >
+                            delete
+                          </button>
+                        </div>
                   </div>
                 </div>
-              </div>
             ))}
           </div>
-        </div>
-        
       </div>
       </div>
       <AddAnnouncements open={openAdd} handleClose={handleClose} handleSave={handleCreate} data={{title:'' , active:false , description:'' , user:1}}/>
       <AddAnnouncements open={openEdit} handleClose={handleClose} handleSave={handleUpdate} data={selectedData}/>
-    </>
-    );
-  }
+  </div>
+  </>
+);
+   }
   }
 
 export default Crud;
