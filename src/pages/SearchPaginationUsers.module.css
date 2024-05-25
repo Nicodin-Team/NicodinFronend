@@ -7,7 +7,6 @@
     background: var(--bg);
     min-height:100vh;
   }
-  
   .card_grid {
     list-style: none;
     padding-right: 200px; 

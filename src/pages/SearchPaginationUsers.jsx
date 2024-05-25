@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./SearchPaginationUsers.module.css"
 import { Multiselect } from "multiselect-react-dropdown";
 import { Box, Pagination } from "@mui/material";
+import axios from "axios";
 
 function SearchPaginationUsers() {
   const [items, setItems] = useState([]);
@@ -11,30 +12,46 @@ function SearchPaginationUsers() {
   const [selectedOptionsForGender, setSelectedOptionsForGender] = useState([]);
   const [paginate, setpaginate] = useState(8);
   const [pageCount, setPageCount] = useState();
-  const [page, setPage] = React.useState(1);
+  const [page, setPage] = useState(1);
+  const [fetchedData, setFetchedData] = useState();
   const handleChange = (event, value) => {
     setPage(value);
   };
 
-  const getData = () => {
-    fetch("/src/services/data.json", {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (myJson) {
-        setItems(myJson);
-        setPageCount(Math.ceil(myJson.length / 8));
-      });
-  };
-  console.log(items);
+  // const getData = () => {
+  //   fetch("/src/services/data.json", {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json",
+  //     },
+  //   })
+  //     .then(function (response) {
+  //       return response.json();
+  //     })
+  //     .then(function (myJson) {
+  //       setItems(myJson);
+  //       setPageCount(Math.ceil(myJson.length / 8));
+  //     });
+  // };
+  // console.log(items);
+  // useEffect(() => {
+  //   getData();
+  // }, []);
+
   useEffect(() => {
-    getData();
-  }, []);
+    const fetchUsers = async () =>{
+      if (page > 0){
+      const baseURL = `https://teamup.liara.run/accounts/users/all/?page=${page}`
+      console.log(page);
+      const response = await axios.get(baseURL);
+      // console.log(response)
+      setPageCount(Math.ceil(response.data.count / 10))
+      setFetchedData(response.data.results)
+      setTimeout(()=>{console.log(fetchedData)},500)
+      }
+    }
+    fetchUsers()
+  },[page])
 
   const data = Object.values(items);
   const search_parameters = Object.keys(Object.assign({}, ...data));
@@ -200,16 +217,14 @@ function SearchPaginationUsers() {
             {/* #### */}
           </div>
         </div>
-
+              
         <ul className={styles.card_grid}>
-          {search(data)
-            .slice((page - 1) * 8, page * 8)
-            .map((item) => (
+          {fetchedData && (fetchedData).map((item) => (
               <li key={item.id}>
                 <article className={styles.mycard}>
                   <div className={styles.card_image}>
                     <img className={styles.myimage}
-                      src={item.image}
+                      src={item.photo}
                       alt={item.first_name + " " + item.last_name}
                     />
                   </div>
@@ -219,16 +234,16 @@ function SearchPaginationUsers() {
                     </h4>
                     <ol className={styles.card_list}>
                       <li>
-                        <span>{item.email}</span>
+                        <span>{item.username}</span>
                       </li>
                       <li>
                         <span>{item.gender}</span>
                       </li>
                       <li>
-                        <span>{item.skill}</span>
+                        <span>{item.bio}</span>
                       </li>
                       <li>
-                        <span>city: {item.city}</span>
+                        {(item.country || item.city) ? <span>address: {item.country}, {item.city}</span> : <span>address: no address</span>}
                       </li>
                     </ol>
                   </div>
@@ -254,7 +269,8 @@ function SearchPaginationUsers() {
             color="primary"
             showFirstButton
             showLastButton
-            count={Math.ceil(search(data).length / 8)}
+            // count={Math.ceil(search(data).length / 8)}
+            count = {pageCount}
           />
         </Box>
       </div>
