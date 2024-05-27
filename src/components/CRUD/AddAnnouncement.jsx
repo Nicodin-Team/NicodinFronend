@@ -57,7 +57,7 @@ const AddAnnouncements = ({ open, handleClose, handleSave, data }) => {
             title: data.title,
             description: data.description,
             created_at: data.created_at,
-            active: data.active
+            active: data.active,
         },
         validationSchema: modalSchema,
         onSubmit: async (values, { resetForm }) => {

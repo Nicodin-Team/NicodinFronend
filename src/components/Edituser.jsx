@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
+
 import "../components/Edituser.module.css";
+
 import Form from "react-bootstrap/Form";
 import * as React from "react";
 import PropTypes from "prop-types";
@@ -12,11 +14,18 @@ import Chip from "@mui/material/Chip";
 import Paper from "@mui/material/Paper";
 import TagFacesIcon from "@mui/icons-material/TagFaces";
 import avatar from "../assets/Images/c2.png";
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
 import axios from "axios";
-import {useAuth} from '../context/AuthContext'
+import { useAuth } from "../context/AuthContext";
+import Application from "./Application";
+import Chips from "./Chip";
+
+
+
 // import { useAuth } from 'path/to/auth/hook';
 
 const fetchCities = async () => {
@@ -92,7 +101,16 @@ export default function EditProfile() {
   const [selectedCity, setSelectedCity] = useState("");
   const [data, setData] = useState(null);
   const [value, setValue] = useState(0);
-  // const [newfirstname , setNewfirstname] = useState("");
+  const [file, setFile] = useState("");
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(
+    "https://bootdey.com/img/Content/avatar/avatar7.png"
+  );
+  //-----------------------------
+  const [selectedSkills, setSelectedSkills] = useState([]); // State for selected skills (chip labels or IDs)
+  const [softSkillData, setSoftSkillData] = useState([]); // State for soft skill data (checkboxes)
+  const [isLoading, setIsLoading] = useState(false); // State for loading indicator
+  const [error, setError] = useState(null); // State for error message
+  //--------------------------------
   const [chipData, setChipData] = useState([
     { key: 0, label: "Angular" },
     { key: 1, label: "jQuery" },
@@ -106,7 +124,77 @@ export default function EditProfile() {
     { key: 9, label: "javascript" },
     { key: 10, label: "java" },
   ]);
+  //-----------------------------
+  // Fetch chip data (skills) on component mount
+  const handleCheckboxChange = (event) => {
+    const { name, checked } = event.target;
+    const updatedSoftSkillData = softSkillData.map((data) => {
+      if (data.label === name) {
+        return { ...data, checked };
+      }
+      return data;
+    });
+  
+    setSoftSkillData(updatedSoftSkillData);
+  
+    // Update selectedSkills based on checked soft skills
+    const selectedSoftSkillLabels = updatedSoftSkillData.filter((data) => data.checked).map((data) => data.label);
+    setSelectedSkills([...selectedSkills, ...selectedSoftSkillLabels]);
+  };
+  
+  // const handleChipClick = (data) => {
+  //   const existingIndex = selectedSkills.findIndex((skill) => skill === data.label || skill === data.id); // Find existing chip by label or ID
+  
+  //   if (existingIndex !== -1) {
+  //     // Chip already selected, remove it
+  //     setSelectedSkills(selectedSkills.filter((skill, index) => index !== existingIndex));
+  //   } else {
+  //     // Chip not selected, add it
+  //     setSelectedSkills([...selectedSkills, data.label || data.id]); // Use label or ID based on your data structure
+  //   }
+  // };
+  useEffect(() => {
+    const fetchChipData = async () => {
+      setIsLoading(true); // Set loading indicator to true
+      setError(null); // Clear any previous errors
 
+      try {
+        const response = await axios.get('https://your-api-endpoint/skills'); // Use axios.get
+
+        setChipData(response.data); // Update chipData state with fetched data
+      } catch (error) {
+        console.error('Error fetching chip data:', error);
+        setError(error.message); // Set error message state
+      } finally {
+        setIsLoading(false); // Set loading indicator to false
+      }
+    };
+
+    fetchChipData(); // Call the function to fetch data
+  }, []); // Empty dependency array ensures fetching only once on mount
+
+  // Fetch soft skill data (checkboxes) on component mount
+  useEffect(() => {
+    const fetchSoftSkillData = async () => {
+      setIsLoading(true); // Set loading indicator to true
+      setError(null); // Clear any previous errors
+
+      try {
+        const response = await axios.get('https://your-api-endpoint/soft-skills'); // Use axios.get
+
+        setSoftSkillData(response.data.map((item) => ({ ...item, checked: false }))); // Update softSkillData state with fetched data and initial unchecked state
+      } catch (error) {
+        console.error('Error fetching soft skill data:', error);
+        setError(error.message); // Set error message state
+      } finally {
+        setIsLoading(false); // Set loading indicator to false
+      }
+    };
+
+    fetchSoftSkillData(); // Call the function to fetch data
+  }, []); // Empty dependency array ensures fetching only once on mount
+
+  //----------------------------
   const handleDelete = (chipToDelete) => () => {
     setChipData((chips) =>
       chips.filter((chip) => chip.key !== chipToDelete.key)
@@ -116,6 +204,7 @@ export default function EditProfile() {
   const setcity = (event, newValue) => {
     setSelectedCity(newValue);
   };
+  const { accessToken } = useAuth();
 
   useEffect(() => {
     const fetchCityData = async () => {
@@ -124,30 +213,36 @@ export default function EditProfile() {
     };
     const id = 1;
     async function fetchData() {
-      const result = await axios.get(`https://teamup.liara.run/accounts/users/${id}`);
+      setTimeout(() => {
+        axios.defaults.headers.common[
+          "Authorization"
+        ] = `Bearer ${accessToken}`;
+      }, 1000);
+      const result = await axios
+        .patch(`https://teamup.liara.run/accounts/users/update/`)
+        .catch((e) => {
+          console.log(e);
+        });
       // console.log(typeof(result.data))
-      
+
       setData(result.data);
-      setFirstname(result.data.first_name)
-      setLastname(result.data.last_name)
-      setUsername(result.data.username)
-      setcity(result.data.city)
-      setGender(result.data.gender)
-      setAge(result.data.age)
-      setCountry(result.data.country)
+      setFirstname(result.data.first_name);
+      setLastname(result.data.last_name);
+      setUsername(result.data.username);
+      setcity(result.data.city);
+      setGender(result.data.gender);
+      setAge(result.data.age);
+      setCountry(result.data.country);
     }
 
     fetchData();
     fetchCityData();
   }, []);
-   
-  
 
   const handleTabChange = (event, newValue) => {
     console.log(newValue);
     setValue(newValue);
-  }
-
+  };
 
   const validateEmail = (email) => {
     const re =
@@ -155,10 +250,9 @@ export default function EditProfile() {
     return re.test(String(email).toLowerCase());
   };
 
-
   const setfirstname = (e) => {
     setFirstname(e.target.value);
-    
+
     if (!firstname) {
       setErrorFirstname("First name is required");
     } else {
@@ -226,66 +320,78 @@ export default function EditProfile() {
     reader.readAsDataURL(e.target.files[0]);
   };
 
-  
-  const { accessToken } = useAuth();
-  
   const setUpdate = async () => {
-    console.log(setUpdate)
-      const formData = new FormData();
-      // formData.append("photo", selectedFile); 
-      formData.append("photo", ''); 
+    console.log(setUpdate);
+    const formData = new FormData();
+    // formData.append("photo", selectedFile);
+    formData.append("photo", "");
 
-      // Add other form data
-      formData.append("bio", '');
-      formData.append("first_name", firstname);
-      formData.append("last_name", lastname);
-      formData.append("username", Username);
-      formData.append("gender", gender); 
-      formData.append("age", age); 
-      formData.append("country", country); 
-      formData.append("city", selectedCity);
-      
-     console.log(accessToken)
-      try {
-        const response = await fetch(
-          "https://teamup.liara.run/accounts/users/update/",
-          {
-            
-            method: "PATCH",
-            body: formData,
-            headers: { 
-              "Content-Type": "multipart/form-data",
-              'Authorization': `Bearer ${accessToken}`
-            }
-          }
-        );
-        console.log(response)
-        if (response.ok) {
-          const data = await response.json();
-          setProfilePicture(data.profilePictureUrl || profilePicture);
-          setFirstname(data.firstName || firstname);
-          setLastname(data.lastName || lastname);
-          setUsername(data.username || Username);
-          setEmail(data.email || email);
-          setGender(data.gender || gender);
-          setAge(data.age || age);
-          setCountry(data.country || country);
-          setSelectedCity(data.city || selectedCity);
-          console.log(data)
-          console.log("Profile updated successfully!");
-        } else {
-          
-          const errorData = await response.json();
-          console.log(
-            "Failed to update profile:",
-            errorData.message || response.statusText
-          );
-        }
-      } catch (error) {
-        console.log("Error updating profile:", error);
-      }
-    
-    
+    // Add other form data
+    // formData.append("bio", "");
+    formData.append("first_name", firstname);
+    formData.append("last_name", lastname);
+    formData.append("username", Username);
+    formData.append("gender", gender);
+    formData.append("age", age);
+    formData.append("country", country);
+    formData.append("city", selectedCity);
+
+    let data = {
+      photo: "",
+      first_name: firstname,
+      last_name: lastname,
+      username: Username,
+      gender: gender,
+      age: age,
+      country: country,
+      city: selectedCity,
+    };
+
+    console.log(accessToken);
+
+    setTimeout(() => {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+    }, 1000);
+    const res = await axios
+      .patch(`https://teamup.liara.run/accounts/users/update/`, formData, {headers:{
+        "Content-Type": "multipart/form-data"
+      }})
+      .catch((e) => {
+        console.log(e);
+      });
+    console.log(res);
+    if ( res && res.data.Status === 'Success') {
+      const data = res;
+      setProfilePicture(data.profilePictureUrl || profilePicture);
+      setFirstname(data.firstName || firstname);
+      setLastname(data.lastName || lastname);
+      setUsername(data.username || Username);
+      setEmail(data.email || email);
+      setGender(data.gender || gender);
+      setAge(data.age || age);
+      setCountry(data.country || country);
+      setSelectedCity(data.city || selectedCity);
+      console.log(data);
+      console.log("Profile updated successfully!");
+    } else {
+      const errorData = await res;
+      console.log(
+        "Failed to update profile:",
+        errorData.message || res.statusText
+      );
+      return errorData;
+    }
+  };
+
+  const photoUpload = (e) => {
+    e.preventDefault();
+    const reader = new FileReader();
+    const file = e.target.files[0];
+    reader.onloadend = () => {
+      setFile(file);
+      setImagePreviewUrl(reader.result);
+    };
+    reader.readAsDataURL(file);
   };
 
   return (
@@ -300,18 +406,25 @@ export default function EditProfile() {
         <hr />
         <div className="d-flex flex-row align-items-center justify-content-between">
           <div className="col-xl-4 col-lg-4 col-md-4 col-sm-4 d-flex flex-column align-items-center">
-            <div className=" card mb-4 mb-xl-0">
+            <div className=" card mb-4 mb-xl-0" >
               <div className="card-header">Profile Picture</div>
               <div className="card-body text-center my-4">
-                <img
+              <Stack direction="row" spacing={1}>
+                <Avatar
                   className="img-account-profile rounded-circle mb-2"
-                  src={profilePicture || data.photo}
+                  src={imagePreviewUrl}
                   alt=""
+                  sx={{ width: 310, height: 315 }}
                 />
+                </Stack>
                 <div className="small font-italic text-muted mb-4">
                   JPG or PNG no larger than 5 MB
                 </div>
-                <input type="file" className="form-control" />
+                <input
+                  type="file"
+                  className="form-control"
+                  onChange={photoUpload}
+                />
               </div>
             </div>
           </div>
@@ -467,7 +580,7 @@ export default function EditProfile() {
                               onChange={setcity}
                               value={selectedCity}
                             >
-                              <option value=''>Select City</option>
+                              <option value="">Select City</option>
                               {cities.slice(0, 50).map((city) => (
                                 <option key={city.id} value={city.name}>
                                   {city.name}
@@ -495,77 +608,125 @@ export default function EditProfile() {
                     </div>
                   </CustomTabPanel>
                   <CustomTabPanel value={value} index={1}>
-                  <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 " style={{height:'380px',width:'700px'}}>
-                    <div className="my-3 py-2 d-inline"> 
-                    <Paper
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        flexWrap: "wrap",
-                        listStyle: "none",
-                        p: 4,
-                        m: 5,
-                      }}
-                      component="ul"
+                    <div
+                      className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 "
+                      style={{ height: "380px", width: "700px" }}
                     >
-                      {chipData.map((data) => {
-                        let icon;
+                      <div className="my-3 py-2 d-inline">
+                        <Paper
+                          sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            flexWrap: "wrap",
+                            listStyle: "none",
+                            p: 4,
+                            m: 5,
+                          }}
+                          component="ul"
+                        >
+                          <Chips/>
+                          {/* {chipData.map((data) => {
+                            let icon;
 
-                        if (data.label === "React") {
-                          icon = <TagFacesIcon />;
-                        }
+                            if (data.label === "React") {
+                              icon = <TagFacesIcon />;
+                            }
 
-                        return (
-                          <ListItem key={data.key}>
-                            <Chip
-                              icon={icon}
-                              label={data.label}
-                              onDelete={
-                                data.label === "React"
-                                  ? undefined
-                                  : handleDelete(data)
-                              }
+                            return (
+                              <ListItem key={data.key}>
+                                <Chip
+                                  icon={icon}
+                                  label={data.label}
+                                  onDelete={
+                                    data.label === "React"
+                                      ? undefined
+                                      : handleDelete(data)
+                                  }
+                                />
+                              </ListItem>
+                            );
+                          })} */}
+                        </Paper>
+                        <hr />
+                        <Paper
+                          sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            flexWrap: "wrap",
+                            listStyle: "none",
+                            p: 2,
+                            m: 5,
+                          }}
+                          component="ul"
+                        >
+                          <Application/>
+                          {/* <FormGroup style={{ display: "inline-block" }}>
+                          {softSkillData.map((data) => (
+                              <FormControlLabel
+                                key={data.label}
+                                control={<Checkbox checked={data.checked} onChange={handleCheckboxChange} name={data.label} />}
+                                label={data.label}
+                              />
+                            ))}
+                            <FormControlLabel
+                              control={<Checkbox defaultChecked />}
+                              label="روابط عمومی"
                             />
-                          </ListItem>
-                        );
-                      })}
-                    </Paper>
-                    <hr/>
-                    <Paper
-                      sx={{
-                        display: "flex",
-                        justifyContent: "center",
-                        flexWrap: "wrap",
-                        listStyle: "none",
-                        p: 2,
-                        m: 5,
-                      }}
-                      component="ul"
-                    >
-                    <FormGroup style={{display:'inline-block'}}>
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="روابط عمومی" />
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="تیم سازی" />
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="مهارت در ارائه" />
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="مدیریت استرس" />
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="خودشناسی" />
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="مسئولیت پذیری" />
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="رقابت جویی" />
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="گزارش نویسی" />
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="کاریزما" />
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="مدیریت بحران" />
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="خلاقیت وایده پردازی" />
-                        <FormControlLabel control={<Checkbox defaultChecked />} label="قدرت مذاکره" />
-                    </FormGroup>
-                    </Paper>
-                    </div>
+                            <FormControlLabel
+                              control={<Checkbox defaultChecked />}
+                              label="تیم سازی"
+                            />
+                            <FormControlLabel
+                              control={<Checkbox defaultChecked />}
+                              label="مهارت در ارائه"
+                            />
+                            <FormControlLabel
+                              control={<Checkbox defaultChecked />}
+                              label="مدیریت استرس"
+                            />
+                            <FormControlLabel
+                              control={<Checkbox defaultChecked />}
+                              label="خودشناسی"
+                            />
+                            <FormControlLabel
+                              control={<Checkbox defaultChecked />}
+                              label="مسئولیت پذیری"
+                            />
+                            <FormControlLabel
+                              control={<Checkbox defaultChecked />}
+                              label="رقابت جویی"
+                            />
+                            <FormControlLabel
+                              control={<Checkbox defaultChecked />}
+                              label="گزارش نویسی"
+                            />
+                            <FormControlLabel
+                              control={<Checkbox defaultChecked />}
+                              label="کاریزما"
+                            />
+                            <FormControlLabel
+                              control={<Checkbox defaultChecked />}
+                              label="مدیریت بحران"
+                            />
+                            <FormControlLabel
+                              control={<Checkbox defaultChecked />}
+                              label="خلاقیت وایده پردازی"
+                            />
+                            <FormControlLabel
+                              control={<Checkbox defaultChecked />}
+                              label="قدرت مذاکره"
+                            />
+                          </FormGroup> */}
+                        </Paper>
+                      </div>
                     </div>
                   </CustomTabPanel>
                 </Box>
+              </div>
             </div>
           </div>
         </div>
-        </div>
-        </div>
+      </div>
     </>
   );
 }
