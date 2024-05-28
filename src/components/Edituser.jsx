@@ -21,7 +21,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
-import Application from "./Application";
+// import Application from "./Application";
 import Chips from "./Chip";
 
 
@@ -610,9 +610,12 @@ export default function EditProfile() {
                   <CustomTabPanel value={value} index={1}>
                     <div
                       className="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 "
-                      style={{ height: "380px", width: "700px" }}
+                      style={{ height: "420px", width: "700px" }}
                     >
                       <div className="my-3 py-2 d-inline">
+                      <div className="d-flex">
+                        <p>hardskill</p>
+                        </div>
                         <Paper
                           sx={{
                             display: "flex",
@@ -620,10 +623,12 @@ export default function EditProfile() {
                             flexWrap: "wrap",
                             listStyle: "none",
                             p: 4,
-                            m: 5,
+                            m: 2,
                           }}
                           component="ul"
                         >
+                          {/* <p>hardware skill</p> */}
+                          
                           <Chips/>
                           {/* {chipData.map((data) => {
                             let icon;
@@ -648,6 +653,9 @@ export default function EditProfile() {
                           })} */}
                         </Paper>
                         <hr />
+                        <div className="d-flex">
+                        <p>softskill</p>
+                        </div>
                         <Paper
                           sx={{
                             display: "flex",
@@ -655,12 +663,13 @@ export default function EditProfile() {
                             flexWrap: "wrap",
                             listStyle: "none",
                             p: 2,
-                            m: 5,
+                            m: 2,
                           }}
                           component="ul"
                         >
-                          <Application/>
-                          {/* <FormGroup style={{ display: "inline-block" }}>
+                          {/* <Application/> */}
+                         
+                          <FormGroup style={{ display: "inline-block" }}>
                           {softSkillData.map((data) => (
                               <FormControlLabel
                                 key={data.label}
@@ -716,7 +725,7 @@ export default function EditProfile() {
                               control={<Checkbox defaultChecked />}
                               label="قدرت مذاکره"
                             />
-                          </FormGroup> */}
+                          </FormGroup>
                         </Paper>
                       </div>
                     </div>
