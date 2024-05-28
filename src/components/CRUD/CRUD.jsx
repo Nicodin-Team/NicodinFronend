@@ -1,7 +1,7 @@
 import React ,{useState,useEffect}  from "react";
 
 import styles from "./Crud.module.css";
-import {create,deleteOne,getAll,update} from "../../services/announcement";
+import {create,deleteOne,getAll,getUser,update} from "../../services/announcement";
 import AddAnnouncements from "./AddAnnouncement";
 import { useAuth } from "../../context/AuthContext";
 // import { Button ,Typography } from "@mui/material";
@@ -12,20 +12,25 @@ function Crud() {
   const[openAdd,setOpenAdd] = useState(false);
   const[openEdit,setOpenEdit] = useState(false);
   const[selectedData,setSelectedData] = useState({});
+  const [userId,setUserId] = useState(null)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await getAll({page:1,search:''})
+        if(accessToken){
+          const userResponse = await getUser({authToken: accessToken})
+          // setUserId(userResponse.data.data.id)
+          console.log(userResponse)
+        }
         setData(response.data)
-        console.log(response.data)
       } catch (error) {
         console.log(error)
       }
     };
     
     fetchData();
-  }, []);
+  }, [accessToken]);
 
   const handleClose = () => {
     setOpenAdd(false);
@@ -52,7 +57,7 @@ function Crud() {
   const handleCreate = async (values) =>{
     console.log(values)
     try {
-      await create({data:{title:values.title , description:values.description , active:false , user:1}})//replace real userid
+      await create({data:{title:values.title , description:values.description , active:false , user:userId}})//replace real userid
       const res = await getAll({page:1,search:''})
       setData(res.data)
       
@@ -65,7 +70,7 @@ function Crud() {
   const handleDelete = async () =>{
     try {
       console.log(selectedData)
-      const response = await deleteOne({id:selectedData.id})
+      const response = await deleteOne({id:selectedData.id, authToken: accessToken})
       console.log(response)
       const res = await getAll({page:1,search:''})
       setData(res.data)

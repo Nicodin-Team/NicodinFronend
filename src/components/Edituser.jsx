@@ -219,7 +219,7 @@ export default function EditProfile() {
         ] = `Bearer ${accessToken}`;
       }, 1000);
       const result = await axios
-        .patch(`https://teamup.liara.run/accounts/users/update/`)
+        .put(`https://teamup.liara.run/accounts/users/update/`)
         .catch((e) => {
           console.log(e);
         });
