@@ -1,8 +1,8 @@
-
+/* AnnouncementPage.css */
 .Announcementpage {
   
   .announcementcontainer {
-    max-width: 1000px;
+    max-width: 1400px;
     margin: 10 auto;
     padding: 20px;
   }
@@ -17,31 +17,66 @@
     background-color: #232347;
   }
 
-
+  .navigation {
+    display: flex;
+  }
+  
+  .nav-item {
+    padding: 10px;
+    margin-right: 10px;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .nav-item:hover {
+    color: #007bff;
+  }
+  
+  header h1 {
+    margin: 0 200px 0 0;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  nav ul li {
+    display: inline;
+    margin-right: 20px;
+  }
+  
+  nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  nav ul li a:hover {
+    color: #f1c40f; /* Change color on hover */
+  }
 
 
 
   
 .announcement-container {
   padding: 20px;
-  
 }
 
 .announcement-title {
-  font-size: 30px; /* Larger font size for the title */
+  font-size: 24px; /* Larger font size for the title */
   margin-bottom: 20px; /* Adds space below the title */
   color: #041628;
 }
 
 .announcementList {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr)); 
-  gap: 10px; 
-  
+  grid-template-columns: repeat(auto-fit, minmax(600px, 1fr)); /* Two items per row */
+  gap: 20px; /* Adds space between each announcement item */
 }
 
 .announcementItem {
-  color: rgb(248, 246, 246);
+  color: white;
   background-color: #214673; /* Background color for each item */
   padding: 20px; /* Add padding around each item */
   border-radius: 8px; /* Rounded corners for each item */
@@ -51,41 +86,51 @@
   box-shadow: 0px 0px 16px -2px #041628;
 }
 
+.view-details-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  padding: 8px 16px;
+  background-color: #007bff; /* Button background color */
+  color: white; /* Button text color */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+} 
 
+.view-details-button:hover {
+  background-color: #F2BD4B; /* Button background color on hover */
+}
 
-.title {
+.jobtitle {
+  display: flex;
   font-size: 24px;
   margin: 0px;
-  display: flex;
 }
 
 .jobDescription {
   display: flex;
   font-weight: 700;
   font-size: 24px;
-  color: #f5f4f2;
 }
 
 .view-details-button{
   border-radius: 1em;
   background-color: #F2BD4B;
 }
-
-
 .jobCreatedAt{
   display: flex;
 }
 .jobActive{
-  display: flex;
-  font-weight: 400;
-  font-size: big;
+  display: inline-block;
 }
 
-.jobUser{
-  display: flex;
+/* .job-place{
+  display: inline-block;
   font-weight: 400;
-  font-size: big;
-}
+  font-size: small;
+  margin-left: 10px;
+} */
 
 .pagination {
   list-style: none;
@@ -131,31 +176,9 @@
   color: #F2BD4B; /* Active button text color */
 }
 
-}
-
-/* .msn{
-  margin-right: 30px;
-  justify-content: end;
-}
-
-.mary{
-  margin-right: 30px;
-  
-}
-
-.mmad{
-  margin-right: 200px;
-} */
-
-.deleteButton {
-  margin-right: 110px; 
-
-}
-
-.row{
-  margin-right: 5px;
-}
-
 .col{
-  margin-right: 1px;
+  margin-right: 30px;
 }
+
+}
+

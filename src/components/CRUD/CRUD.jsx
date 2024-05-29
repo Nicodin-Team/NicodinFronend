@@ -1,4 +1,4 @@
-import React ,{useState,useEffect}  from "react";
+import React , {useState,useEffect}  from "react";
 
 import styles from "./Crud.module.css";
 import {create,deleteOne,getAll,getUser,update} from "../../services/announcement";
@@ -8,7 +8,7 @@ import { useAuth } from "../../context/AuthContext";
 
 function Crud() {
   const {accessToken} = useAuth();
-  const [data, setData ] = useState([]);
+  const [data, setData] = useState([]);
   const[openAdd,setOpenAdd] = useState(false);
   const[openEdit,setOpenEdit] = useState(false);
   const[selectedData,setSelectedData] = useState({});
@@ -94,17 +94,18 @@ function Crud() {
           <div className={styles.announcementList}>
             {data.map((item) => (
               <div key={item.id} className={styles.announcementItem}>
+                
+                <h4 className={styles.jobtitle}>{item.title}</h4>
                 <h3 className={styles.jobDescription}>{item.description}</h3>
-                <h4 className={styles.title}>{item.title}</h4>
                 <h4 className={styles.jobActive}>{item.active}</h4>
                 {/* <h4 className={styles.jobUser}>{item.User}</h4> */}
                 <h4 className={styles.jobCreatedAt}>{item.created_at}</h4>
 
                     <div className={`${styles.row} row justify-content-end`}> 
-                        <div className={`${styles.col} col-1 ms-5`}> 
+                        <div className={`${styles.col} col-1`}> 
                           <button
                             type="button"
-                            className={`${styles.updateButton} btn btn-warning`} 
+                            className={`${styles.updateButton} btn btn-warning `} 
                             onClick={() => {
                               setSelectedData(item);
                               setOpenEdit(true);
@@ -113,10 +114,10 @@ function Crud() {
                             update
                           </button>
                         </div>
-                        <div className={`${styles.col} col-1`}> 
+                        <div className={`${styles.col} col-1 `}> 
                           <button
                             type="button"
-                            className={`${styles.deleteButton} btn btn-danger`} 
+                            className={`${styles.deleteButton} btn btn-danger `} 
                             onClick={() => {
                               setSelectedData(item);
                               handleDelete();
