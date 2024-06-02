@@ -25,9 +25,6 @@ import { useAuth } from "../context/AuthContext";
 import Chips from "./Chip";
 
 
-
-// import { useAuth } from 'path/to/auth/hook';
-
 const fetchCities = async () => {
   try {
     const response = await axios.get(
@@ -106,7 +103,6 @@ export default function EditProfile() {
     "https://bootdey.com/img/Content/avatar/avatar7.png"
   );
   //-----------------------------
-  const [selectedSkills, setSelectedSkills] = useState([]); // State for selected skills (chip labels or IDs)
   const [softSkillData, setSoftSkillData] = useState([]); // State for soft skill data (checkboxes)
   const [isLoading, setIsLoading] = useState(false); // State for loading indicator
   const [error, setError] = useState(null); // State for error message
@@ -124,75 +120,29 @@ export default function EditProfile() {
     { key: 9, label: "javascript" },
     { key: 10, label: "java" },
   ]);
-  //-----------------------------
-  // Fetch chip data (skills) on component mount
-  const handleCheckboxChange = (event) => {
-    const { name, checked } = event.target;
-    const updatedSoftSkillData = softSkillData.map((data) => {
-      if (data.label === name) {
-        return { ...data, checked };
-      }
-      return data;
-    });
+  //----------------------------
   
-    setSoftSkillData(updatedSoftSkillData);
-  
-    // Update selectedSkills based on checked soft skills
-    const selectedSoftSkillLabels = updatedSoftSkillData.filter((data) => data.checked).map((data) => data.label);
-    setSelectedSkills([...selectedSkills, ...selectedSoftSkillLabels]);
-  };
-  
-  // const handleChipClick = (data) => {
-  //   const existingIndex = selectedSkills.findIndex((skill) => skill === data.label || skill === data.id); // Find existing chip by label or ID
-  
-  //   if (existingIndex !== -1) {
-  //     // Chip already selected, remove it
-  //     setSelectedSkills(selectedSkills.filter((skill, index) => index !== existingIndex));
-  //   } else {
-  //     // Chip not selected, add it
-  //     setSelectedSkills([...selectedSkills, data.label || data.id]); // Use label or ID based on your data structure
-  //   }
-  // };
-  useEffect(() => {
-    const fetchChipData = async () => {
-      setIsLoading(true); // Set loading indicator to true
-      setError(null); // Clear any previous errors
 
-      try {
-        const response = await axios.get('https://your-api-endpoint/skills'); // Use axios.get
+  // // Fetch soft skill data (checkboxes) on component mount
+  // useEffect(() => {
+  //   const fetchSoftSkillData = async () => {
+  //     setIsLoading(true); // Set loading indicator to true
+  //     setError(null); // Clear any previous errors
 
-        setChipData(response.data); // Update chipData state with fetched data
-      } catch (error) {
-        console.error('Error fetching chip data:', error);
-        setError(error.message); // Set error message state
-      } finally {
-        setIsLoading(false); // Set loading indicator to false
-      }
-    };
+  //     try {
+  //       const response = await axios.get('https://teamup.liara.run/accounts/skills/'); 
+       
+  //       setSoftSkillData(response.data.map((item) => ({ ...item, checked: false }))); 
+  //     } catch (error) {
+  //       console.error('Error fetching soft skill data:', error);
+  //       setError(error.message);
+  //     } finally {
+  //       setIsLoading(false); 
+  //     }
+  //   };
 
-    fetchChipData(); // Call the function to fetch data
-  }, []); // Empty dependency array ensures fetching only once on mount
-
-  // Fetch soft skill data (checkboxes) on component mount
-  useEffect(() => {
-    const fetchSoftSkillData = async () => {
-      setIsLoading(true); // Set loading indicator to true
-      setError(null); // Clear any previous errors
-
-      try {
-        const response = await axios.get('https://your-api-endpoint/soft-skills'); // Use axios.get
-
-        setSoftSkillData(response.data.map((item) => ({ ...item, checked: false }))); // Update softSkillData state with fetched data and initial unchecked state
-      } catch (error) {
-        console.error('Error fetching soft skill data:', error);
-        setError(error.message); // Set error message state
-      } finally {
-        setIsLoading(false); // Set loading indicator to false
-      }
-    };
-
-    fetchSoftSkillData(); // Call the function to fetch data
-  }, []); // Empty dependency array ensures fetching only once on mount
+  //   fetchSoftSkillData(); // Call the function to fetch data
+  // }, []); // Empty dependency array ensures fetching only once on mount
 
   //----------------------------
   const handleDelete = (chipToDelete) => () => {
@@ -207,10 +157,12 @@ export default function EditProfile() {
   const { accessToken } = useAuth();
 
   useEffect(() => {
+    
     const fetchCityData = async () => {
       const fetchedCities = await fetchCities();
       setCities(fetchedCities);
     };
+
     const id = 1;
     async function fetchData() {
       setTimeout(() => {
@@ -233,8 +185,30 @@ export default function EditProfile() {
       setGender(result.data.gender);
       setAge(result.data.age);
       setCountry(result.data.country);
-    }
+    };
 
+    const fetchSoftSkillData = async () => {
+      setIsLoading(true); 
+      setError(null); 
+
+      try {
+        const response = await axios.get('https://teamup.liara.run/accounts/skills/',{
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }); 
+        setSoftSkillData(response.data.map((item) => ({ ...item, checked: false }))); 
+      } catch (error) {
+        console.error('Error fetching soft skill data:', error);
+        setError(error.message);
+      } finally {
+        setIsLoading(false); 
+      }
+    };
+
+
+    fetchSoftSkillData(); 
     fetchData();
     fetchCityData();
   }, []);
@@ -672,12 +646,12 @@ export default function EditProfile() {
                           <FormGroup style={{ display: "inline-block" }}>
                           {softSkillData.map((data) => (
                               <FormControlLabel
-                                key={data.label}
-                                control={<Checkbox checked={data.checked} onChange={handleCheckboxChange} name={data.label} />}
-                                label={data.label}
+                                key={data.id}
+                                control={<Checkbox checked={data.checked}  name={data.name}/>}
+                                label={`${data.name} - ${data.level}`}
                               />
                             ))}
-                            <FormControlLabel
+                            {/* <FormControlLabel
                               control={<Checkbox defaultChecked />}
                               label="روابط عمومی"
                             />
@@ -724,7 +698,7 @@ export default function EditProfile() {
                             <FormControlLabel
                               control={<Checkbox defaultChecked />}
                               label="قدرت مذاکره"
-                            />
+                            /> */}
                           </FormGroup>
                         </Paper>
                       </div>

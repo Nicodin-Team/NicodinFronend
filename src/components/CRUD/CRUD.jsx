@@ -20,7 +20,7 @@ function Crud() {
         const response = await getAll({page:1,search:''})
         if(accessToken){
           const userResponse = await getUser({authToken: accessToken})
-          // setUserId(userResponse.data.data.id)
+          setUserId(userResponse.data.data.id)
           console.log(userResponse)
         }
         setData(response.data)
