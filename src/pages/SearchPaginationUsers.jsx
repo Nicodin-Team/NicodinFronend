@@ -41,7 +41,13 @@ function SearchPaginationUsers() {
   useEffect(() => {
     const fetchUsers = async () =>{
       if (page > 0){
-      const baseURL = `https://teamup.liara.run/accounts/users/all/?page=${page}`
+      let baseURL;
+      if (query.length > 0){
+      baseURL = `https://teamup.liara.run/accounts/users/all/?page=${page}&search=${query}`
+      }
+      else{
+      baseURL = `https://teamup.liara.run/accounts/users/all/?page=${page}`
+      }
       console.log(page);
       const response = await axios.get(baseURL);
       // console.log(response)
@@ -51,7 +57,7 @@ function SearchPaginationUsers() {
       }
     }
     fetchUsers()
-  },[page])
+  },[page, query])
 
   const data = Object.values(items);
   const search_parameters = Object.keys(Object.assign({}, ...data));
