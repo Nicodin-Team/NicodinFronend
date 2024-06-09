@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import react, { useEffect, useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 import axios from "axios";
 const baseUrl = "https://teamup.liara.run";
@@ -22,11 +23,12 @@ const getOne = ({ id }) => {
   return axios.get(url, config);
 };
 
-const createrequest = ({ data, id }) => {
+const createrequest = ({ data, id, token }) => {
   const url = `${baseUrl}/announcements/announcements/${id}/`;
   const config = {
     headers: {
       "Content-Type": "application/json",
+      Authentization : `Bearer ${token}`
     },
   };
   return axios.patch(url, data, config);
@@ -35,9 +37,10 @@ const createrequest = ({ data, id }) => {
 
 const AnnouncementDetailsDialog = ({ open, handleClose, id }) => {
   const [data, setData]=useState({})
+  const token = useAuth();
   useEffect(() => {
     const fetchdata = async () => {
-      const response = await getOne({id:1})//pak bad moaref =>:1
+      const response = await getOne({id})//pak bad moaref =>:1
       setData(response.data)
       console.log(response)
     }
@@ -46,7 +49,7 @@ const AnnouncementDetailsDialog = ({ open, handleClose, id }) => {
 
   const send_request = async () => {
     try {
-      const response = await createrequest({data , id})
+      const response = await createrequest({data , id, token})
       console.log(response)
     } catch (error) {
       console.log(error)
@@ -135,7 +138,7 @@ const AnnouncementDetailsDialog = ({ open, handleClose, id }) => {
           <Button variant="outlined" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="contained" onClick={handleClose} autoFocus>
+          <Button variant="contained" onClick={send_request} autoFocus>
             Request
           </Button>
         </DialogActions>
