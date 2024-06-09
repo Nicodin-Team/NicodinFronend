@@ -1,7 +1,348 @@
+// import { useState, useEffect } from "react";
+
+// import "../components/Edituser.module.css";
+
+// import Form from "react-bootstrap/Form";
+// import * as React from "react";
+// import PropTypes from "prop-types";
+// import Tabs from "@mui/material/Tabs";
+// import Tab from "@mui/material/Tab";
+// import Typography from "@mui/material/Typography";
+// import Box from "@mui/material/Box";
+// import { styled } from "@mui/material/styles";
+// import Chip from "@mui/material/Chip";
+// import Paper from "@mui/material/Paper";
+// import TagFacesIcon from "@mui/icons-material/TagFaces";
+// import avatar from "../assets/Images/c2.png";
+// import Avatar from '@mui/material/Avatar';
+// import Stack from '@mui/material/Stack';
+// import FormGroup from "@mui/material/FormGroup";
+// import FormControlLabel from "@mui/material/FormControlLabel";
+// import Checkbox from "@mui/material/Checkbox";
+// import axios from "axios";
+// import { useAuth } from "../context/AuthContext";
+// // import Application from "./Application";
+// // import Chips from "./Chip";
+// import SoftSkillData from "./softSkillData";
+// //------------------------------
+
+// import TextField from "@mui/material/TextField";
+// import Autocomplete from "@mui/material/Autocomplete";
+// import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+// import CheckBoxIcon from "@mui/icons-material/CheckBox";
+
+
+// const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+// const checkedIcon = <CheckBoxIcon fontSize="small" />;
+// //-----------------------------
+
+// const fetchCities = async () => {
+//   try {
+//     const response = await axios.get(
+//       "https://teamup.liara.run/resources/cities/"
+//     );
+//     const { data } = response;
+//     console.log(data);
+//     return data;
+//   } catch (error) {
+//     console.log(error);
+//     return [];
+//   }
+// };
+
+// const ListItem = styled("li")(({ theme }) => ({
+//   margin: theme.spacing(0.5),
+// }));
+
+// function CustomTabPanel(props) {
+//   const { children, value, index, ...other } = props;
+
+//   return (
+//     <div
+//       role="tabpanel"
+//       hidden={value !== index}
+//       id={`simple-tabpanel-${index}`}
+//       aria-labelledby={`simple-tab-${index}`}
+//       {...other}
+//     >
+//       {value === index && (
+//         <Box sx={{ p: 3 }}>
+//           <Typography>{children}</Typography>
+//         </Box>
+//       )}
+//     </div>
+//   );
+// }
+
+// CustomTabPanel.propTypes = {
+//   children: PropTypes.node,
+//   index: PropTypes.number.isRequired,
+//   value: PropTypes.number.isRequired,
+// };
+
+// function a11yProps(index) {
+//   return {
+//     id: `simple-tab-${index}`,
+//     "aria-controls": `simple-tabpanel-${index}`,
+//   };
+// }
+
+// export default function EditProfile() {
+//   const [firstname, setFirstname] = useState("");
+//   const [lastname, setLastname] = useState("");
+//   const [Username, setUsername] = useState("");
+//   const [email, setEmail] = useState("");
+//   const [gender, setGender] = useState("");
+//   const [age, setAge] = useState("");
+//   const [country, setCountry] = useState("");
+//   const [selectedCity, setSelectedCity] = useState("");
+//   // const [city, setCity] = useState("");
+//   // const [profilePicture, setProfilePicture] = useState(
+//   //   "https://bootdey.com/img/Content/avatar/avatar7.png"
+//   // );
+//   const [selectedFile, setSelectedFile] = useState(null);
+//   const [errorFirstname, setErrorFirstname] = useState("");
+//   const [errorLastname, setErrorLastname] = useState("");
+//   const [errorUsername, setErrorUsername] = useState("");
+//   const [errorEmail, setErrorEmail] = useState("");
+//   const [errorAge, setErrorAge] = useState("");
+//   const [cities, setCities] = useState([]);
+//   const [data, setData] = useState(null);
+//   const [value, setValue] = useState(0);
+//   const [file, setFile] = useState("");
+//   const [imagePreviewUrl, setImagePreviewUrl] = useState(
+//     "https://bootdey.com/img/Content/avatar/avatar7.png"
+//   );
+//   const [skill , setSkill] = React.useState([]);
+//   console.log(skill);
+//   //-----------------------------
+//   // const [softSkillData, setSoftSkillData] = useState([]); // State for soft skill data (checkboxes)
+//   //--------------------------------
+//   // const [chipData, setChipData] = useState([
+//   //   { key: 0, label: "Angular" },
+//   //   { key: 1, label: "jQuery" },
+//   //   { key: 2, label: "Polymer" },
+//   //   { key: 3, label: "React" },
+//   //   { key: 4, label: "Vue.js" },
+//   //   { key: 5, label: "c++" },
+//   //   { key: 6, label: "c#" },
+//   //   { key: 7, label: "html" },
+//   //   { key: 8, label: "css" },
+//   //   { key: 9, label: "javascript" },
+//   //   { key: 10, label: "java" },
+//   // ]);
+  
+//   //----------------------------
+//   // const handleDelete = (chipToDelete) => () => {
+//   //   setChipData((chips) =>
+//   //     chips.filter((chip) => chip.key !== chipToDelete.key)
+//   //   );
+//   // };
+//   const fetchApi = async () => {
+//     try {
+//       const response = await axios.get('https://teamup.liara.run/resources/skillset/', {
+//         headers: {
+//           "Content-Type": "application/json",
+//           Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzIyNTA0NTE5LCJpYXQiOjE3MTczMjA1MTksImp0aSI6IjViYWQwYzZmN2E2ZjQxNGNiZTdhZjhhZjlkNDIxODdlIiwidXNlcl9pZCI6NDR9.8LwzygNzwZK-_yzN0bXrEROtCXUkCimaK4nUlCZ8JHg`,
+//         },
+//       });
+//       console.log(response);
+//       setSkill(response.data);
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   };
+
+//   const { accessToken } = useAuth();
+ 
+//   useEffect(() => {
+    
+//     const fetchCityData = async () => {
+//       const fetchedCities = await fetchCities();
+//       setCities(fetchedCities);
+//     };
+
+//     const id = 1;
+//     async function fetchData() {
+//       setTimeout(() => {
+//         axios.defaults.headers.common[
+//           "Authorization"
+//         ] = `Bearer ${accessToken}`;
+//       }, 1000);
+//       const result = await axios
+//         .put(`https://teamup.liara.run/accounts/users/update/`)
+//         .catch((e) => {
+//           console.log(e);
+//         });
+//       // console.log(typeof(result.data))
+
+//       setData(result.data);
+//       setFirstname(result.data.first_name);
+//       setLastname(result.data.last_name);
+//       setUsername(result.data.username);
+//       setcity(result.data.city);
+//       setGender(result.data.gender);
+//       setAge(result.data.age);
+//       setCountry(result.data.country);
+//     };
+    
+
+//     fetchApi();
+//     fetchData();
+//     fetchCityData();
+//   }, []);
+
+//   const handleTabChange = (event, newValue) => {
+//     console.log(newValue);
+//     setValue(newValue);
+//   };
+
+//   const validateEmail = (email) => {
+//     const re =
+//       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+//     return re.test(String(email).toLowerCase());
+//   };
+
+//   const setfirstname = (e) => {
+//     setFirstname(e.target.value);
+
+//     if (!firstname) {
+//       setErrorFirstname("First name is required");
+//     } else {
+//       setErrorFirstname("");
+//     }
+//   };
+
+//   const setlastname = (e) => {
+//     setLastname(e.target.value);
+//     if (!lastname) {
+//       setErrorLastname("Last name is required");
+//     } else {
+//       setErrorLastname("");
+//     }
+//   };
+
+//   const setusername = (e) => {
+//     setUsername(e.target.value);
+//     if (!Username) {
+//       setErrorUsername("Username is required");
+//     } else {
+//       setErrorUsername("");
+//     }
+//   };
+
+//   const setemail = (e) => {
+//     setEmail(e.target.value);
+//     if (!validateEmail(email)) {
+//       setErrorEmail("Invalid email format");
+//     } else {
+//       setErrorEmail("");
+//     }
+//   };
+
+//   const setgender = (e) => {
+//     setGender(e.target.value);
+//   };
+
+//   const setage = (e) => {
+//     setAge(e.target.value);
+
+//     if (!age) {
+//       setErrorAge("First name is required");
+//     } else {
+//       setErrorAge("");
+//     }
+//   };
+
+//   const setcountry = (e) => {
+//     setCountry(e.target.value);
+//   };
+
+//   const setcity = (event, newValue) => {
+//     console.log("شهر انتخاب شده:", event.target.value);
+//     setSelectedCity(event.target.value);
+//   };
+  
+//   const handleDelete = (skillToDelete) => {
+//     setSkill(skill.filter((skills) => skills !== skillToDelete));
+//   };
+
+
+//   const setUpdate = async () => {
+//     console.log(setUpdate);
+//     const formData = new FormData();
+//     // formData.append("photo", selectedFile);
+//     formData.append("photo", imagePreviewUrl);
+//     formData.append("first_name", firstname);
+//     formData.append("last_name", lastname);
+//     formData.append("username", Username);
+//     formData.append("gender", gender);
+//     formData.append("age", age);
+//     formData.append("country", country);
+//     formData.append("city", selectedCity);
+//     formData.append("Chip",skill);
+
+//     // let data = {
+//     //   photo: "",
+//     //   first_name: firstname,
+//     //   last_name: lastname,
+//     //   username: Username,
+//     //   gender: gender,
+//     //   age: age,
+//     //   country: country,
+//     //   city: selectedCity,
+//     // };
+
+//     console.log(accessToken);
+
+//     setTimeout(() => {
+//       axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+//     }, 1000);
+//     const res = await axios
+//       .patch(`https://teamup.liara.run/accounts/users/update/`, formData, {headers:{
+//         "Content-Type": "multipart/form-data",
+//       }})
+//       .catch((e) => {
+//         console.log(e);
+//       });
+//     console.log(res);
+//     if ( res && res.data.Status === 'Success') {
+//       const data = res;
+//       setImagePreviewUrl(data.profilePictureUrl || imagePreviewUrl);
+//       setFirstname(data.firstName || firstname);
+//       setLastname(data.lastName || lastname);
+//       setUsername(data.username || Username);
+//       setEmail(data.email || email);
+//       setGender(data.gender || gender);
+//       setAge(data.age || age);
+//       setCountry(data.country || country);
+//       setSelectedCity(data.city || selectedCity);
+//       setSkill(data.skill || skill);
+//       console.log(data);
+//       console.log("Profile updated successfully!");
+//     } else {
+//       const errorData = await res;
+//       console.log(
+//         "Failed to update profile:",
+//         errorData.message || res.statusText
+//       );
+//       return errorData;
+//     }
+//   };
+
+//   const photoUpload = (e) => {
+//     e.preventDefault();
+//     const reader = new FileReader();
+//     const file = e.target.files[0];
+//     reader.onloadend = () => {
+//       setFile(file);
+//       setImagePreviewUrl(reader.result);
+//     };
+//     reader.readAsDataURL(file);
+//   };
+
 import { useState, useEffect } from "react";
-
 import "../components/Edituser.module.css";
-
 import Form from "react-bootstrap/Form";
 import * as React from "react";
 import PropTypes from "prop-types";
@@ -21,17 +362,20 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import axios from "axios";
 import { useAuth } from "../context/AuthContext";
-// import Application from "./Application";
-import Chips from "./Chip";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
 
+import SoftSkillData from "./softSkillData";
+
+const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
+const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
 const fetchCities = async () => {
   try {
-    const response = await axios.get(
-      "https://teamup.liara.run/resources/cities/"
-    );
+    const response = await axios.get("https://teamup.liara.run/resources/cities/");
     const { data } = response;
-    console.log(data);
     return data;
   } catch (error) {
     console.log(error);
@@ -45,7 +389,6 @@ const ListItem = styled("li")(({ theme }) => ({
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role="tabpanel"
@@ -84,10 +427,7 @@ export default function EditProfile() {
   const [gender, setGender] = useState("");
   const [age, setAge] = useState("");
   const [country, setCountry] = useState("");
-  // const [city, setCity] = useState("");
-  const [profilePicture, setProfilePicture] = useState(
-    "https://bootdey.com/img/Content/avatar/avatar7.png"
-  );
+  const [selectedCity, setSelectedCity] = useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const [errorFirstname, setErrorFirstname] = useState("");
   const [errorLastname, setErrorLastname] = useState("");
@@ -95,140 +435,80 @@ export default function EditProfile() {
   const [errorEmail, setErrorEmail] = useState("");
   const [errorAge, setErrorAge] = useState("");
   const [cities, setCities] = useState([]);
-  const [selectedCity, setSelectedCity] = useState("");
   const [data, setData] = useState(null);
   const [value, setValue] = useState(0);
   const [file, setFile] = useState("");
-  const [imagePreviewUrl, setImagePreviewUrl] = useState(
-    "https://bootdey.com/img/Content/avatar/avatar7.png"
-  );
-  //-----------------------------
-  const [softSkillData, setSoftSkillData] = useState([]); // State for soft skill data (checkboxes)
-  const [isLoading, setIsLoading] = useState(false); // State for loading indicator
-  const [error, setError] = useState(null); // State for error message
-  //--------------------------------
-  const [chipData, setChipData] = useState([
-    { key: 0, label: "Angular" },
-    { key: 1, label: "jQuery" },
-    { key: 2, label: "Polymer" },
-    { key: 3, label: "React" },
-    { key: 4, label: "Vue.js" },
-    { key: 5, label: "c++" },
-    { key: 6, label: "c#" },
-    { key: 7, label: "html" },
-    { key: 8, label: "css" },
-    { key: 9, label: "javascript" },
-    { key: 10, label: "java" },
-  ]);
-  //----------------------------
-  
-
-  // // Fetch soft skill data (checkboxes) on component mount
-  // useEffect(() => {
-  //   const fetchSoftSkillData = async () => {
-  //     setIsLoading(true); // Set loading indicator to true
-  //     setError(null); // Clear any previous errors
-
-  //     try {
-  //       const response = await axios.get('https://teamup.liara.run/accounts/skills/'); 
-       
-  //       setSoftSkillData(response.data.map((item) => ({ ...item, checked: false }))); 
-  //     } catch (error) {
-  //       console.error('Error fetching soft skill data:', error);
-  //       setError(error.message);
-  //     } finally {
-  //       setIsLoading(false); 
-  //     }
-  //   };
-
-  //   fetchSoftSkillData(); // Call the function to fetch data
-  // }, []); // Empty dependency array ensures fetching only once on mount
-
-  //----------------------------
-  const handleDelete = (chipToDelete) => () => {
-    setChipData((chips) =>
-      chips.filter((chip) => chip.key !== chipToDelete.key)
-    );
-  };
-
-  const setcity = (event, newValue) => {
-    setSelectedCity(newValue);
-  };
+  const [imagePreviewUrl, setImagePreviewUrl] = useState("https://bootdey.com/img/Content/avatar/avatar7.png");
+  const [skill, setSkill] = useState([]);
   const { accessToken } = useAuth();
 
   useEffect(() => {
-    
     const fetchCityData = async () => {
       const fetchedCities = await fetchCities();
       setCities(fetchedCities);
     };
 
-    const id = 1;
-    async function fetchData() {
-      setTimeout(() => {
-        axios.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${accessToken}`;
-      }, 1000);
-      const result = await axios
-        .put(`https://teamup.liara.run/accounts/users/update/`)
-        .catch((e) => {
-          console.log(e);
+    const fetchData = async () => {
+      try {
+        const result = await axios.get("https://teamup.liara.run/accounts/users/profile/", {//bayad ezafe kon
+          headers: { Authorization: `Bearer ${accessToken}` }
         });
-      // console.log(typeof(result.data))
-
-      setData(result.data);
-      setFirstname(result.data.first_name);
-      setLastname(result.data.last_name);
-      setUsername(result.data.username);
-      setcity(result.data.city);
-      setGender(result.data.gender);
-      setAge(result.data.age);
-      setCountry(result.data.country);
+        console.log(result);
+        setData(result.data);
+        setFirstname(result.data.first_name);
+        setLastname(result.data.last_name);
+        setUsername(result.data.username);
+        setSelectedCity(result.data.city);
+        setGender(result.data.gender);
+        setAge(result.data.age);
+        setCountry(result.data.country);
+      } catch (e) {
+        console.log(e);
+      }
     };
 
-    const fetchSoftSkillData = async () => {
-      setIsLoading(true); 
-      setError(null); 
-
+    const fetchApi = async () => {
       try {
-        const response = await axios.get('https://teamup.liara.run/accounts/skills/',{
+        const response = await axios.get("https://teamup.liara.run/resources/skillset/", {
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
           },
-        }); 
-        setSoftSkillData(response.data.map((item) => ({ ...item, checked: false }))); 
-      } catch (error) {
-        console.error('Error fetching soft skill data:', error);
-        setError(error.message);
-      } finally {
-        setIsLoading(false); 
+        });
+        setSkill(response.data);
+      } catch (err) {
+        console.log(err);
       }
     };
 
-
-    fetchSoftSkillData(); 
+    fetchApi();
     fetchData();
     fetchCityData();
-  }, []);
+  }, [accessToken]);
 
   const handleTabChange = (event, newValue) => {
-    console.log(newValue);
+    
     setValue(newValue);
+    setUpdate();
+    // handleupdate(formData);
+    console.log('updating data:');
+    // api for updating data related to 
   };
 
+  
   const validateEmail = (email) => {
-    const re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
   };
 
   const setfirstname = (e) => {
     setFirstname(e.target.value);
-
-    if (!firstname) {
-      setErrorFirstname("First name is required");
+    if (!e.target.value) {
+      setErrorFirstname("وارد کردن نام الزامی میباشد!");
+    } else if (e.target.value.length < 3) {
+      setErrorFirstname("نام حداقل باید 3 حرف باشد!");
+    } else if (!/^[آ-ی\s]+$/.test(e.target.value)) {
+      setErrorFirstname("نام باید شامل حروف فارسی باشد!");
     } else {
       setErrorFirstname("");
     }
@@ -236,9 +516,9 @@ export default function EditProfile() {
 
   const setlastname = (e) => {
     setLastname(e.target.value);
-    if (!lastname) {
-      setErrorLastname("Last name is required");
-    } else {
+    if (!e.target.value) {
+      setErrorLastname("وارد کردن نام خانوادگی الزامی میباشد!");
+    } else if (e.target.value.length < 3) {
       setErrorLastname("");
     }
   };
@@ -266,12 +546,12 @@ export default function EditProfile() {
   };
 
   const setage = (e) => {
-    const newAge = parseInt(e.target.value);
-    if (!isNaN(newAge) && newAge >= 18) {
-      setAge(newAge);
-      setErrorAge("");
+    setAge(e.target.value);
+
+    if (!age) {
+      setErrorAge("First name is required");
     } else {
-      setErrorAge("Age must be a number greater than or equal to 18");
+      setErrorAge("");
     }
   };
 
@@ -279,29 +559,26 @@ export default function EditProfile() {
     setCountry(e.target.value);
   };
 
-  // const setcity = (e) => {
-  //   setCity(e.target.value);
-  // };
+  const setcity = (event, newValue) => {
+    console.log("شهر انتخاب شده:", event.target.value);
+    setSelectedCity(event.target.value);
+  };
 
-  const handleProfilePictureChange = (e) => {
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      if (e.target.result) {
-        setSelectedFile(e.target.files[0]);
-        setProfilePicture(e.target.result); // Set preview image URL
-      }
-    };
-    reader.readAsDataURL(e.target.files[0]);
+  const handleDelete = (skillToDelete) => {
+    setSkill(skill.filter((skills) => skills !== skillToDelete));
+  };
+
+  const handleAdd = (newSkill) => {
+    if (!skill.includes(newSkill)) {
+      setSkill([...skill, newSkill]);
+    }
   };
 
   const setUpdate = async () => {
     console.log(setUpdate);
     const formData = new FormData();
-    // formData.append("photo", selectedFile);
-    formData.append("photo", "");
-
-    // Add other form data
-    // formData.append("bio", "");
+    formData.append("bio", "");
+    formData.append("photo", imagePreviewUrl);
     formData.append("first_name", firstname);
     formData.append("last_name", lastname);
     formData.append("username", Username);
@@ -310,16 +587,19 @@ export default function EditProfile() {
     formData.append("country", country);
     formData.append("city", selectedCity);
 
-    let data = {
-      photo: "",
-      first_name: firstname,
-      last_name: lastname,
-      username: Username,
-      gender: gender,
-      age: age,
-      country: country,
-      city: selectedCity,
-    };
+    // formData.append("Chip", skill);
+    // formData.append("softSkill" , )//skill and soft skill ezafe kone
+
+    // let data = {
+    //   photo: "",
+    //   first_name: firstname,
+    //   last_name: lastname,
+    //   username: Username,
+    //   gender: gender,
+    //   age: age,
+    //   country: country,
+    //   city: selectedCity,
+    // };
 
     console.log(accessToken);
 
@@ -327,16 +607,19 @@ export default function EditProfile() {
       axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
     }, 1000);
     const res = await axios
-      .patch(`https://teamup.liara.run/accounts/users/update/`, formData, {headers:{
-        "Content-Type": "multipart/form-data"
-      }})
+      .patch(`https://teamup.liara.run/accounts/users/update/`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        }
+      })
       .catch((e) => {
         console.log(e);
       });
     console.log(res);
-    if ( res && res.data.Status === 'Success') {
+   
+    if (res && res.data.Status === 'Success') {
       const data = res;
-      setProfilePicture(data.profilePictureUrl || profilePicture);
+      setImagePreviewUrl(data.profilePictureUrl || imagePreviewUrl);
       setFirstname(data.firstName || firstname);
       setLastname(data.lastName || lastname);
       setUsername(data.username || Username);
@@ -345,6 +628,7 @@ export default function EditProfile() {
       setAge(data.age || age);
       setCountry(data.country || country);
       setSelectedCity(data.city || selectedCity);
+      // setSkill(data.skill || skill);
       console.log(data);
       console.log("Profile updated successfully!");
     } else {
@@ -367,6 +651,7 @@ export default function EditProfile() {
     };
     reader.readAsDataURL(file);
   };
+
 
   return (
     <>
@@ -513,13 +798,13 @@ export default function EditProfile() {
                       </div>
                       <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                         <div className="form-group">
-                          <label htmlFor=" Age" className="d-flex my-1 py-2">
-                            Age
+                        <label htmlFor="age" className="d-flex my-1 py-2">
+                            age
                           </label>
                           <input
                             type="number"
                             className="form-control"
-                            id=" Age"
+                            id="age"
                             placeholder="Enter your age"
                             onChange={setage}
                             value={age}
@@ -601,9 +886,31 @@ export default function EditProfile() {
                           }}
                           component="ul"
                         >
-                          {/* <p>hardware skill</p> */}
                           
-                          <Chips/>
+                          <Autocomplete
+                              multiple
+                              id="checkboxes-tags-demo"
+                              // options={top5Songs}
+                              options={skill}
+                              // onClick={() => handleAdd(skill)}
+                              onDelete={() => handleDelete(skill)} 
+                              disableCloseOnSelect
+                              getOptionLabel={(option) => option.name}
+                              renderOption={(props, option, { selected }) => (
+                                <li {...props}>
+                                  <Checkbox icon={icon} checkedIcon={checkedIcon} checked={selected} />
+                                  {option.name}
+                                </li>
+                              )}
+                              style={{ width: 500 }}
+                              renderInput={(params) => (
+                                <TextField {...params} label="Checkboxes" placeholder="Checkboxes" />
+                              )}
+                            />
+                            
+                          
+                          {/* <Chips/> */}
+
                           {/* {chipData.map((data) => {
                             let icon;
 
@@ -638,68 +945,22 @@ export default function EditProfile() {
                             listStyle: "none",
                             p: 2,
                             m: 2,
+                            
                           }}
                           component="ul"
                         >
-                          {/* <Application/> */}
+                          <SoftSkillData/>
                          
-                          <FormGroup style={{ display: "inline-block" }}>
+                          {/* <FormGroup style={{ display: "inline-block" }}>
                           {softSkillData.map((data) => (
                               <FormControlLabel
                                 key={data.id}
                                 control={<Checkbox checked={data.checked}  name={data.name}/>}
-                                label={`${data.name} - ${data.level}`}
+                                label={data.name}
                               />
-                            ))}
-                            {/* <FormControlLabel
-                              control={<Checkbox defaultChecked />}
-                              label="روابط عمومی"
-                            />
-                            <FormControlLabel
-                              control={<Checkbox defaultChecked />}
-                              label="تیم سازی"
-                            />
-                            <FormControlLabel
-                              control={<Checkbox defaultChecked />}
-                              label="مهارت در ارائه"
-                            />
-                            <FormControlLabel
-                              control={<Checkbox defaultChecked />}
-                              label="مدیریت استرس"
-                            />
-                            <FormControlLabel
-                              control={<Checkbox defaultChecked />}
-                              label="خودشناسی"
-                            />
-                            <FormControlLabel
-                              control={<Checkbox defaultChecked />}
-                              label="مسئولیت پذیری"
-                            />
-                            <FormControlLabel
-                              control={<Checkbox defaultChecked />}
-                              label="رقابت جویی"
-                            />
-                            <FormControlLabel
-                              control={<Checkbox defaultChecked />}
-                              label="گزارش نویسی"
-                            />
-                            <FormControlLabel
-                              control={<Checkbox defaultChecked />}
-                              label="کاریزما"
-                            />
-                            <FormControlLabel
-                              control={<Checkbox defaultChecked />}
-                              label="مدیریت بحران"
-                            />
-                            <FormControlLabel
-                              control={<Checkbox defaultChecked />}
-                              label="خلاقیت وایده پردازی"
-                            />
-                            <FormControlLabel
-                              control={<Checkbox defaultChecked />}
-                              label="قدرت مذاکره"
-                            /> */}
-                          </FormGroup>
+                            ))} */}
+                            
+                          {/* </FormGroup> */}
                         </Paper>
                       </div>
                     </div>

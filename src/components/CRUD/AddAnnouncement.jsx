@@ -15,24 +15,24 @@ import * as yup from "yup";
 const modalSchema = yup.object({
     title: yup.string().required("این فیلد اجباری میباشد"),
     description: yup.string().required("این فیلد اجباری میباشد"),
-    created_at: yup.string().required("این فیلد اجباری میباشد"),
-    active: yup.string().required("این فیلد اجباری میباشد"),
+    // created_at: yup.string().required("این فیلد اجباری میباشد"),
+    // active: yup.string().required("این فیلد اجباری میباشد"),
 });
 
 const AddAnnouncements = ({ open, handleClose, handleSave, data }) => {
     const [touched, setTouched] = useState({
         title: false,
         description: false,
-        created_at:  false,
-        active: false
+        // created_at:  false,
+        // active: false
     });
 
     const handleTouch = ({ name }) => {
         const newTouched = {
             title: touched.title,
             description: touched.description,
-            created_at: touched.created_at,
-            active: touched.active
+            // created_at: touched.created_at,
+            // active: touched.active
         };
         switch (name) {
             case "title":
@@ -41,12 +41,12 @@ const AddAnnouncements = ({ open, handleClose, handleSave, data }) => {
             case "description":
                 newTouched.description = true;
                 break;
-            case "created_at":
-                newTouched.created_at = true;
-                break;
-            case "active":
-                newTouched.active = true;
-                break;
+            // case "created_at":
+            //     newTouched.created_at = true;
+            //     break;
+            // case "active":
+            //     newTouched.active = true;
+            //     break;
             default:
                 return;
         }
@@ -56,8 +56,8 @@ const AddAnnouncements = ({ open, handleClose, handleSave, data }) => {
         initialValues: {
             title: data.title,
             description: data.description,
-            created_at: data.created_at,
-            active: data.active,
+            // created_at: data.created_at,
+            // active: data.active,
         },
         validationSchema: modalSchema,
         onSubmit: async (values, { resetForm }) => {
@@ -152,7 +152,7 @@ const AddAnnouncements = ({ open, handleClose, handleSave, data }) => {
                             {formik.errors.description}
                         </Typography>
                     )}
-                    <FormControl
+                    {/* <FormControl
                         fullWidth
                         sx={{
                             mt: 3,
@@ -207,7 +207,7 @@ const AddAnnouncements = ({ open, handleClose, handleSave, data }) => {
                             color="error">
                             {formik.errors.active}
                         </Typography>
-                    )}
+                    )} */}
                 </Box>
                 <Box
                     display="flex"

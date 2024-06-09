@@ -15,7 +15,7 @@ export const getUser = ({ authToken }) => {
 };
 
 //? GET - for read
-export const getAll = ({page,search}) => {
+export const getAll = ({page}) => {
   const url = `${baseUrl}/announcements/announcements/?page=${page}`;
   const config = {
     headers: {
@@ -26,7 +26,11 @@ export const getAll = ({page,search}) => {
 };
 
 //? DELETE - for delete
-export const deleteOne = ({ id,authToken }) => {
+export const deleteOne = async ({ id, authToken }) => {
+  if (!id) {
+    throw new Error("ID is required for deleting an announcement.");
+  }
+
   const url = `${baseUrl}/announcements/announcements/${id}/`;
   const config = {
     headers: {
@@ -34,31 +38,51 @@ export const deleteOne = ({ id,authToken }) => {
       Authorization: `Bearer ${authToken}`,
     },
   };
-  return axios.delete(url, config);
+  try {
+    const response = await axios.delete(url, config);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting announcement:", error);
+    throw error;
+  }
 };
+//------------
+
+//---------------
 
 //? PUT / PATCH - for update
 export const update = ({ id, data ,authToken}) => {
   const url = `${baseUrl}/announcements/announcements/${id}/`;
-  const config = {
+  
+  try{
+    const config = {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${authToken}`,
     },
   };
   return axios.put(url, data, config);
+}catch(error){
+  console.error("Error puting announcement:", error);
+    throw error;
+}
+  
 };
 
 //? POST - For create somethig
 export const create = ({ data }) => {
   const url = `${baseUrl}/announcements/announcements/`;
-  const config = {
+  try{const config = {
     headers: {
       "Content-Type": "application/json",
-    //   Authorization: `Bearer ${authToken}`,
+      // Authorization: `Bearer ${authToken}`,
     },
   };
-  return axios.post(url, data, config);
+  return axios.post(url, data, config);} catch(error){
+    console.error("Error updating announcement:", error);
+    throw error;
+  }
+  
 };
 
 

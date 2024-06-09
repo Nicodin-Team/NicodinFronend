@@ -9,55 +9,39 @@ import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { useAuth } from '../context/AuthContext';
 
+
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
 
-// const top5Songs = [
-//   { title: "Organize" },
-//   { title: "Joha" },
-//   { title: "Terminator" },
-//   { title: "Dull" },
-//   { title: "Nzaza" },
-//   { title: "c#" },
-//   { title: "c++" },
-//   { title: "html" },
-//   { title: "css" },
-//   { title: "js" },
-//   { title: "vue.js" },
-//   { title: "react" },
-//   { title: "adem" },
-// ];
 
-
-export default function Chips() {
-  const [skill , setSkill] = React.useState([]);
+export default function SoftSkillData() {
+  const [skillSoft , setSkillSoft] = React.useState([]);
 
   const { accessToken } = useAuth();
 
   useEffect(() => {
-    const fetchApi = async () => {
+    const fetchsoftApi = async () => {
       try{
-        const responce = await axios.get('https://teamup.liara.run/resources/skillset/',{
+        const responce = await axios.get('https://teamup.liara.run/resources/softskills/',{
           headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${accessToken}`,
           },
         })
         console.log(responce)
-        setSkill(responce.data)
+        setSkillSoft(responce.data)
       } catch(err){
          console.log(err)
       }
     }
-    fetchApi();
+    fetchsoftApi();
   },[])
 
   return (
     <Autocomplete
       multiple
       id="checkboxes-tags-demo"
-      // options={top5Songs}
-      options={skill}
+      options={skillSoft}
       disableCloseOnSelect
       getOptionLabel={(option) => option.name}
       renderOption={(props, option, { selected }) => (
