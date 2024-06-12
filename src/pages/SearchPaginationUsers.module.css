@@ -1,0 +1,186 @@
+  .users {
+    --bg: #f2f7fc;
+    --bg-offset: #ffffff;
+    --text: #335a82;
+    --gray: #194673;
+    --border: rgba(0, 0, 0, 0.13);
+    background: var(--bg);
+    min-height:100vh;
+  }
+  .card_grid {
+    list-style: none;
+    padding-right: 200px; 
+    padding-left: 200px;
+    margin: 2em 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 48px;
+  }
+  .mycard {
+    background-color: var(--bg-offset);
+    padding: 0px;
+    box-shadow: 0px 2px 4px var(--border);
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+    border-radius: 5%;
+    border: 2px solid #194673;
+  }
+  .mycard:hover {
+    transform: scale(1.034);
+  }
+  .mycard:hover .card_content h2 {
+    display: block;
+    -webkit-line-clamp: none;
+    -webkit-box-orient: none;
+    overflow: visible;
+  }
+  .card_image {
+    height: 243.8px;
+  }
+  .myimage {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 5.25% 5.25% 0 0;
+  }
+  .card_content {
+    padding: 20px 15px;
+    padding-top: 30px;
+    padding-left: 15px;
+    padding-bottom: 25px;
+    padding-right: 16px;
+  }
+  .card_name {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card_list {
+    margin-top: 16px;
+    list-style: none;
+    padding-left: 0px ;
+    
+  }
+  .card_list li {
+    color: var(--text);
+    margin-top: 8px;
+  }
+  .card_list li span {
+    color: var(--gray);
+  }
+
+  .search_wrapper {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 175px;
+    margin-right: 5px;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 25px;
+  }
+
+  .box {
+    position: relative;
+  }
+
+  .myinput {
+    margin-left: 22px;
+    margin-top: 16px;
+    padding: 10px;
+    width: 80px;
+    height: 40px;
+    background: rgb(65, 107, 149);
+    border-radius: 50px;
+    box-sizing: border-box;
+    font-size: 18px;
+    color: #030303;
+    outline: none;
+    transition: 0.5s;
+    visibility: hidden;
+    border: 1.5px solid rgb(13 12 12);
+  }
+  .box:hover input {
+    margin-left: 22px;
+    margin-top: 16px;
+    height: 40px;
+    width: 250px;
+    background: #ffffff;
+    border-radius: 20px;
+    visibility: visible;
+  }
+  .box i {
+    margin-left: 22px;
+    position: absolute;
+    top: 65%;
+    right: 15px;
+    transform: translate(-50%, -50%);
+    font-size: 26px;
+    color: #100f0e;
+    transition: 0.2s;
+  }
+  .box:hover i {
+    margin-left: 20px;
+    margin-top: 10px;
+    opacity: 0;
+    z-index: -1;
+  }
+
+  @media (max-width: 375px) {
+    .search_input {
+      width: 100%;
+    }
+    .search_wrapper {
+      justify-content: start;
+      flex-wrap: wrap;
+    }
+    .select {
+      margin-top: 3.5em;
+    }
+  }
+
+  .search_input {
+    margin-top: 10px;
+    background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbC1ydWxlPSJldmVub2RkIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0xNS44NTMgMTYuNTZjLTEuNjgzIDEuNTE3LTMuOTExIDIuNDQtNi4zNTMgMi40NC01LjI0MyAwLTkuNS00LjI1Ny05LjUtOS41czQuMjU3LTkuNSA5LjUtOS41IDkuNSA0LjI1NyA5LjUgOS41YzAgMi40NDItLjkyMyA0LjY3LTIuNDQgNi4zNTNsNy40NCA3LjQ0LS43MDcuNzA3LTcuNDQtNy40NHptLTYuMzUzLTE1LjU2YzQuNjkxIDAgOC41IDMuODA5IDguNSA4LjVzLTMuODA5IDguNS04LjUgOC41LTguNS0zLjgwOS04LjUtOC41IDMuODA5LTguNSA4LjUtOC41eiIvPjwvc3ZnPg==");
+    background-color: var(--bg-offset);
+    background-size: 16px 16px;
+    background-position: left 10px center;
+    background-repeat: no-repeat;
+    padding: 1.4em 2em;
+    padding-left: 2.7em;
+    border: 1px solid var(--border);
+    color: var(--gray);
+    box-shadow: 0px 4px 6px var(--border);
+    transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+    border-radius: 25px;
+  }
+  .search_input:hover {
+    margin-top: 10px;
+    box-shadow: 0px 0px 0px var(--border);
+    border-radius: 20px;
+  }
+
+  .search_and_filter {
+    display: flex;
+  }
+
+  .multiselect_for_cities {
+    position: absolute;
+    margin-left: 485px;
+    margin-top: 5.6px;
+  }
+
+  .multiselect_for_skills {
+    position: absolute;
+    margin-left: 715px;
+    border-radius: 50%;
+    margin-top: 5.6px;
+  }
+
+  .multiselect_for_gender {
+    position: absolute;
+    margin-left: 945px;
+    margin-top: 5.6px;
+  }
+

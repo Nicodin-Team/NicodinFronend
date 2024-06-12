@@ -1,4 +1,4 @@
-:root {
+
 
     --bg-color: #242e56;
     --primary-color: #f1bd4c;
@@ -15,13 +15,11 @@
 
 body {
 
-    background-color: var(--bg-color);
+    /* background-color: var(--bg-color); */
     font-family: Mona sans;
+
     
-
-}
-
-
+background-color: var(--bg-color);
 a {
 
     text-decoration: none;
@@ -356,4 +354,5 @@ a {
 
 .footer-section__footer-social a:hover {
     background-color: var(--bg-color);
+}
 }
