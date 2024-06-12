@@ -1,6 +1,7 @@
 import React from 'react';
 import './AnnouncementPage.css';
 import { getList } from './services/accounts';
+import AnnouncementDetailsDialog from '../announcement_detail/AnnouncementDetailsDialog';
 
 const CompanyName = ({ name }) => <h3 className='job-company'>{name}</h3>;
 
@@ -84,8 +85,9 @@ class AnnouncementPage extends React.Component {
       ],
       currentPage: 1,
       itemsPerPage: 6,
-      searchQuery: ''
-    
+      searchQuery: '',
+      openDialog: false,
+      selectedData : null,
     };
     data;
      }
@@ -96,12 +98,23 @@ class AnnouncementPage extends React.Component {
     this.setState({ currentPage: pageNumber });
   };
 
+  handleOpenDialog = () => {
+    this.setState({openDialog: true})
+  }
+  handleCloseDialog = () => {
+    this.setState({openDialog: false})
+  }
+  // selected button for dialog
+  handleSelect = (data) => {
+    this.setState({selectedData: data})
+  }
+
   handleSearchChange = (event) => {
     this.setState({ searchQuery: event.target.value });
   };
 
   render() {
-    const { hiringAds, currentPage, itemsPerPage, searchQuery } = this.state;
+    const { hiringAds, currentPage, itemsPerPage, searchQuery,openDialog,selectedData } = this.state;
 
     const filteredAds = hiringAds.filter(ad =>
       ad.companyName.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -123,6 +136,7 @@ class AnnouncementPage extends React.Component {
     const currentPages = pageNumbers.slice(indexOfFirstPage, indexOfLastPage);
 
     return (
+      <>
       <div className='Announcement-page'>
       <header>
         <div class="navigation">
@@ -153,7 +167,10 @@ class AnnouncementPage extends React.Component {
                   <Place name={ad.place} />
                   <JobName name={ad.jobName} />
                   <Salary amount={ad.salary} />
-                  <button className="view-details-button">View Details</button>
+                  <button onClick={()=>{
+                    this.handleSelect(ad);
+                    this.handleOpenDialog();
+                  }} className="view-details-button">View Details</button>
               </div>
           ))}
         </div>
@@ -184,6 +201,8 @@ class AnnouncementPage extends React.Component {
       </ul>
       </div>
       </div>
+      <AnnouncementDetailsDialog open={openDialog} handleClose={this.handleCloseDialog} id={1}/>
+      </>
     );
   }
 }
