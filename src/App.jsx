@@ -4,10 +4,11 @@ import Login from './components/login';
 import Signup from './components/signup';
 import Error from './components/error';
 import EditProfile from './components/Edituser';
+import Crud from "./components/CRUD/CRUD";
+
 import Landing from './pages/Landing';
 import { AuthProvider } from './context/AuthContext';
 
-import Crud from './components/CRUD/Crud';
 
 
 
