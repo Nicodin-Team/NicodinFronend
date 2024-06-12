@@ -1,7 +1,18 @@
 
-import React, { useState , useEffect } from "react";
-// import "../components/Edituser.module.css";
 
+import { useState, useEffect } from "react";
+import "../components/Edituser.module.css";
+import Form from "react-bootstrap/Form";
+import * as React from "react";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import { styled } from "@mui/material/styles";
+import Chip from "@mui/material/Chip";
+import Paper from "@mui/material/Paper";
+import TagFacesIcon from "@mui/icons-material/TagFaces";
 import avatar from "../assets/Images/c2.png";
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
