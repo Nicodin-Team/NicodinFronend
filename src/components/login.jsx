@@ -125,7 +125,7 @@ export default function Login() {
                 </Form>
               )}
             </Formik>
-            <p>
+            <p style={{marginLeft:'35px'}}>
               Don't have an account?
               <Link to="/signup" className={styles.textpage}>
                 Sign Up
