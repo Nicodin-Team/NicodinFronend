@@ -1,10 +1,14 @@
-
-
 .snippets{
     display: flex;
     align-items: center;
     justify-content: center;
 } 
+
+
+.img-account-profile{
+    max-width: 300px !important;
+    max-height: 400px !important;
+}
 
 .form-control {
     border: 1px solid #cfd1d8;
@@ -34,7 +38,7 @@
 
 
 button{
-    margin-right: 225px;
+    margin-right: 625px;
     background: rgb(241,190,75);
 
 }
