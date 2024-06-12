@@ -3,9 +3,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import * as yup from "yup";
-import styles from "../components/signin_up.module.css";// Assuming CSS module file is named Signup_em.module.css
+
+import { Formik, Form, Field, ErrorMessage } from 'formik'; // Import Formik components
+import * as yup from 'yup'; // Import yup for validation
+// import '../components/signin_up.css';
+
+
 
 export default function Signup_em() {
   const initialValues = {
