@@ -11,7 +11,7 @@ import AnnouncementPage from './components/Announcement/AnnouncementPage';
 
 import SearchPaginationUsers from './pages/SearchPaginationUsers';
 
-import Crud from './components/CRUD/Crud';
+import Crud from './components/CRUD/CRUD';
 
 
 
