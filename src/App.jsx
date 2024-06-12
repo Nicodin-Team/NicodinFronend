@@ -12,6 +12,7 @@ import AnnouncementPage from './components/Announcement/AnnouncementPage';
 import SearchPaginationUsers from './pages/SearchPaginationUsers';
 
 import Crud from './components/CRUD/CRUD';
+// import AnnouncementDetailsDialog from './components/announcement_detail/AnnouncementDetailsDialog';
 
 
 
@@ -30,6 +31,7 @@ function App() {
           <Route path='/signup' element={<Signup/>}/>
           <Route path='/crud' element={<Crud/>}/>
           <Route path='*' element={<Error/>}/>
+          {/* <Route path='/dialog' element={<AnnouncementDetailsDialog/>}/> */}
         </Routes>
       </Router></AuthProvider>
     </div>
