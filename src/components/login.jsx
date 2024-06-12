@@ -1,6 +1,6 @@
 
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import logo from "../assets/Images/logo.png";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
@@ -11,9 +11,12 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function Login() {
   const { login } = useAuth();
+  const navigate = useNavigate();
+  
+ 
 
-  const notify = () => {
-    toast.success('🦄login succesfull!', {
+  const notifySuccess = () => {
+    toast.success('🦄 Login successful!', {
       position: "top-left",
       autoClose: 5000,
       hideProgressBar: false,
@@ -22,9 +25,22 @@ export default function Login() {
       draggable: true,
       progress: undefined,
       theme: "light",
-      });
-  }
+    });
+  };
+  
 
+  const notifyError = () => {
+    toast.error('❌ Login failed: User not found', {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
   
   const initialValues = {
     email: "",
@@ -42,18 +58,19 @@ export default function Login() {
       .required("Password is required"),
   });
 
-  const onSubmit = async (values, { setSubmitting, resetForm }) => {
+  const onSubmit = async (values, { resetForm }) => {
+    
     try {
       const response = await login(values);
-      console.log(response);
-      
-      resetForm();
+        resetForm();
+        notifySuccess();
+        navigate('/profile');
     } catch (error) {
-      console.log(error);
-    
-      setSubmitting(false);
+      console.error(error);
+      notifyError('An error occurred');
     }
   };
+
 
   return (
  
@@ -104,10 +121,10 @@ export default function Login() {
                     />
                   </div>
                   <div className={styles.button}>
-                    <button type="submit" disabled={isSubmitting} onClick={notify}>
-                      Submit
+                    <button type="submit" disabled={isSubmitting} >
+                      {isSubmitting ? "Submitting..." : "Submit"}
                     </button>
-                    
+          
                   </div>
                   <ToastContainer
                     position="top-left"
@@ -133,6 +150,8 @@ export default function Login() {
             </p>
           </div>
         </div>
+        <ToastContainer position="top-left" autoClose={5000} hideProgressBar={false} closeOnClick pauseOnHover draggable theme="light" />
+
       </>
       
   );
