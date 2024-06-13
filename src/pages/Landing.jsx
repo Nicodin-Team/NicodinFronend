@@ -1,13 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-
-// import "./landing.css";
-// import imagearrow from '../assets/Icons/Arrow_icon.png';
-// import imageagreement from '../assets/Icons/agreement.png'
-// import imagebriefcase from '../assets/Icons//briefcase.png';
-// import imagechat from '../assets/Icons/chat.png';
-
+import styles from "../pages/landing.module.css";
+import imageagreement from "../assets/Icons/agreement.png";
+import imagearrow from "../assets/Icons/Arrow_icon.png";
+import imagebriefcase from "../assets/Icons/briefcase.png";
+import imagechat from "../assets/Icons/chat.png";
 import MyAnimation from "../components/landing/animation";
 
 export default function Landing() {
