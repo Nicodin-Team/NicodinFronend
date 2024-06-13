@@ -313,7 +313,7 @@ export default function EditProfile() {
 
 
   return (
-    <>
+    <div className="EditUserqq">
       <div className="container bootstrap snippets bootdey">
         <h1
           className="font-weight-bold h1 d-flex ps-2"
@@ -630,6 +630,6 @@ export default function EditProfile() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

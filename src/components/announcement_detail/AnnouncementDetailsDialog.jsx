@@ -10,6 +10,8 @@ import {
 } from "@mui/material";
 import react, { useEffect, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import axios from "axios";
 const baseUrl = "https://teamup.liara.run";
@@ -23,21 +25,56 @@ const getOne = ({ id }) => {
   return axios.get(url, config);
 };
 
-const createrequest = ({ data, id, token }) => {
+const createrequest = ({ data, id, accessToken, notifySuccess, notifyError }) => {
   const url = `${baseUrl}/announcements/announcements/${id}/`;
+  axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`
   const config = {
     headers: {
       "Content-Type": "application/json",
-      Authentization : `Bearer ${token}`
+      // Authentization : `Bearer ${accessToken}`
     },
   };
-  return axios.patch(url, data, config);
+  console.log(accessToken)
+
+  try{
+    axios.patch(url, data, config);
+    notifySuccess("success")
+  }
+  catch (err){
+    notifyError("error")
+  };
 };
 
 
 const AnnouncementDetailsDialog = ({ open, handleClose, id }) => {
   const [data, setData]=useState({})
-  const token = useAuth();
+  const { accessToken } = useAuth();
+  const notifySuccess = () => {
+    toast.success('🦄 request sent successfully!', {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
+  
+  
+  const notifyError = () => {
+    toast.error('❌ request failed', {
+      position: "top-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+  };
   useEffect(() => {
     const fetchdata = async () => {
       const response = await getOne({id})//pak bad moaref =>:1
@@ -49,15 +86,31 @@ const AnnouncementDetailsDialog = ({ open, handleClose, id }) => {
 
   const send_request = async () => {
     try {
-      const response = await createrequest({data , id, token})
+      const response = await createrequest({data , id, accessToken, notifySuccess, notifyError})
       console.log(response)
     } catch (error) {
       console.log(error)
     }
   }
 
+  
+
   if (data) {
     return (
+      <>
+      <ToastContainer
+                    position="top-left"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                    
+                    />
       <Dialog
         open={open}
         onClose={handleClose}
@@ -143,6 +196,7 @@ const AnnouncementDetailsDialog = ({ open, handleClose, id }) => {
           </Button>
         </DialogActions>
       </Dialog>
+      </>
     );
   } else {
     return <Box />;

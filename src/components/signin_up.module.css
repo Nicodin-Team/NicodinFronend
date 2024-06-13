@@ -1,5 +1,14 @@
 
 
+.amirloginqq,.amirsignupqq{
+
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    align-items: center;
 .wrapper {
 display: -webkit-box;
 display: -ms-flexbox;
@@ -48,12 +57,11 @@ font-size: 1.4rem;
 font-weight: bold;
 text-align: center;
 color: #fff;
-padding: 1px;
+padding: 2px;
 }
 
 .account{
-margin-left: 70px;
-justify-content: center;
+margin-left: 50px;
 }
 
 .or {
@@ -98,15 +106,6 @@ margin-top: 30px;
 
 
 @media (min-width: 363px) {
-body {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    align-items: center;
-}
 
 .wrapper {
     display: -webkit-box;
@@ -182,10 +181,5 @@ transform: scale(0.98);
 
 .textpage{
     color: #ebe722;
-    
 }
-
-.zar{
-    margin-left: 30px;
-    margin-top: 200px;
 }

@@ -75,7 +75,7 @@ export default function Login() {
 //login
   return (
  
-    <>
+    <div className={styles.amirloginqq}>
      
         <div className={`${styles.wrapper} ${styles.signIn}`}>
           <div className={styles.form}>
@@ -153,7 +153,7 @@ export default function Login() {
         </div>
         <ToastContainer position="top-left" autoClose={5000} hideProgressBar={false} closeOnClick pauseOnHover draggable theme="light" />
 
-      </>
+      </div>
       
   );
 }

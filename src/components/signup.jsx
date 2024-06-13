@@ -35,6 +35,7 @@ export default function Signup() {
   };
 
   return (
+    <div className={styles.amirsignupqq}>
     <div className={`${styles.wrapper} ${styles.signUp}`}>
       <div className={styles.form}>
         <div className={styles.heading}>CREATE AN ACCOUNT</div>
@@ -70,6 +71,7 @@ export default function Signup() {
         </p>
         {registerError && <p className={styles.error}>{registerError}</p>}
       </div>
+    </div>
     </div>
   );
 }
