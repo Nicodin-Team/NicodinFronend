@@ -29,7 +29,7 @@ function App() {
           <Route path='/users' element={<SearchPaginationUsers/>}/>
           <Route path='/' element={<Landing/>}/>
           <Route path='/signup' element={<Signup/>}/>
-          {/* <Route path='/crud' element={<Crud/>}/> */}
+          <Route path='/crud' element={<Crud/>}/>
           <Route path='*' element={<Error/>}/>
           {/* <Route path='/dialog' element={<AnnouncementDetailsDialog/>}/> */}
         </Routes>
