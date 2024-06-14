@@ -16,7 +16,7 @@ export default function Login() {
  
 
   const notifySuccess = () => {
-    toast.success('🦄 Login successful!', {
+    toast.success('Login successful!', {
       position: "top-left",
       autoClose: 5000,
       hideProgressBar: false,
@@ -25,12 +25,17 @@ export default function Login() {
       draggable: true,
       progress: undefined,
       theme: "light",
+      style: { 
+        width: "fit-content", 
+        maxWidth: "250px", 
+        whiteSpace: "nowrap" 
+      },
     });
   };
   
 
-  const notifyError = () => {
-    toast.error('❌ Login failed: User not found', {
+  const notifyError = (message) => {
+    toast.error(`❌ Login failed: ${message}`, {
       position: "top-left",
       autoClose: 5000,
       hideProgressBar: false,
@@ -39,6 +44,11 @@ export default function Login() {
       draggable: true,
       progress: undefined,
       theme: "light",
+      style: { 
+        width: "fit-content", 
+        maxWidth: "250px", 
+        whiteSpace: "nowrap"
+      },
     });
   };
   
@@ -59,15 +69,20 @@ export default function Login() {
   });
 
   const onSubmit = async (values, { resetForm }) => {
-    
     try {
       const response = await login(values);
+      if (response) {
         resetForm();
         notifySuccess();
+        setTimeout(() => {
         navigate('/profile');
+        }, 3000);
+      } else {
+        notifyError();
+      }
     } catch (error) {
       console.error(error);
-      notifyError('An error occurred');
+      notifyError();
     }
   };
 
@@ -127,19 +142,7 @@ export default function Login() {
                     </button>
           
                   </div>
-                  <ToastContainer
-                    position="top-left"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    rtl={false}
-                    pauseOnFocusLoss
-                    draggable
-                    pauseOnHover
-                    theme="light"
-                    
-                    />
+
                 </Form>
               )}
             </Formik>

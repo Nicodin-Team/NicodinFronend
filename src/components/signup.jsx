@@ -1,4 +1,5 @@
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -27,10 +28,23 @@ export default function Signup() {
       const response = await axios.post("https://teamup.liara.run/accounts/register/", values);
       console.log(response);
       resetForm(); 
+      toast.success('Registration successful!', {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        style: { width: "fit-content", 
+          maxWidth: "250px", 
+          whiteSpace: "nowrap" } ,
+      });
     } catch (error) {
-      setRegisterError(error.response?.data?.message || "Registration failed. Please try again.");
+      console.log(error);
     } finally {
-      setSubmitting(false); 
+      console.log(error); 
     }
   };
 
@@ -72,6 +86,7 @@ export default function Signup() {
         {registerError && <p className={styles.error}>{registerError}</p>}
       </div>
     </div>
+    <ToastContainer position="top-left" autoClose={5000} hideProgressBar={false} closeOnClick pauseOnHover draggable theme="light" />
     </div>
   );
 }
