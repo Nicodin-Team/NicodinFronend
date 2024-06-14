@@ -272,7 +272,6 @@ function SearchPaginationUsers() {
             page={page}
             onChange={handleChange}
             variant="outlined"
-            color="primary"
             showFirstButton
             showLastButton
             // count={Math.ceil(search(data).length / 8)}

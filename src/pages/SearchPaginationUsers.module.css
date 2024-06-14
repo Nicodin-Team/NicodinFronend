@@ -4,7 +4,8 @@
     --text: #335a82;
     --gray: #194673;
     --border: rgba(0, 0, 0, 0.13);
-    background: #214674;
+    background: #222245;
+    /* #e6effc */
     min-height:100vh;
   }
   .card_grid {
@@ -22,7 +23,7 @@
     box-shadow: 0px 2px 4px var(--border);
     transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
     border-radius: 5%;
-    border: 2px solid #194673;
+    border: 2px solid #e6effc;
   }
   .mycard:hover {
     transform: scale(1.034);
