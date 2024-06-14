@@ -13,10 +13,10 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 
 const modalSchema = yup.object({
-    title: yup.string().required("این فیلد اجباری میباشد"),
-    description: yup.string().required("این فیلد اجباری میباشد"),
-    // created_at: yup.string().required("این فیلد اجباری میباشد"),
-    // active: yup.string().required("این فیلد اجباری میباشد"),
+    title: yup.string().required("This field is necessary"),
+    description: yup.string().required("This field is necessary"),
+    // created_at: yup.string().required("This field is necessary"),
+    // active: yup.string().required("This field is necessary"),
 });
 
 const AddAnnouncements = ({ open, handleClose, handleSave, data }) => {
