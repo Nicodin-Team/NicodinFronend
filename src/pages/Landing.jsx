@@ -65,13 +65,25 @@ export default function Landing() {
             </div>
 
             <div className="d-flex ">
-              <a className="me-4 mt-2" href="">
-                Log In
-              </a>
+            <Link
+                    className={"me-4 mt-2"}
+                    aria-current="page"
+                    //   href="#"
+                    to="/login"
+                  >
+                    Log In
+                  </Link>
+              
 
-              <a className={styles.signup_button} href="">
-                Sign Up
-              </a>
+            
+              <Link
+                    className={styles.signup_button}
+                    aria-current="page"
+                    //   href="#"
+                    to="/signup"
+                  >
+                    Sign Up
+                  </Link>
             </div>
           </div>
         </nav>
