@@ -230,7 +230,7 @@ function SearchPaginationUsers() {
                 <article className={styles.mycard}>
                   <div className={styles.card_image}>
                     <img className={styles.myimage}
-                      src={item.photo}
+                      src={"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_G0N9CN_iM6-kvF6qpZFibDRcR-t25KVQQA&s"}
                       alt={item.first_name + " " + item.last_name}
                     />
                   </div>
