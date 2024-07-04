@@ -1,99 +1,92 @@
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
-import '../components/signin_up.css';
 import axios from "axios";
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as yup from 'yup';
+import styles from '../components/signin_up.module.css'; // فرض کنید فایل CSS شما در همین مسیر است
 
 export default function Signup() {
+  const initialValues = {
+    username: "",
+    email: "",
+    password: "",
+  };
 
-  const [email, setEmail]=useState("")
-  const [username, setUsername]=useState("")
-  const [password, setPassword]=useState("")
+  const validationSchema = yup.object().shape({
+    username: yup.string().required("Username is required"),
+    email: yup.string().email("Invalid email format").required("Email is required"),
+    password: yup.string().min(8, "Password must be at least 8 characters").required("Password is required"),
+  });
 
-  const handleEmail=(e)=>{
-    setEmail(e.target.value)
-  }
-  const handleUsername=(e)=>{
-    setUsername(e.target.value)
-  }
-  const handlepass=(e)=>{
-    setPassword(e.target.value)
-  }
+  const [registerError, setRegisterError] = useState(null);
 
-  // const handlechange = (e) => {
-	// 	const {email,value} = e.target
-	// 	setUser({
-	// 		...user , [email]:value
-	// 	})
-   
-	// }
-  
-  const register = async () => {
-    // console.log(username)
-    // console.log(email)
-    // console.log(password)
-    
-    if(email && password && username) {
-      try {
-        console.log({
-          username:username,
-          email:email,
-          password:password
-        })
-        const response = await axios.post('https://teamup.liara.run/accounts/register/',{
-          username:username,
-          email:email,
-          password:password
-        })
-        console.log(response)
-        setEmail('')
-        setUsername('')
-        setPassword('')
-      } catch (error) {
-        console.log(error.message)
-      }
-    } else{
-      console.log(email)
-      console.log(username)
-      console.log(password)
-      alert('Invalid input')
+  const onSubmit = async (values, { setSubmitting, resetForm }) => {
+    try {
+      const response = await axios.post("https://teamup.liara.run/accounts/register/", values);
+      console.log(response);
+      resetForm(); 
+      toast.success('Registration successful!', {
+        position: "top-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        style: { width: "fit-content", 
+          maxWidth: "250px", 
+          whiteSpace: "nowrap" } ,
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      console.log('error'); 
     }
-  }
+  };
 
   return (
-    <div className="wrapper signUp">
-      <div className="form">
-        <div className="heading">CREATE AN ACCOUNT</div>
-        <form>
-          <div>
-            <label htmlFor="name">Username</label>
-            <input type="text" id="name" placeholder="Enter your name" value={username}  onChange={handleUsername}/>
-          </div>
-          <div>
-            <label htmlFor="name">E-Mail</label>
-            <input type="email" id="name" placeholder="Enter your mail"  value={email}   onChange={handleEmail}/> 
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
-              value={password}
-              type="password"
-              id="password"
-              placeholder="Enter you password"
-              onChange={handlepass}
-            />
-          </div>
-          <div className="button">
-            <button type="button" onClick={register}>Submit</button>
-          </div>
-          <h2  className="or">
-            OR
-          </h2>
-        </form>
-        <p className="account">
-          Have an account ? <Link to="/" className="log"> Log In </Link>
+    <div className={styles.amirsignupqq}>
+    <div className={`${styles.wrapper} ${styles.signUp}`}>
+      <div className={styles.form}>
+        <div className={styles.heading}>CREATE AN ACCOUNT</div>
+        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+          {({ isSubmitting }) => (
+            <Form>
+              <div className={styles.field}>
+                <label htmlFor="username">Username</label>
+                <Field type="text" id="username" placeholder="Enter your username" name="username" />
+                <ErrorMessage name="username" component="div" className={styles.error} />
+              </div>
+              <div className={styles.field}>
+                <label htmlFor="email">E-Mail</label>
+                <Field type="email" id="email" placeholder="Enter your Email" name="email" />
+                <ErrorMessage name="email" component="div" className={styles.error} />
+              </div>
+              <div className={styles.field}>
+                <label htmlFor="password">Password</label>
+                <Field type="password" id="password" placeholder="Enter your password" name="password" />
+                <ErrorMessage name="password" component="div" className={styles.error} />
+              </div>
+              <div className={styles.button}>
+                <button type="submit" disabled={isSubmitting}>
+                  Submit
+                </button>
+              </div>
+            </Form>
+          )}
+        </Formik>
+        <h2 className={styles.or}>OR</h2>
+        <p className={styles.account}>
+            Have an account? <Link to="/login" className={styles.textpage}>Log In</Link>
         </p>
+        {registerError && <p className={styles.error}>{registerError}</p>}
       </div>
+    </div>
+    <ToastContainer position="top-left" autoClose={5000} hideProgressBar={false} closeOnClick pauseOnHover draggable theme="light" />
     </div>
   );
 }

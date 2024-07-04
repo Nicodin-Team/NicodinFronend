@@ -1,0 +1,342 @@
+
+    body{
+        background-color: var(--bg-color);
+        
+    }
+        
+
+    a {
+
+        text-decoration: none;
+        color: var(--text-color2) !important;
+    }
+
+
+    .icon_custom {
+
+        font-size: 25px;
+        font-weight: bold;
+        color: var(--primary-color) !important;
+        font-family: Verdana;
+    }
+
+        
+
+    .margin_container {
+
+        margin: auto 5%;
+    }
+
+    .signup_button {
+
+
+        color: #f1bd4c;
+        border: #f1bd4c solid 1px;
+        border-radius: 20px;
+        padding: 9px 18px;
+        color: var(--primary-color) !important;
+
+
+    }
+
+
+    .text_sec {
+
+        color: var(--text-color2);
+        font-size: 60px;
+
+
+    }
+
+    .text_sec_specific {
+
+        padding: 0px 22px;
+        border-radius: 45px;
+        color: var(--bg-color);
+        background-color: var(--primary-color);
+
+
+    }
+
+    .text_sec_p {
+
+        color: #c5c7d4;
+    }
+
+
+    .oval {
+        width: 200px;
+        height: 400px;
+        position: absolute;
+        left: 64%;
+        top: 1%;
+        border-radius: 90px;
+        background-image: url(../../assests/Images/guy1.jpg); 
+        background-size: cover;
+        background-position: center;
+    }
+
+
+
+    .oval2 {
+        width: 200px;
+        height: 400px;
+        position: absolute;
+        left: 80%;
+        top: 15%;
+        border-radius: 90px;
+        background-image: url(../../assests/Images/women\ 1.avif); 
+        background-size: cover;
+        background-position: center;
+    } 
+
+    .oval3 {
+        width: 200px;
+        height: 400px;
+        position: absolute;
+        left: 64%;
+        top: 60%;
+        border-radius: 90px;
+        background-image: url(../../assests/Images/women\ 2.jpg); 
+        background-size: cover;
+        background-position: center; 
+    } 
+
+    .oval4 {
+        width: 200px;
+        height: 400px;
+        position: absolute;
+        left: 80%;
+        top: 75%;
+        border-radius: 90px;
+        background-image: url(../../assests/Images/guy2.avif); 
+        background-size: cover;
+        background-position: center;
+    }  
+
+
+    .button_Get {
+
+        color: #f1bd4c;
+        border: #f1bd4c solid 1px;
+        border-radius: 25px;
+        padding: 18px 36px;
+        color: var(--primary-color) !important;
+
+    }
+
+
+    .link_learn {
+        color: var(--primary-color) !important;
+
+    }
+
+
+    .size_icon {
+
+    width: 20px;
+    height: 20px;
+    }
+
+    .icon1 {
+
+        width: 16px;
+        height: 16px;
+        margin-left: 4px;
+        color: #f1bd4c;
+    }
+
+
+    .space_div{
+
+        background-color: #ffffff;
+        width: 100%;
+        height: 70px;
+    }
+
+    .support_sec {
+
+        width: 100%;
+        height: 100px;
+        font-size: 10px;
+        color:white;
+    }
+
+    .support_sec_h2 {
+
+        font-size: 15px;
+        text-align: center;
+    }
+
+    .sec_info_h2 {
+        color: white;
+        font-size: 75px;
+        margin-top: 10px;
+    }
+
+
+    .sec_info_p {
+
+
+        color: white;
+        font-size: 18px;
+        margin-left: 10px;
+
+    }
+
+    .sec_info {
+        background-color: #214674;
+        width: 100%;
+        height: 166px;
+        margin-top: 250px;
+        position: relative;
+    }
+
+
+    .sec_info_margin {
+
+        margin-left: 50px;
+        margin-right: 50px;
+    }
+
+    .sec_info_specific {
+        color: var(--primary-color);
+
+    }
+
+
+    .empty_sec{
+
+        width: 100%;
+        height: 200px;
+        background-color: var(--bg-color);
+        
+    
+        
+    }
+
+    .animation-margin{
+
+        margin-right: 900px;
+    }
+
+
+    .sec_find {
+        background-color: white;
+        width: 100%;
+        height: 800px;
+
+
+    }
+
+
+    .sec_find_text {
+
+        text-align: center;
+        color: var(--bg-color);
+        font-weight: 800;
+
+
+    }
+
+
+    .sec_find_p {
+        text-align: center;
+        color: #7b7b80;
+        margin-top: 45px;
+    }
+
+    .sec_icon {
+
+
+        margin-top: 60px;
+        text-align: center;
+        margin-right: 50px;
+        margin-left: 50px;
+
+
+    }
+
+    .sec_icon_h2 {
+        color: #242e56;
+        margin-top: 30px;
+    }
+
+    .sec_icon_p {
+
+        color: #727378;
+        margin-top: 15px;
+    }
+
+    /* .sec-search--h2 {
+
+        color: var(--bg-color);
+        margin-top: 100px;
+        font-weight: 800;
+        text-align: center;
+
+    }
+
+    .sec-search--p {
+
+        color: #727378;
+        margin-top: 15px;
+        text-align: center;
+    } */
+
+
+
+    /* .sec-search input[type=text] {
+        width: 50%;
+        height: 50px;
+        text-align: justify;
+        margin-left: 25%;
+        margin-top: 40px;
+        border: solid 1px rgb(25, 155, 225);
+        border-radius: 40px;
+        font-size: 17px;
+    } */
+
+
+    .footer_section {
+        background-color: var(--bg-color);
+        width: 100%;
+        height: 380px;
+    }
+
+    .footer_section_footer_contact a {
+        margin: 5px 0;
+        color: var(--primary-color);
+    }
+
+    .footer_section_footer_contact a i {
+        margin-right: 5px;
+    }
+
+    .footer_section_footer_contact a:hover {
+        color: red;
+    }
+
+    .footer_section_text_color{
+        color: var(--primary-color);
+    }
+    .footer_section_text_color2{
+        color: var(--text-color2);
+    }
+
+    .footer_section_footer_social a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 43px;
+        height: 43px;
+        border-radius: 100%;
+        background-color:var(--primary-color);
+        border-radius: 100%;
+        margin: 5px 5px;
+        font-size: 18px;
+    }
+
+    .footer_section_footer_social a:hover {
+        background-color: var(--bg-color);
+    }

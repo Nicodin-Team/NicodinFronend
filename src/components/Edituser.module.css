@@ -1,19 +1,15 @@
-body {
-    margin: 0;
-    padding-top: 50px;
-    color: #2e323c;
-    background: #9bb0ca;
-    position: fixed;
-    height: 100%;
-    width: 100dvw;
-}
-
-
+.EditUserqq{
 .snippets{
     display: flex;
     align-items: center;
     justify-content: center;
 } 
+
+
+.img-account-profile{
+    max-width: 300px !important;
+    max-height: 400px !important;
+}
 
 .form-control {
     border: 1px solid #cfd1d8;
@@ -43,9 +39,10 @@ body {
 
 
 button{
-    margin-right: 225px;
+    margin-right: 625px;
     background: rgb(241,190,75);
 
 }
 
 
+}
