@@ -155,7 +155,7 @@ const AnnouncementDetailsDialog = ({ open, handleClose, id }) => {
                     width: 230,
                 }}>
                     <Typography variant="h6">
-                        {data.created_at}
+                    {(new Date(data.created_at)).toDateString()}
                     </Typography>
                 </Box>
             </Box>

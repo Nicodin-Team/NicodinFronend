@@ -341,7 +341,7 @@ function Crud() {
                 <h3 className={styles.jobDescription}>{item.description}</h3>
                 <h4 className={styles.jobActive}>{item.active}</h4>
                 {/* <h4 className={styles.jobUser}>{item.User}</h4> */}
-                <h4 className={styles.jobCreatedAt}>{item.created_at}</h4>
+                <h4 className={styles.jobCreatedAt}>{(new Date(item.created_at)).toDateString()}</h4>
 
                     <div className={`${styles.row} row justify-content-end`}> 
                         <div className={`${styles.col} col-1`}> 

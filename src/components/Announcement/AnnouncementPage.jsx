@@ -7,7 +7,7 @@ import axios from 'axios';
 const CompanyName = ({ name }) => <h3 className='job-company'>{name}</h3>;
 
 const Place = ({ name }) => <h3 className='job-place'>{name}</h3>;
-const Date = ({ date }) => <h3 className='job-date'>{date}</h3>;
+const MyDate = ({ date }) => <h3 className='job-date'>{date}</h3>;
 
 const JobName = ({ name }) => <h4 className='job-title'>{name}</h4>;
 
@@ -184,7 +184,7 @@ const AnnouncementPage = () => {
                   {/* <Place name={ad.place} /> */}
                   {/* <JobName name={ad.jobName} /> */}
                   <Description detail={ad.description} />
-                  <Date date={ad.created_at} />
+                  <MyDate date={(new Date(ad.created_at)).toDateString()} />
                   <button onClick={() => {
                     handleSelect(ad);
                     handleOpenDialog();
